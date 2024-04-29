@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">FormaFit</string>
+
+    <!-- Bottom navigation View MainActivity -->
+    <string name="navigation_bascula"> Báscula </string>
+    <string name="navigation_imc"> IMC </string>
+    <string name="navigation_notificacion"> Notificaciones </string>
+    <string name="navigation_configuracion"> Configuración </string>
+
+
+
 </resources>
