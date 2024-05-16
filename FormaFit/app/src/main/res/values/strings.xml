@@ -7,6 +7,15 @@
     <string name="navigation_notificacion"> Notificaciones </string>
     <string name="navigation_configuracion"> Configuración </string>
 
+    <!-- Nombres de botones flotantes -->
+    <string name="floating_add"> Añadir </string>
+
+    <!-- Activitie Login -->
+    <string name="email"> Email </string>
+    <string name="password"> Contraseña </string>
+    <string name="iniciarSesion"> Iniciar Sesión </string>
+    <string name="crear"> Crear </string>
+    <string name="sinCuenta"> ¿No tienes cuenta? </string>
 
 
 </resources>
