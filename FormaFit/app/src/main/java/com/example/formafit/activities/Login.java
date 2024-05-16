@@ -13,14 +13,13 @@ import android.widget.Toast;
 import com.example.formafit.R;
 import com.example.formafit.base_datos.BaseDatosHelper;
 
-import org.w3c.dom.Text;
-
 public class Login extends AppCompatActivity {
 
     private BaseDatosHelper dbHelper;
     private Button loginButton, registroButton;
 
     private TextView emailLogin, passwordLogin;
+
 
     private void openMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
@@ -64,6 +63,8 @@ public class Login extends AppCompatActivity {
                 openRegistro();
             }
         });
+
+
 
     }
 }

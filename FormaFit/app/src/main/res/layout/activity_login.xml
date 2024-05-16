@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D8CBC7"
-    android:elevation="40dp"
+    android:background="@color/fondo_logo_sombra"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".activities.Login">
@@ -75,7 +74,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:backgroundTint="@color/buttons_color2"
+            android:backgroundTint="@color/buttons_color_rosa"
             android:text="@string/iniciarSesion"
             android:textColorHint="@color/black"
             android:textColor="@color/white" />
@@ -96,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="110dp"
             android:layout_marginRight="110dp"
-            android:backgroundTint="@color/buttons_color"
+            android:backgroundTint="@color/buttons_color_verde"
             android:text="@string/crear"
             android:textColor="@color/black"
             android:textStyle="bold" />

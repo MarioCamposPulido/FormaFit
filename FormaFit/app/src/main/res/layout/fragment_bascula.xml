@@ -25,7 +25,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="100dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         android:contentDescription="@string/floating_add"
         app:backgroundTint="@color/buttons_color"
         android:src="@drawable/icon_plus" />
