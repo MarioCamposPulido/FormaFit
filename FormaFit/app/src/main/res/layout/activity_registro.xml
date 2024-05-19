@@ -17,17 +17,44 @@
         android:layout_margin="25dp">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/crearPerfilTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/crearPerfil"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:textSize="32sp"
+            android:textColor="@color/buttons_color_rosa" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayou55t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nombreUsuario"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/icon_tarjeta_persona"
+            app:endIconContentDescription="@string/nombreUsuario">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emlLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             app:endIconMode="custom"
@@ -50,7 +77,7 @@
             app:endIconMode="password_toggle"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordLogin"
@@ -60,53 +87,106 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/alturaTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/peso"
+            android:gravity="center"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:textSize="20sp"/>
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/toggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                style="?attr/materialButtonOutlinedStyle"
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button 1"
-                />
-            <Button
-                style="?attr/materialButtonOutlinedStyle"
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button 2"
-                />
-            <Button
-                style="?attr/materialButtonOutlinedStyle"
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:icon="@drawable/icon_hombre"
-                />
-        </com.google.android.material.button.MaterialButtonToggleGroup>
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider55"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:valueFrom="10"
+            android:valueTo="200"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            app:trackColor="@color/buttons_color_verde"
+            app:thumbColor="@color/buttons_color_rosa"
+            app:tickColor="@color/buttons_color_rosa"
+            app:thumbStrokeColor="@color/buttons_color_rosa"/>
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/toggleButton"
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                android:id="@+id/button1"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/maleButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/icon_hombre"
-                />
-            <Button
-                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                android:id="@+id/button2"
+                android:src="@drawable/selector_hombre"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:backgroundTint="@color/buttons_color_verde"
+                android:background="@drawable/backgroud_rounded"/>
+
+            <ImageButton
+                android:id="@+id/femaleButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/icon_mujer"
-                />
-        </com.google.android.material.button.MaterialButtonToggleGroup>
+                android:src="@drawable/selector_mujer"
+                android:padding="10dp"
+                android:backgroundTint="@color/buttons_color_verde"
+                android:background="@drawable/backgroud_rounded"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/nacimientoButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/buttons_color_rosa"
+            android:text="@string/fechaNacimiento"
+            android:textColor="@color/white"
+            android:textColorHint="@color/black"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/alturaTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/altura"
+            android:gravity="center"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:textSize="20sp"/>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:valueFrom="50"
+            android:valueTo="250"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            app:trackColor="@color/buttons_color_rosa"
+            app:thumbColor="@color/buttons_color_verde"
+            app:tickColor="@color/buttons_color_verde"
+            app:thumbStrokeColor="@color/buttons_color_rosa"/>
+
+
+
+        <Button
+            android:id="@+id/crearUsuario"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/buttons_color_verde"
+            android:text="@string/crear"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
 
     </LinearLayout>
 

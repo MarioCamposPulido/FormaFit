@@ -27,7 +27,7 @@
         android:layout_marginBottom="100dp"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/floating_add"
-        app:backgroundTint="@color/buttons_color"
+        app:backgroundTint="@color/buttons_color_verde"
         android:src="@drawable/icon_plus" />
 
 

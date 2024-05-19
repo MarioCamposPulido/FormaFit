@@ -16,6 +16,11 @@
     <string name="iniciarSesion"> Iniciar Sesión </string>
     <string name="crear"> Crear </string>
     <string name="sinCuenta"> ¿No tienes cuenta? </string>
+    <string name="nombreUsuario"> Nombre de usuario </string>
+    <string name="altura"> Altura </string>
+    <string name="fechaNacimiento"> Fecha De Nacimiento </string>
+    <string name="peso"> Peso </string>
+    <string name="crearPerfil"> ★ Crea tu perfil ★ </string>
 
 
 </resources>
