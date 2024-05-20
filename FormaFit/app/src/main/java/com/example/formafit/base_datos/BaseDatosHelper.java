@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -23,7 +24,6 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(EstructuraBBDD.SQL_CREATE_TABLE_USERS);
-        db.execSQL(EstructuraBBDD.SQL_CREATE_TABLE_WEIGHT);
     }
 
     /**
@@ -37,20 +37,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Código para actualizar la estructura de la base de datos
         db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_USERS);
-        db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_WEIGHT);
         onCreate(db);
-    }
-
-    /**
-     * Transforma un Array de bytes a bitmap
-     * @param bytes Array de bytes
-     * @return Bitmap
-     */
-    public static Bitmap getBitmapFromBytes(byte[] bytes) {
-        if (bytes != null) {
-            return BitmapFactory.decodeByteArray(bytes, 0 ,bytes.length);
-        }
-        return null;
     }
 
     /**
@@ -72,6 +59,34 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return exists;
     }
 
+    public void insertNewUserRegistro(String email, String pasw, String userName,
+                                      String gender, String birth, int height,
+                                      String date, int weight) {
+
+        // Creamos mapa de valores con los nombres de las tablas
+        ContentValues values = new ContentValues();
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USER, email);
+        values.put(EstructuraBBDD.COLUMN_PASSWORD_USER, pasw);
+        values.put(EstructuraBBDD.COLUMN_USERNAME_USER, userName);
+        values.put(EstructuraBBDD.COLUMN_GENDER_USER, gender);
+        values.put(EstructuraBBDD.COLUMN_BIRTH_USER, birth);
+        values.put(EstructuraBBDD.COLUMN_HEIGHT_USER, height);
+        values.put(EstructuraBBDD.COLUMN_DATE_USER, date);
+        values.put(EstructuraBBDD.COLUMN_WEIGHT_USER, weight);
+
+        // Insertar nueva fila indicando nombre de la tabla
+        long newRowId = this.getWritableDatabase().insert(
+                EstructuraBBDD.TABLE_USERS, null, values);
+        //this.close();
+
+    }
+
+    /**
+     * Comprueba si el Usuario existe por su email y contraseña
+     * @param emailParam
+     * @param passwordParam
+     * @return
+     */
     public boolean checkUserLogin(String emailParam, String passwordParam) {
 
         Cursor cursor = this.getReadableDatabase().rawQuery(
@@ -81,10 +96,6 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
                 new String[]{emailParam, passwordParam});
 
         boolean exists = cursor.getCount() == 1;
-        if (cursor.moveToFirst()) {
-            // Acceso a los datos de la fila actual
-
-        }
         cursor.close();
         //this.close();
 

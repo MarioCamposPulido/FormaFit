@@ -21,6 +21,8 @@
     <string name="fechaNacimiento"> Fecha De Nacimiento </string>
     <string name="peso"> Peso </string>
     <string name="crearPerfil"> ★ Crea tu perfil ★ </string>
+    <string name="alturaPorDefecto"> 50 cm </string>
+    <string name="pesoPorDefecto"> 10 kg </string>
 
 
 </resources>

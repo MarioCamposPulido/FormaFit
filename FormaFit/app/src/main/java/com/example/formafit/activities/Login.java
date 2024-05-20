@@ -48,11 +48,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dbHelper = new BaseDatosHelper(getBaseContext());
-                // Comprueba si el usuario existe en la base de datos, si es cierto iniciará sesión
                 if (dbHelper.checkUserLogin(emailLogin.getText().toString(), passwordLogin.getText().toString())){
                     openMainActivity();
-                }else{
-                    Toast.makeText(Login.this, "caca", Toast.LENGTH_SHORT).show();
                 }
             }
         });
