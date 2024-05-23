@@ -128,20 +128,19 @@
             app:tickColor="@color/buttons_color_rosa"
             app:thumbStrokeColor="@color/buttons_color_rosa"/>
 
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="10dp">
 
             <ImageButton
                 android:id="@+id/maleButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/selector_hombre"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
+                android:layout_marginRight="14dp"
+                android:padding="12dp"
                 android:backgroundTint="@color/buttons_color_verde"
                 android:background="@drawable/backgroud_rounded"/>
 
@@ -150,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/selector_mujer"
-                android:padding="10dp"
+                android:padding="12dp"
                 android:backgroundTint="@color/buttons_color_verde"
                 android:background="@drawable/backgroud_rounded"/>
         </LinearLayout>

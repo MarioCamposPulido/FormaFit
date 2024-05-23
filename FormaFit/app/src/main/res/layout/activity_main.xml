@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/fondo_logo">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
@@ -24,10 +25,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/black"
+            android:background="@color/buttons_color_rosa"
             app:menu="@menu/bottom_navigation"
             app:itemTextColor="@color/white"
             app:itemIconTint="@color/white"
+            style="@style/CustomBottomNavigationView"
             app:labelVisibilityMode="selected"/>
 
     </RelativeLayout>

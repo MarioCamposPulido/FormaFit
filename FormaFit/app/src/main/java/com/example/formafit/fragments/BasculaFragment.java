@@ -1,34 +1,47 @@
 package com.example.formafit.fragments;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.formafit.R;
+import com.example.formafit.activities.MainActivity;
+import com.example.formafit.base_datos.BaseDatosHelper;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.utils.EntryXComparator;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.LinkedList;
 
 public class BasculaFragment extends Fragment {
 
     private LineChart lineChart;
     private LineData lineData;
-    private List<Entry> entries = new ArrayList<>();
+    private BaseDatosHelper dbHelper;
 
     public BasculaFragment() {
         // Required empty public constructor
+    }
+
+    private LinkedList<Entry> getAllEntradasEnGrafico(LinkedList<Integer> pesos){
+        LinkedList<Entry> entries = new LinkedList<>();
+        for (int i = 0; i < pesos.size(); i++) {
+            entries.add(new Entry(i, pesos.get(i)));
+        }
+
+        return entries;
     }
 
     @Override
@@ -45,14 +58,25 @@ public class BasculaFragment extends Fragment {
         lineChart = view.findViewById(R.id.lineChart);
         FloatingActionButton fabAniadirEntrada = view.findViewById(R.id.fabAdd);
 
-        entries.add(new Entry(0, 10));
-        entries.add(new Entry(1, 20));
-        entries.add(new Entry(2, 15));
-        entries.add(new Entry(6, 25));
+        dbHelper = new BaseDatosHelper(getContext());
+        LineDataSet lineDataSet = new LineDataSet(getAllEntradasEnGrafico(dbHelper.getAllEntradasPeso(MainActivity.email)), "Peso");
 
-        LineDataSet dataSet = new LineDataSet(entries, "Peso");
-        dataSet.setColor(Color.GREEN);
-        lineData = new LineData(dataSet);
+        lineDataSet.setColor(ContextCompat.getColor(getContext(), R.color.buttons_color_rosa));
+        lineDataSet.setLineWidth(4f);
+        lineDataSet.setValueTextSize(12f);
+        lineDataSet.setDrawValues(false);
+
+        lineDataSet.setValueTypeface(Typeface.DEFAULT_BOLD);
+
+        lineChart.getXAxis().setDrawAxisLine(false);
+        lineChart.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.backgroud_rounded));
+        lineChart.getAxisRight().setDrawLabels(false);
+        lineChart.getXAxis().setDrawGridLines(false);
+        lineChart.getXAxis().setDrawLabels(false);
+        lineChart.getXAxis().setDrawGridLines(false);
+        lineChart.getDescription().setEnabled(false);
+        lineChart.getLegend().setEnabled(false);
+        lineData = new LineData(lineDataSet);
 
         lineChart.setBackgroundColor(Color.WHITE);
 
@@ -62,19 +86,19 @@ public class BasculaFragment extends Fragment {
         fabAniadirEntrada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LineData lineData = lineChart.getLineData();
-                LineDataSet dataSet = null;
-                if (lineData != null && lineData.getDataSetCount() > 0) {
-                    dataSet = (LineDataSet) lineData.getDataSetByIndex(0);
-                }
-                if (dataSet == null) {
-                    // Si no hay ningún conjunto de datos, muestra un mensaje de error o haz algo apropiado
-                    return;
-                }
-                dataSet.addEntry(new Entry(7, 50)); // Aquí puedes ajustar los valores xValue e yValue
-                lineData.notifyDataChanged();
-                lineChart.notifyDataSetChanged();
-                lineChart.invalidate();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new EntradaPesoFragment()).commit();
+            }
+        });
+
+        lineChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                float yValue = e.getY();
+                Toast.makeText(getContext(), "Valor: " + yValue, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected() {
             }
         });
 

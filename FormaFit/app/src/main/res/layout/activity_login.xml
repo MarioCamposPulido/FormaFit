@@ -28,7 +28,7 @@
             android:elevation="10dp"
             android:background="@drawable/backgroud_rounded"
             app:srcCompat="@drawable/logo_formafit"
-            android:padding="8dp"/>
+            android:padding="10dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"

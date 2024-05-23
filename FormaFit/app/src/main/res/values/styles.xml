@@ -16,4 +16,13 @@
         <item name="colorOnPrimary">@color/white</item> <!-- Cambia el color del texto -->
     </style>
 
+    <style name="CustomBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+
+    </style>
+
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

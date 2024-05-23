@@ -13,11 +13,13 @@ import android.widget.TextView;
 import com.example.formafit.R;
 import com.example.formafit.fragments.BasculaFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.shape.MaterialShapeDrawable;
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private Fragment fragment;
+    public static String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

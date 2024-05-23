@@ -49,7 +49,7 @@ public class Registro extends AppCompatActivity {
 
     private String getGeneroLogin() {
         if (maleButton.isSelected()) {
-            return "H";
+            return "M";
         }
         if (femaleButton.isSelected()) {
             return "F";

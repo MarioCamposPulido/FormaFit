@@ -24,5 +24,13 @@
     <string name="alturaPorDefecto"> 50 cm </string>
     <string name="pesoPorDefecto"> 10 kg </string>
 
+    <!-- Fragment Crear Entrada Peso -->
+    <string name="nuevaEntradaPeso"> Nueva Entrada de Peso </string>
+    <string name="aniadirImg"> Añade una imagen </string>
+    <string name="grasaCorporal"> BF% </string>
+    <string name="grasaPorDefecto"> [?? %] </string>
+    <string name="fecha"> ★   Fecha   ★ </string>
+    <string name="aniadirComentario"> Añadir comentario… </string>
+    <string name="imcPromedio"> {??.?} </string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.formafit.activities;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -36,6 +37,17 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Crear un callback que no hace nada para deshabilitar el botón de retroceso
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // No hacer nada para deshabilitar el botón de retroceso
+            }
+        };
+
+        // Añadir el callback al dispatcher de onBackPressed
+        getOnBackPressedDispatcher().addCallback(this, callback);
+
         loginButton = findViewById(R.id.loginButton);
         emailLogin = findViewById(R.id.emailLogin);
         passwordLogin = findViewById(R.id.passwordLogin);
@@ -50,6 +62,7 @@ public class Login extends AppCompatActivity {
                 dbHelper = new BaseDatosHelper(getBaseContext());
                 if (dbHelper.checkUserLogin(emailLogin.getText().toString(), passwordLogin.getText().toString())){
                     openMainActivity();
+                    MainActivity.email = emailLogin.getText().toString();
                 }
             }
         });

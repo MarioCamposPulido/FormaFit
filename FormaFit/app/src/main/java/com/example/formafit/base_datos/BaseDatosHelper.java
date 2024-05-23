@@ -6,10 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -36,7 +35,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Código para actualizar la estructura de la base de datos
-        db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_USERSANDWEIGHT);
         onCreate(db);
     }
 
@@ -48,8 +47,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
     public boolean checkEmail(String email) {
 
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT * FROM " + EstructuraBBDD.TABLE_USERS +
-                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? ",
+                "SELECT * FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? ",
                 new String[]{email});
 
         boolean exists = cursor.getCount() > 0;
@@ -65,18 +64,18 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
         // Creamos mapa de valores con los nombres de las tablas
         ContentValues values = new ContentValues();
-        values.put(EstructuraBBDD.COLUMN_EMAIL_USER, email);
-        values.put(EstructuraBBDD.COLUMN_PASSWORD_USER, pasw);
-        values.put(EstructuraBBDD.COLUMN_USERNAME_USER, userName);
-        values.put(EstructuraBBDD.COLUMN_GENDER_USER, gender);
-        values.put(EstructuraBBDD.COLUMN_BIRTH_USER, birth);
-        values.put(EstructuraBBDD.COLUMN_HEIGHT_USER, height);
-        values.put(EstructuraBBDD.COLUMN_DATE_USER, date);
-        values.put(EstructuraBBDD.COLUMN_WEIGHT_USER, weight);
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT, email);
+        values.put(EstructuraBBDD.COLUMN_PASSWORD_USERSANDWEIGHT, pasw);
+        values.put(EstructuraBBDD.COLUMN_USERNAME_USERSANDWEIGHT, userName);
+        values.put(EstructuraBBDD.COLUMN_GENDER_USERSANDWEIGHT, gender);
+        values.put(EstructuraBBDD.COLUMN_BIRTH_USERSANDWEIGHT, birth);
+        values.put(EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT, height);
+        values.put(EstructuraBBDD.COLUMN_DATE_USERSANDWEIGHT, date);
+        values.put(EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT, weight);
 
         // Insertar nueva fila indicando nombre de la tabla
         long newRowId = this.getWritableDatabase().insert(
-                EstructuraBBDD.TABLE_USERS, null, values);
+                EstructuraBBDD.TABLE_USERSANDWEIGHT, null, values);
         //this.close();
 
     }
@@ -90,12 +89,12 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
     public boolean checkUserLogin(String emailParam, String passwordParam) {
 
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT * FROM " + EstructuraBBDD.TABLE_USERS +
-                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? AND " +
-                        EstructuraBBDD.COLUMN_PASSWORD_USER + "=? ",
+                "SELECT * FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? AND " +
+                        EstructuraBBDD.COLUMN_PASSWORD_USERSANDWEIGHT + "=? ",
                 new String[]{emailParam, passwordParam});
 
-        boolean exists = cursor.getCount() == 1;
+        boolean exists = cursor.getCount() >= 1;
         cursor.close();
         //this.close();
 
@@ -103,6 +102,178 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return exists;
     }
 
+    public LinkedList<Integer> getAllEntradasPeso(String email){
+        Cursor cursor = this.getReadableDatabase().rawQuery(
+                "SELECT weight FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=?",
+                new String[]{email});
+
+        // Crear un array para almacenar los resultados
+        LinkedList<Integer> weights = new LinkedList<>();
+
+        // Extraer los datos del cursor
+        int index = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                // Obtener el valor de la columna "weight"
+                int weight = cursor.getInt(cursor.getColumnIndexOrThrow("weight"));
+                weights.add(weight);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        //this.close();
+
+
+        return weights;
+    }
+
+    public int getAltura(String email) {
+        int altura = -1; // Valor predeterminado si no se encuentra ninguna altura
+
+        // Consulta SQL para obtener la altura limitada a un solo registro
+        String query = "SELECT height FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+                " LIMIT 1";
+
+        Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
+
+        // Verificar si se encontró algún resultado
+        if (cursor.moveToFirst()) {
+            altura = cursor.getInt(cursor.getColumnIndexOrThrow("height"));
+        }
+
+        cursor.close();
+
+        return altura;
+    }
+
+    public String getFechaNacimiento(String email) {
+        String fechaNacimiento = ""; // Valor predeterminado si no se encuentra ninguna fecha de nacimiento
+
+        // Consulta SQL para obtener la altura limitada a un solo registro
+        String query = "SELECT birth FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+                " LIMIT 1";
+
+        Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
+
+        // Verificar si se encontró algún resultado
+        if (cursor.moveToFirst()) {
+            fechaNacimiento = cursor.getString(cursor.getColumnIndexOrThrow("birth"));
+        }
+
+        cursor.close();
+
+        return fechaNacimiento;
+    }
+
+    public String getGenero(String email) {
+        String genero = ""; // Valor predeterminado si no se encuentra ningún genero
+
+        // Consulta SQL para obtener la altura limitada a un solo registro
+        String query = "SELECT gender FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+                " LIMIT 1";
+
+        Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
+
+        // Verificar si se encontró algún resultado
+        if (cursor.moveToFirst()) {
+            genero = cursor.getString(cursor.getColumnIndexOrThrow("gender"));
+        }
+
+        cursor.close();
+
+        return genero;
+    }
+
+    public String getPassword(String email) {
+        String password = "";
+
+        // Consulta SQL para obtener la altura limitada a un solo registro
+        String query = "SELECT password FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+                " LIMIT 1";
+
+        Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
+
+        // Verificar si se encontró algún resultado
+        if (cursor.moveToFirst()) {
+            password = cursor.getString(cursor.getColumnIndexOrThrow("password"));
+        }
+
+        cursor.close();
+
+        return password;
+    }
+
+    public String getUserName(String email) {
+        String userName = "";
+
+        // Consulta SQL para obtener la altura limitada a un solo registro
+        String query = "SELECT user_name FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+                " LIMIT 1";
+
+        Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
+
+        // Verificar si se encontró algún resultado
+        if (cursor.moveToFirst()) {
+            userName = cursor.getString(cursor.getColumnIndexOrThrow("user_name"));
+        }
+
+        cursor.close();
+
+        return userName;
+    }
+
+    public String getBirth(String email) {
+        String birth = "";
+
+        // Consulta SQL para obtener la altura limitada a un solo registro
+        String query = "SELECT birth FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+                " LIMIT 1";
+
+        Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
+
+        // Verificar si se encontró algún resultado
+        if (cursor.moveToFirst()) {
+            birth = cursor.getString(cursor.getColumnIndexOrThrow("birth"));
+        }
+
+        cursor.close();
+
+        return birth;
+    }
+
+    public void insertNewEntradaPeso(String email, String date, String description, Drawable img, int weight) {
+
+        // Creamos mapa de valores con los nombres de las tablas
+        ContentValues values = new ContentValues();
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT, email);
+        values.put(EstructuraBBDD.COLUMN_PASSWORD_USERSANDWEIGHT, getPassword(email));
+        values.put(EstructuraBBDD.COLUMN_USERNAME_USERSANDWEIGHT, getUserName(email));
+        values.put(EstructuraBBDD.COLUMN_GENDER_USERSANDWEIGHT, getGenero(email));
+        values.put(EstructuraBBDD.COLUMN_BIRTH_USERSANDWEIGHT, getBirth(email));
+        values.put(EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT, getAltura(email));
+        values.put(EstructuraBBDD.COLUMN_DATE_USERSANDWEIGHT, date);
+        values.put(EstructuraBBDD.COLUMN_DESCRIPTION_USERSANDWEIGHT, description);
+        values.put(EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT, "");
+        values.put(EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT, weight);
+
+        try {
+            // Insertar nueva fila indicando nombre de la tabla
+            long newRowId = this.getWritableDatabase().insert(
+                    EstructuraBBDD.TABLE_USERSANDWEIGHT, null, values);
+            //this.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
 
 }
 

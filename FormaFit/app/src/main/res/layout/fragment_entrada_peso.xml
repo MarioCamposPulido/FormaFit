@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.EntradaPesoFragment"
+    android:background="@color/fondo_logo_sombra">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/fondo_logo"
+        android:gravity=""
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:text="@string/nuevaEntradaPeso"
+                android:textSize="22sp"
+                android:layout_centerVertical="true"/>
+
+            <ImageButton
+                android:id="@+id/introducirNuevoPeso"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/backgroud_rounded"
+                android:backgroundTint="@color/buttons_color_verde"
+                android:padding="12dp"
+                android:src="@drawable/icon_check"
+                android:layout_marginEnd="14dp"/>
+
+        </RelativeLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/photoButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:padding="6dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_plus"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/buttons_color_verde"
+            app:strokeWidth="5dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:text="@string/aniadirImg"
+            android:textSize="22sp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/pesoTextVie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/peso"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/entradaPesoKg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/pesoPorDefecto"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderPesoEntradaPeso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:stepSize="1"
+            android:valueFrom="10"
+            android:valueTo="200"
+            app:thumbColor="@color/buttons_color_verde"
+            app:thumbStrokeColor="@color/buttons_color_rosa"
+            app:tickColor="@color/buttons_color_verde"
+            app:trackColor="@color/buttons_color_rosa" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/navigation_imc"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/imcCalculado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/imcPromedio"
+                android:textSize="20sp"
+                android:layout_marginEnd="65dp"/>
+
+            <TextView
+                android:id="@+id/pes2o2Kg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/grasaCorporal"
+                android:textSize="20sp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/grasasPorcentaje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/grasaPorDefecto"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/fechaButtonEntradaPeso"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/buttons_color_rosa"
+            android:text="@string/fecha"
+            android:textColor="@color/white"
+            android:textColorHint="@color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aniadirComentario"
+            android:textColor="@color/white"
+            android:textColorHint="@color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descripcionEntradaPeso"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:gravity="start|top"
+                android:maxLines="6"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:inputType="textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
