@@ -42,15 +42,17 @@ import java.util.Locale;
 
 public class EntradaPesoFragment extends Fragment {
 
-    ShapeableImageView photoButton;
-    TextView entradaPesoKg, imcCalculado, grasasPorcentaje;
-    TextInputEditText descripcionEntradaPeso;
-    Slider sliderPesoEntradaPeso;
-    Button fechaButtonEntradaPeso;
-    ImageButton introducirNuevoPeso;
-    BaseDatosHelper dbHelper;
+    private ShapeableImageView photoButton;
+    private TextView entradaPesoKg, imcCalculado, grasasPorcentaje;
+    private TextInputEditText descripcionEntradaPeso;
+    private Slider sliderPesoEntradaPeso;
+    private Button fechaButtonEntradaPeso;
+    private ImageButton introducirNuevoPeso;
+    private BaseDatosHelper dbHelper;
 
     private static int pesoNuevo;
+    private static Bitmap imgTomada;
+
 
     private final ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -60,6 +62,7 @@ public class EntradaPesoFragment extends Fragment {
                         Bundle extras = result.getData().getExtras();
                         Bitmap imgBitmap = (Bitmap) extras.get("data");
                         photoButton.setImageBitmap(imgBitmap);
+                        imgTomada = imgBitmap;
                     }
                 }
             });
@@ -131,7 +134,7 @@ public class EntradaPesoFragment extends Fragment {
             public void onClick(View view) {
                 dbHelper = new BaseDatosHelper(getContext());
                 dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
-                                                descripcionEntradaPeso.getText().toString(), photoButton.getDrawable(),
+                                                descripcionEntradaPeso.getText().toString(), imgTomada,
                                                 pesoNuevo);
                 requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
             }

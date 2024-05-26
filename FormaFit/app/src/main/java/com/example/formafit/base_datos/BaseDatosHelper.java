@@ -5,11 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 
+import com.example.formafit.activities.MainActivity;
 import com.example.formafit.fragments.EntradaPesoFragment;
 import com.example.formafit.java.EntradaPeso;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -136,9 +140,13 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return exists;
     }
 
+    public Bitmap byteArrayToBitmap(byte[] byteArray) {
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+    }
+
     public LinkedList<EntradaPeso> getAllEntradasPeso(String email){
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT date, weight, description FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                "SELECT date, weight, description, img FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
                         " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=?",
                 new String[]{email});
 
@@ -152,7 +160,12 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
                 String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
                 int weight = cursor.getInt(cursor.getColumnIndexOrThrow("weight"));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
-                entradasPeso.add(new EntradaPeso(date, getAltura(email), weight, getEdadUser(email), description));
+                if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null){
+                    Bitmap imagen = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndexOrThrow("img")));
+                    entradasPeso.add(new EntradaPeso(date, getAltura(email), weight, getEdadUser(email), description, imagen, getGenero(MainActivity.email)));
+                }else {
+                    entradasPeso.add(new EntradaPeso(date, getAltura(email), weight, getEdadUser(email), description, null, getGenero(MainActivity.email)));
+                }
             } while (cursor.moveToNext());
         }
 
@@ -283,7 +296,11 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return birth;
     }
 
-    public void insertNewEntradaPeso(String email, String date, String description, Drawable img, int weight) {
+    public void insertNewEntradaPeso(String email, String date, String description, Bitmap img, int weight) {
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
+        img.compress(Bitmap.CompressFormat.PNG, 0 , baos);
+        byte[] blob = baos.toByteArray();
 
         // Creamos mapa de valores con los nombres de las tablas
         ContentValues values = new ContentValues();
@@ -295,7 +312,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         values.put(EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT, getAltura(email));
         values.put(EstructuraBBDD.COLUMN_DATE_USERSANDWEIGHT, date);
         values.put(EstructuraBBDD.COLUMN_DESCRIPTION_USERSANDWEIGHT, description);
-        values.put(EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT, "");
+        values.put(EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT, blob);
         values.put(EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT, weight);
 
         try {

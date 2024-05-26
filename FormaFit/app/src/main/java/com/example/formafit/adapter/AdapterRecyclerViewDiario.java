@@ -1,5 +1,6 @@
 package com.example.formafit.adapter;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,9 +56,10 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
      */
     class EntradasPesosViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView fechaEntradaPeso;
+        private TextView fechaEntradaPeso, grasasPorcentajeDiario, imcCalculadoDiario, kilosDiario;
+        private ImageView img;
 
-        private BaseDatosHelper dbHelper;
+
 
         /**
          * Declaramos lo que es cada item, para interactuar con él
@@ -66,11 +68,22 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
         public EntradasPesosViewHolder(@NonNull View itemView) {
             super(itemView);
             this.fechaEntradaPeso = itemView.findViewById(R.id.fechaEntradaPeso);
+            this.img = itemView.findViewById(R.id.diarioImagen);
+            this.grasasPorcentajeDiario = itemView.findViewById(R.id.grasasPorcentajeDiario);
+            this.imcCalculadoDiario = itemView.findViewById(R.id.imcCalculadoDiario);
+            this.kilosDiario = itemView.findViewById(R.id.kilosDiario);
         }
 
 
         public void bind(EntradaPeso entradaPeso){
                 fechaEntradaPeso.setText(entradaPeso.getFecha());
+                if (!Objects.isNull(entradaPeso.getImagen())){
+                    img.setImageBitmap(entradaPeso.getImagen());
+                }
+                grasasPorcentajeDiario.setText("[" + entradaPeso.getPorcentajeGrasa() + " %]");
+                imcCalculadoDiario.setText("{ " + entradaPeso.getImc() + " }");
+                kilosDiario.setText(entradaPeso.getPeso() + " kg");
+
 //            if (!Objects.isNull(usuario.getGenero())){
 //                descripcionUsuario.setText(usuario.getGenero());
 //            }
