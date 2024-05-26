@@ -21,8 +21,8 @@
     <string name="fechaNacimiento"> Fecha De Nacimiento </string>
     <string name="peso"> Peso </string>
     <string name="crearPerfil"> ★ Crea tu perfil ★ </string>
-    <string name="alturaPorDefecto"> 50 cm </string>
-    <string name="pesoPorDefecto"> 10 kg </string>
+    <string name="alturaPorDefecto"> 0 cm </string>
+    <string name="pesoPorDefecto"> 0 kg </string>
 
     <!-- Fragment Crear Entrada Peso -->
     <string name="nuevaEntradaPeso"> Nueva Entrada de Peso </string>
@@ -33,4 +33,6 @@
     <string name="aniadirComentario"> Añadir comentario… </string>
     <string name="imcPromedio"> {??.?} </string>
 
+    <!-- Fragment Bascula -->
+    <string name="diario"> Diario </string>
 </resources>

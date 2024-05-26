@@ -8,6 +8,38 @@
     tools:context=".fragments.BasculaFragment">
 
 
+    <TextView
+        android:id="@+id/userNameBascula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="@string/app_name"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/icon_user" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000" />
+
+
+    <TextView
+        android:id="@+id/pesoUltimo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center"
+        android:text="@string/pesoPorDefecto"
+        android:textColor="@color/buttons_color_rosa"
+        android:textSize="40sp"
+        android:background="@drawable/backgroud_white_rounded"
+        android:padding="8dp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="382dp"
@@ -27,10 +59,28 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"
             android:layout_width="match_parent"
-            android:layout_height="330dp">
+            android:layout_height="330dp"
+            android:background="@drawable/backgroud_white_rounded"
+            android:padding="600dp">
 
         </com.github.mikephil.charting.charts.LineChart>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/diarioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/diario"
+        android:textColor="@color/white"
+        android:background="@drawable/buttons_funcionales"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:elevation="4dp"
+        android:gravity="center"
+        app:drawableEndCompat="@drawable/icon_adelante"
+        app:drawableStartCompat="@drawable/icon_diario" />
 
 
 </LinearLayout>

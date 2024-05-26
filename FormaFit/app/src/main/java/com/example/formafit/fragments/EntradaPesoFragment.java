@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -63,35 +64,6 @@ public class EntradaPesoFragment extends Fragment {
                 }
             });
 
-    private int calcularEdad(String fechaNacimientoStr) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            // Parsear la fecha de nacimiento
-            Date fechaNacimiento = sdf.parse(fechaNacimientoStr);
-
-            // Obtener la fecha actual
-            Calendar fechaActual = Calendar.getInstance();
-
-            // Crear un calendario con la fecha de nacimiento
-            Calendar nacimiento = Calendar.getInstance();
-            nacimiento.setTime(fechaNacimiento);
-
-            // Calcular la edad
-            int edad = fechaActual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR);
-
-            // Comprobar si el cumpleaños ya ha pasado este año
-            if (fechaActual.get(Calendar.DAY_OF_YEAR) < nacimiento.get(Calendar.DAY_OF_YEAR)) {
-                edad--;
-            }
-
-            return edad;
-        } catch (ParseException e) {
-            // Manejar la excepción si el formato de la fecha es incorrecto
-            e.printStackTrace();
-            return -1; // o alguna otra indicación de error
-        }
-    }
-
     public EntradaPesoFragment() {
         // Required empty public constructor
     }
@@ -100,6 +72,15 @@ public class EntradaPesoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
+            }
+        };
+
+        // Añadir el callback al dispatcher de onBackPressed
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override
@@ -167,7 +148,7 @@ public class EntradaPesoFragment extends Fragment {
 
                 switch (dbHelper.getGenero(MainActivity.email)){
                     case "M":
-                        double grasaCorporalHombre = Math.floor((1.20 * imc + 0.23 * calcularEdad(dbHelper.getFechaNacimiento(MainActivity.email)) - 16.2) * 10) / 10;
+                        double grasaCorporalHombre = Math.floor((1.20 * imc + 0.23 * dbHelper.getEdadUser(MainActivity.email) - 16.2) * 10) / 10;
                         if (grasaCorporalHombre > 7 ){
                             grasasPorcentaje.setText("[" + grasaCorporalHombre + "]");
                         }else {
@@ -175,7 +156,7 @@ public class EntradaPesoFragment extends Fragment {
                         }
                         break;
                     case "F":
-                        double grasaCorporalMujer = Math.floor((1.20 * imc + 0.23 * calcularEdad(dbHelper.getFechaNacimiento(MainActivity.email)) - 5.4) * 10) / 10;
+                        double grasaCorporalMujer = Math.floor((1.20 * imc + 0.23 * dbHelper.getEdadUser(MainActivity.email) - 5.4) * 10) / 10;
                         if (grasaCorporalMujer > 10 ){
                             grasasPorcentaje.setText("[" + grasaCorporalMujer + "]");
                         }else {
