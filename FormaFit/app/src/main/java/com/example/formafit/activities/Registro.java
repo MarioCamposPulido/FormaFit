@@ -42,8 +42,13 @@ public class Registro extends AppCompatActivity {
     private static int crearAltura;
     private static int crearPeso;
 
-    private void openLogin() {
+    private void openLogin(String email, String password) {
         Intent intent = new Intent(this, Login.class);
+
+        // Agregar los textos al Intent como extras
+        intent.putExtra("EXTRA_EMAIL", email);
+        intent.putExtra("EXTRA_PASSWORD", password);
+
         startActivity(intent);
     }
 
@@ -149,7 +154,7 @@ public class Registro extends AppCompatActivity {
                 dbHelper = new BaseDatosHelper(getBaseContext());
                 dbHelper.insertNewUserRegistro(emailRegistro.getText().toString(), passwordRegistro.getText().toString(), nombreRegistro.getText().toString(),
                         getGeneroLogin(), nacimientoButtonRegistro.getText().toString(), crearAltura, getFechaActual(), crearPeso);
-                openLogin();
+                openLogin(emailRegistro.getText().toString(), passwordRegistro.getText().toString());
             }
         });
 

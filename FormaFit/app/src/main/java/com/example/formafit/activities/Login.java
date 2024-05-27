@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.formafit.R;
 import com.example.formafit.base_datos.BaseDatosHelper;
@@ -52,6 +51,21 @@ public class Login extends AppCompatActivity {
         emailLogin = findViewById(R.id.emailLogin);
         passwordLogin = findViewById(R.id.passwordLogin);
         registroButton = findViewById(R.id.registroButton);
+
+        // Obtener el Intent que inició esta actividad
+        Intent intent = getIntent();
+
+        // Extraer los datos del Intent
+        if (intent != null) {
+            if (intent.hasExtra("EXTRA_EMAIL")) {
+                String email = intent.getStringExtra("EXTRA_EMAIL");
+                emailLogin.setText(email);
+            }
+            if (intent.hasExtra("EXTRA_PASSWORD")) {
+                String password = intent.getStringExtra("EXTRA_PASSWORD");
+                passwordLogin.setText(password);
+            }
+        }
 
         // Cambiar la barra de color de arriba en negro
         getWindow().setStatusBarColor(Color.BLACK);

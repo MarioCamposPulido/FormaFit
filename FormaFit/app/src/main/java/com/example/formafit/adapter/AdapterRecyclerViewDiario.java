@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.formafit.R;
@@ -22,7 +23,6 @@ import java.util.Objects;
 public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyclerViewDiario.EntradasPesosViewHolder> {
 
     private LinkedList<EntradaPeso> entradaPesos;
-
 
     public AdapterRecyclerViewDiario (LinkedList<EntradaPeso> entradaPesoRecyclers){
         this.entradaPesos = entradaPesoRecyclers;
@@ -39,7 +39,14 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
 
     @Override
     public void onBindViewHolder(@NonNull EntradasPesosViewHolder holder, int position) {
-        holder.bind(entradaPesos.get(position));
+
+        int diferenciaPeso = 0;
+        if (position > 0) {
+            int entradaPesoPrevia = entradaPesos.get(position - 1).getPeso();
+            diferenciaPeso = entradaPesos.get(position).getPeso() - entradaPesoPrevia;
+        }
+
+        holder.bind(entradaPesos.get(position), diferenciaPeso);
     }
 
     /**
@@ -56,7 +63,7 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
      */
     class EntradasPesosViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView fechaEntradaPeso, grasasPorcentajeDiario, imcCalculadoDiario, kilosDiario;
+        private TextView fechaEntradaPeso, grasasPorcentajeDiario, imcCalculadoDiario, kilosDiario, diferenciaPesoDiario, comentariosDiario;
         private ImageView img;
 
 
@@ -72,10 +79,12 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
             this.grasasPorcentajeDiario = itemView.findViewById(R.id.grasasPorcentajeDiario);
             this.imcCalculadoDiario = itemView.findViewById(R.id.imcCalculadoDiario);
             this.kilosDiario = itemView.findViewById(R.id.kilosDiario);
+            this.diferenciaPesoDiario = itemView.findViewById(R.id.diferenciaPesoDiario);
+            this.comentariosDiario = itemView.findViewById(R.id.comentariosDiario);
         }
 
 
-        public void bind(EntradaPeso entradaPeso){
+        public void bind(EntradaPeso entradaPeso, int diferenciasPeso){
                 fechaEntradaPeso.setText(entradaPeso.getFecha());
                 if (!Objects.isNull(entradaPeso.getImagen())){
                     img.setImageBitmap(entradaPeso.getImagen());
@@ -83,7 +92,21 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
                 grasasPorcentajeDiario.setText("[" + entradaPeso.getPorcentajeGrasa() + " %]");
                 imcCalculadoDiario.setText("{ " + entradaPeso.getImc() + " }");
                 kilosDiario.setText(entradaPeso.getPeso() + " kg");
+                if (diferenciasPeso > 0){
+                    diferenciaPesoDiario.setText("+" + diferenciasPeso + " kg");
+                    diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.buttons_color_rosa));
+                }else {
+                    if (diferenciasPeso < 0){
+                        diferenciaPesoDiario.setText("-" + diferenciasPeso + " kg");
+                        diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.buttons_color_verde));
+                    }
+                }
 
+                if (entradaPeso.getComentario() == null || entradaPeso.getComentario().equals("")){
+                    comentariosDiario.setVisibility(View.GONE);
+                }else {
+                    comentariosDiario.setText(entradaPeso.getComentario());
+                }
 //            if (!Objects.isNull(usuario.getGenero())){
 //                descripcionUsuario.setText(usuario.getGenero());
 //            }
