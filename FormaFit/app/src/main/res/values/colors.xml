@@ -6,4 +6,5 @@
     <color name="fondo_logo">#F1E7E3</color>
     <color name="fondo_logo_sombra">#D8CBC7</color>
     <color name="buttons_color_rosa">#FF579C</color>
+    <color name="gris_texto">#9C9C9C</color>
 </resources>

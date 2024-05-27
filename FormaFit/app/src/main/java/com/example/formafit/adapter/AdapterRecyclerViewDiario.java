@@ -64,7 +64,7 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
     class EntradasPesosViewHolder extends RecyclerView.ViewHolder{
 
         private TextView fechaEntradaPeso, grasasPorcentajeDiario, imcCalculadoDiario, kilosDiario, diferenciaPesoDiario, comentariosDiario;
-        private ImageView img;
+        private ImageView diarioImagen;
 
 
 
@@ -75,7 +75,7 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
         public EntradasPesosViewHolder(@NonNull View itemView) {
             super(itemView);
             this.fechaEntradaPeso = itemView.findViewById(R.id.fechaEntradaPeso);
-            this.img = itemView.findViewById(R.id.diarioImagen);
+            this.diarioImagen = itemView.findViewById(R.id.diarioImagen);
             this.grasasPorcentajeDiario = itemView.findViewById(R.id.grasasPorcentajeDiario);
             this.imcCalculadoDiario = itemView.findViewById(R.id.imcCalculadoDiario);
             this.kilosDiario = itemView.findViewById(R.id.kilosDiario);
@@ -87,7 +87,9 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
         public void bind(EntradaPeso entradaPeso, int diferenciasPeso){
                 fechaEntradaPeso.setText(entradaPeso.getFecha());
                 if (!Objects.isNull(entradaPeso.getImagen())){
-                    img.setImageBitmap(entradaPeso.getImagen());
+                    diarioImagen.setImageBitmap(entradaPeso.getImagen());
+                }else {
+                    diarioImagen.setVisibility(View.GONE);
                 }
                 grasasPorcentajeDiario.setText("[" + entradaPeso.getPorcentajeGrasa() + " %]");
                 imcCalculadoDiario.setText("{ " + entradaPeso.getImc() + " }");
@@ -99,6 +101,8 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
                     if (diferenciasPeso < 0){
                         diferenciaPesoDiario.setText("-" + diferenciasPeso + " kg");
                         diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.buttons_color_verde));
+                    }else {
+                        diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.gris_texto));
                     }
                 }
 
