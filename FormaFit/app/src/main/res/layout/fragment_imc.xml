@@ -4,4 +4,156 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.ImcFragment" />
+    tools:context=".fragments.ImcFragment">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginHorizontal="24dp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:padding="12dp"
+        android:text="@string/navigation_imc"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="40sp"
+        android:background="@drawable/backgroud_white_rounded"
+        android:backgroundTint="@color/buttons_color_rosa"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/buttons_color_verde" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/backgroud_white_rounded"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/pesoIMC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="start"
+                android:text="@string/pesoPorDefecto"
+                android:textSize="22sp"
+                android:textColor="@color/buttons_color_rosa"/>
+
+            <TextView
+                android:id="@+id/textView96"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="start"
+                android:text="@string/peso"
+                android:textSize="20sp"
+                android:textColor="@color/gris_texto"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/backgroud_white_rounded"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/alturaIMC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="end"
+                android:text="@string/alturaPorDefecto"
+                android:textSize="22sp"
+                android:textColor="@color/buttons_color_verde"/>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="end"
+                android:text="@string/altura"
+                android:textSize="20sp"
+                android:textColor="@color/gris_texto"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChartIMC"
+        android:layout_width="360dp"
+        android:layout_height="330dp"
+        android:layout_gravity="center">
+
+    </com.github.mikephil.charting.charts.PieChart>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="14dp">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/muyDelgado"
+            android:fontFamily="@font/barlowsemicondensedmedium"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bajoPeso"
+            android:fontFamily="@font/barlowsemicondensedmedium"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pesoNormal"
+            android:fontFamily="@font/barlowsemicondensedmedium"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sobrePeso"
+            android:fontFamily="@font/barlowsemicondensedmedium"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/obesidad"
+            android:fontFamily="@font/barlowsemicondensedmedium"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+</LinearLayout>

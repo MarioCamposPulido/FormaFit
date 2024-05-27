@@ -41,4 +41,13 @@
     <string name="borrarEntradasPeso"> Se eliminarán todas las entradas de peso menos la última introducida. </string>
     <string name="aceptar"> Aceptar </string>
     <string name="cancelar"> Cancelar </string>
+
+    <!-- Fragment Diario -->
+    <string name="muyDelgado"> Muy Delgado </string>
+    <string name="bajoPeso"> Bajo Peso </string>
+    <string name="pesoNormal"> Peso Normal </string>
+    <string name="sobrePeso"> Sobrepeso </string>
+    <string name="obesidad"> Obesidad </string>
+
+
 </resources>

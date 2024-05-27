@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.formafit.R;
 import com.example.formafit.fragments.BasculaFragment;
+import com.example.formafit.fragments.ImcFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.shape.MaterialShapeDrawable;
 
@@ -37,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (idItemn == R.id.bascula) {
                 fragment = new BasculaFragment();
+            }
+
+            if (idItemn == R.id.imc) {
+                fragment = new ImcFragment();
             }
 
             if (fragment != null) {

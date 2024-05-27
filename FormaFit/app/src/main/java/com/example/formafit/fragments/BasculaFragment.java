@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ import com.example.formafit.R;
 import com.example.formafit.activities.MainActivity;
 import com.example.formafit.base_datos.BaseDatosHelper;
 import com.example.formafit.java.EntradaPeso;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.YAxis;
@@ -107,6 +110,7 @@ public class BasculaFragment extends Fragment {
         lineData = new LineData(lineDataSet);
 
         lineChart.setData(lineData);
+        lineChart.animateY(800, Easing.EasingOption.EaseInOutQuad);
         lineChart.invalidate(); // refresh
 
         fabAniadirEntrada.setOnClickListener(new View.OnClickListener() {
