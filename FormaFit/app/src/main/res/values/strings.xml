@@ -35,4 +35,10 @@
 
     <!-- Fragment Bascula -->
     <string name="diario"> Diario </string>
+
+    <!-- Fragment Diario -->
+    <string name="advertencia"> ¡Advertencia! </string>
+    <string name="borrarEntradasPeso"> Se eliminarán todas las entradas de peso menos la última introducida. </string>
+    <string name="aceptar"> Aceptar </string>
+    <string name="cancelar"> Cancelar </string>
 </resources>

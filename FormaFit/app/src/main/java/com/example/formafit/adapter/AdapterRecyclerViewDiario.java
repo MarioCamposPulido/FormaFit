@@ -87,6 +87,7 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
         public void bind(EntradaPeso entradaPeso, int diferenciasPeso){
                 fechaEntradaPeso.setText(entradaPeso.getFecha());
                 if (!Objects.isNull(entradaPeso.getImagen())){
+                    diarioImagen.setVisibility(View.VISIBLE);
                     diarioImagen.setImageBitmap(entradaPeso.getImagen());
                 }else {
                     diarioImagen.setVisibility(View.GONE);
@@ -109,6 +110,7 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
                 if (entradaPeso.getComentario() == null || entradaPeso.getComentario().equals("")){
                     comentariosDiario.setVisibility(View.GONE);
                 }else {
+                    comentariosDiario.setVisibility(View.VISIBLE);
                     comentariosDiario.setText(entradaPeso.getComentario());
                 }
 //            if (!Objects.isNull(usuario.getGenero())){

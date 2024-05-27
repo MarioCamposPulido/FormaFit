@@ -120,7 +120,7 @@ public class BasculaFragment extends Fragment {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 float yValue = e.getY();
-                Toast.makeText(getContext(), "Valor: " + yValue, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), (int) yValue  + " kg", Toast.LENGTH_LONG).show();
             }
 
             @Override

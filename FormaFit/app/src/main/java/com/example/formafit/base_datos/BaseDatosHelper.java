@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import com.example.formafit.activities.MainActivity;
 import com.example.formafit.fragments.EntradaPesoFragment;
@@ -17,8 +18,10 @@ import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  * Clase BaseDatosHelper, toda la funcionalidad de la base de datos
@@ -172,7 +175,6 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         cursor.close();
         //this.close();
 
-
         return entradasPeso;
     }
 
@@ -298,10 +300,6 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     public void insertNewEntradaPeso(String email, String date, String description, Bitmap img, int weight) {
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
-        img.compress(Bitmap.CompressFormat.PNG, 0 , baos);
-        byte[] blob = baos.toByteArray();
-
         // Creamos mapa de valores con los nombres de las tablas
         ContentValues values = new ContentValues();
         values.put(EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT, email);
@@ -312,7 +310,12 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         values.put(EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT, getAltura(email));
         values.put(EstructuraBBDD.COLUMN_DATE_USERSANDWEIGHT, date);
         values.put(EstructuraBBDD.COLUMN_DESCRIPTION_USERSANDWEIGHT, description);
-        values.put(EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT, blob);
+        if (!Objects.isNull(img)){
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
+            img.compress(Bitmap.CompressFormat.PNG, 0 , baos);
+            byte[] blob = baos.toByteArray();
+            values.put(EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT, blob);
+        }
         values.put(EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT, weight);
 
         try {
@@ -325,6 +328,26 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         }
 
 
+    }
+
+    public int deleteAllEntradasPesoUserExceptLast(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        int deletedRows = 0;
+        try {
+            String selection = EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " = ? AND " +
+                    EstructuraBBDD.COLUMN_ID_USERSANDWEIGHT + " NOT IN (SELECT " + EstructuraBBDD.COLUMN_ID_USERSANDWEIGHT +
+                    " FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                    " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " = ? " +
+                    " ORDER BY " + EstructuraBBDD.COLUMN_ID_USERSANDWEIGHT + " DESC LIMIT 1)";
+            String[] selectionArgs = { email, email };
+            deletedRows = db.delete(EstructuraBBDD.TABLE_USERSANDWEIGHT, selection, selectionArgs);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        db.close();
+        return deletedRows;
     }
 
 }

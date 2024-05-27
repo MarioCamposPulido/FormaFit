@@ -6,13 +6,48 @@
     android:orientation="vertical"
     tools:context=".fragments.DiarioFragment">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:text="@string/diario"
+            android:textSize="22sp"
+            android:layout_centerVertical="true"/>
+
+        <ImageButton
+            android:id="@+id/eliminarTodasEntradasPesoDiario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/backgroud_white_rounded"
+            android:backgroundTint="@color/buttons_color_verde"
+            android:src="@drawable/icon_basura"
+            android:padding="6dp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerDiario"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginHorizontal="16dp" />
 
 </LinearLayout>

@@ -13,8 +13,8 @@
         android:background="@drawable/backgroud_square"
         android:layout_gravity="center"
         android:layout_marginHorizontal="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp">
 
 
         <LinearLayout

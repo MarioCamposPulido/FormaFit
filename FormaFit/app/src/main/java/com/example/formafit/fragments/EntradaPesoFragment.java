@@ -39,6 +39,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class EntradaPesoFragment extends Fragment {
 
@@ -133,9 +134,16 @@ public class EntradaPesoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 dbHelper = new BaseDatosHelper(getContext());
-                dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
-                                                descripcionEntradaPeso.getText().toString(), imgTomada,
-                                                pesoNuevo);
+                if (!Objects.isNull(imgTomada)){
+                    dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
+                            descripcionEntradaPeso.getText().toString(), imgTomada,
+                            pesoNuevo);
+                }else {
+                    dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
+                            descripcionEntradaPeso.getText().toString(), null,
+                            pesoNuevo);
+                }
+
                 requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
             }
         });
