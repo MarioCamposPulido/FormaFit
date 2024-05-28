@@ -5,16 +5,12 @@ import androidx.fragment.app.Fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
+import com.example.formafit.fragments.AjustesFragment;
 import com.example.formafit.R;
 import com.example.formafit.fragments.BasculaFragment;
 import com.example.formafit.fragments.ImcFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.shape.MaterialShapeDrawable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (idItemn == R.id.imc) {
                 fragment = new ImcFragment();
+            }
+
+            if (idItemn == R.id.ajustes) {
+                fragment = new AjustesFragment();
             }
 
             if (fragment != null) {

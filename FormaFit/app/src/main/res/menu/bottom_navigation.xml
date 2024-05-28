@@ -24,11 +24,11 @@
         android:title="@string/navigation_notificacion"
         app:showAsAction="always" />
     <item
-        android:id="@+id/configuracion"
+        android:id="@+id/ajustes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_configuracion"
-        android:title="@string/navigation_configuracion"
+        android:title="@string/navigation_ajustes"
         app:showAsAction="always" />
 
 </menu>

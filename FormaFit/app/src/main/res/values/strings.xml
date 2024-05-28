@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">FormaFit</string>
+    <string name="app_name" translatable="false">Forma Fit</string>
+
+    <string name="slogan"> “Si te pesa la vida, hagamos cambios” </string>
 
     <!-- Bottom navigation View MainActivity -->
     <string name="navigation_bascula"> Báscula </string>
     <string name="navigation_imc"> IMC </string>
     <string name="navigation_notificacion"> Notificaciones </string>
-    <string name="navigation_configuracion"> Configuración </string>
+    <string name="navigation_ajustes"> Ajustes </string>
 
     <!-- Nombres de botones flotantes -->
     <string name="floating_add"> Añadir </string>
@@ -54,6 +56,13 @@
     <string name="pesoNormalIMC"> {18.50 – 24.99} </string>
     <string name="sobrePesoIMC"> {25.00 – 29.99} </string>
     <string name="obesidadIMC"> &gt; {30.00} </string>
+
+    <!-- Fragment Ajustes -->
+    <string name="version"> Versión </string>
+    <string name="idioma"> Idioma </string>
+    <string name="espanol"> Español </string>
+    <string name="ingles"> Inglés </string>
+
 
 
 </resources>

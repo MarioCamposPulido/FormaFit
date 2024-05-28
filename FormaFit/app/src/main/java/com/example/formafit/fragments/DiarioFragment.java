@@ -44,7 +44,7 @@ public class DiarioFragment extends Fragment {
                 })
                 .setNegativeButton(getResources().getText(R.string.cancelar), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        dialog.dismiss();
                     }
                 });
 
