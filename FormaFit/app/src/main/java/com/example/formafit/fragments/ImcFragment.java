@@ -1,14 +1,14 @@
 package com.example.formafit.fragments;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.formafit.R;
@@ -16,14 +16,11 @@ import com.example.formafit.activities.MainActivity;
 import com.example.formafit.base_datos.BaseDatosHelper;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
@@ -34,6 +31,7 @@ public class ImcFragment extends Fragment {
     private PieChart pieChartIMC;
     private TextView alturaIMC, pesoIMC;
     private BaseDatosHelper dbHelper;
+    LinearLayout muyDelgadoLayout, bajoPesoLayout, pesoNormalLayout, sobrePesoLayout, obesidadLayout;
 
     public ImcFragment() {
         // Required empty public constructor
@@ -52,6 +50,12 @@ public class ImcFragment extends Fragment {
         pieChartIMC = view.findViewById(R.id.pieChartIMC);
         alturaIMC = view.findViewById(R.id.alturaIMC);
         pesoIMC = view.findViewById(R.id.pesoIMC);
+
+        muyDelgadoLayout = view.findViewById(R.id.muyDelgadoLayout);
+        bajoPesoLayout = view.findViewById(R.id.bajoPesoLayout);
+        pesoNormalLayout = view.findViewById(R.id.pesoNormalLayout);
+        sobrePesoLayout = view.findViewById(R.id.sobrePesoLayout);
+        obesidadLayout = view.findViewById(R.id.obesidadLayout);
 
         dbHelper = new BaseDatosHelper(getContext());
 
@@ -73,15 +77,17 @@ public class ImcFragment extends Fragment {
         pieChartIMC.getDescription().setEnabled(false);
         pieChartIMC.setCenterText("{" + dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getImc() + "}");
         pieChartIMC.setCenterTextSize(35f);
+        dataSet.setSliceSpace(2f);
+        dataSet.setSliceSpace(2f);
+        // Establece los colores específicos para cada entrada
+        LinkedList<Integer> colors = new LinkedList<>();
+        colors.add(ContextCompat.getColor(getContext(), R.color.azul));
+        colors.add(ContextCompat.getColor(getContext(), R.color.violeta));
+        colors.add(ContextCompat.getColor(getContext(), R.color.verde));
+        colors.add(ContextCompat.getColor(getContext(), R.color.naranja));
+        colors.add(ContextCompat.getColor(getContext(), R.color.rojo));
 
-        // Obtiene el objeto Legend del PieChart
-        Legend legend = pieChartIMC.getLegend();
-
-// Configura la apariencia de la leyenda
-        legend.setForm(Legend.LegendForm.CIRCLE); // Establece la forma de la leyenda
-        legend.setTextSize(12f); // Establece el tamaño del texto de la leyenda
-        legend.setTextColor(Color.WHITE); // Establece el color del texto de la leyenda
-        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+        dataSet.setColors(colors);
 
         data.setValueFormatter(new IValueFormatter() {
             @Override
@@ -92,11 +98,36 @@ public class ImcFragment extends Fragment {
 
         pieChartIMC.setData(data);
 
-        pieChartIMC.highlightValue(0, 0);
+        if (dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getImc() <= 16.99) {
+            pieChartIMC.highlightValue(0, 0);
+            muyDelgadoLayout.setBackgroundResource(R.drawable.backgroud_white_rounded);
+            muyDelgadoLayout.setPadding(16, 16, 16, 16);
+        } else if (dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getImc() >= 17.00
+                && dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getImc() <= 18.49) {
+            pieChartIMC.highlightValue(1, 0);
+            bajoPesoLayout.setBackgroundResource(R.drawable.backgroud_white_rounded);
+            bajoPesoLayout.setPadding(16, 16, 16, 16);
+        } else if (dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getImc() >= 18.50
+                && dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getImc() <= 24.99) {
+            pieChartIMC.highlightValue(2, 0);
+            pesoNormalLayout.setBackgroundResource(R.drawable.backgroud_white_rounded);
+            pesoNormalLayout.setPadding(16, 16, 16, 16);
+        } else if (dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getImc() >= 25.00
+                && dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getImc() <= 29.99) {
+            pieChartIMC.highlightValue(3, 0);
+            sobrePesoLayout.setBackgroundResource(R.drawable.backgroud_white_rounded);
+            sobrePesoLayout.setPadding(16, 16, 16, 16);
+        } else if (dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getImc() >= 30.00) {
+            pieChartIMC.highlightValue(4, 0);
+            obesidadLayout.setBackgroundResource(R.drawable.backgroud_white_rounded);
+            obesidadLayout.setPadding(16, 16, 16, 16);
+        }
+
+
         pieChartIMC.setTouchEnabled(false);
 
         // Configurar animación de entrada
-        pieChartIMC.animateY(1000, Easing.EasingOption.EaseInOutQuad); // Duración de la animación y tipo de interpolación
+        pieChartIMC.animateY(850, Easing.EasingOption.EaseInOutQuad); // Duración de la animación y tipo de interpolación
         pieChartIMC.invalidate(); // refresh
 
         return view;

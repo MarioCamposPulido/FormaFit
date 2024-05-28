@@ -110,7 +110,7 @@ public class BasculaFragment extends Fragment {
         lineData = new LineData(lineDataSet);
 
         lineChart.setData(lineData);
-        lineChart.animateY(800, Easing.EasingOption.EaseInOutQuad);
+        lineChart.animateY(750, Easing.EasingOption.EaseInOutQuad);
         lineChart.invalidate(); // refresh
 
         fabAniadirEntrada.setOnClickListener(new View.OnClickListener() {

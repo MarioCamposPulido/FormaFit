@@ -49,5 +49,11 @@
     <string name="sobrePeso"> Sobrepeso </string>
     <string name="obesidad"> Obesidad </string>
 
+    <string name="muyDelgadoIMC"> &lt; {16.99} </string>
+    <string name="bajoPesoIMC"> {17.00 – 18.49} </string>
+    <string name="pesoNormalIMC"> {18.50 – 24.99} </string>
+    <string name="sobrePesoIMC"> {25.00 – 29.99} </string>
+    <string name="obesidadIMC"> &gt; {30.00} </string>
+
 
 </resources>

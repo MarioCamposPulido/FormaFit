@@ -7,4 +7,10 @@
     <color name="fondo_logo_sombra">#D8CBC7</color>
     <color name="buttons_color_rosa">#FF579C</color>
     <color name="gris_texto">#9C9C9C</color>
+
+    <color name="azul">#0099FF</color>
+    <color name="violeta">#EA3CFD</color>
+    <color name="verde">#37D837</color>
+    <color name="naranja">#FF7F50</color>
+    <color name="rojo"> #E34234 </color>
 </resources>

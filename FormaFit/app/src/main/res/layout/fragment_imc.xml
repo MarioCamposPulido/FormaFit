@@ -42,7 +42,7 @@
             android:layout_weight="1"
             android:background="@drawable/backgroud_white_rounded"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="12dp">
 
             <TextView
                 android:id="@+id/pesoIMC"
@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:background="@drawable/backgroud_white_rounded"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="12dp">
 
             <TextView
                 android:id="@+id/alturaIMC"
@@ -102,8 +102,8 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChartIMC"
-        android:layout_width="360dp"
-        android:layout_height="330dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:layout_gravity="center">
 
     </com.github.mikephil.charting.charts.PieChart>
@@ -113,47 +113,125 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="14dp">
+        android:layout_marginTop="14dp"
+        android:background="@drawable/backgroud_rounded"
+        android:padding="12dp"
+        android:backgroundTint="@color/verde">
 
-        <TextView
-            android:id="@+id/textView10"
+        <LinearLayout
+            android:id="@+id/muyDelgadoLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/muyDelgado"
-            android:fontFamily="@font/barlowsemicondensedmedium"
-            android:textSize="20sp"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="4dp">
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/bajoPeso"
-            android:fontFamily="@font/barlowsemicondensedmedium"
-            android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:text="@string/muyDelgado"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/pesoNormal"
-            android:fontFamily="@font/barlowsemicondensedmedium"
-            android:textSize="20sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/muyDelgadoIMC"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView13"
+        <LinearLayout
+            android:id="@+id/bajoPesoLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sobrePeso"
-            android:fontFamily="@font/barlowsemicondensedmedium"
-            android:textSize="20sp"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="4dp">
 
-        <TextView
-            android:id="@+id/textView14"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:text="@string/bajoPeso"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bajoPesoIMC"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pesoNormalLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/obesidad"
-            android:fontFamily="@font/barlowsemicondensedmedium"
-            android:textSize="20sp"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:text="@string/pesoNormal"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pesoNormalIMC"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/sobrePesoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:text="@string/sobrePeso"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView611"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sobrePesoIMC"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/obesidadLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:text="@string/obesidad"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/obesidadIMC"
+                android:fontFamily="@font/barlowsemicondensedmedium"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
