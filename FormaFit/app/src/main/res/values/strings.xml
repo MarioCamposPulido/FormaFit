@@ -62,6 +62,9 @@
     <string name="idioma"> Idioma </string>
     <string name="espanol"> Español </string>
     <string name="ingles"> Inglés </string>
+    <string name="editarPerfil"> Editar Perfil </string>
+    <string name="editarDatos"> ★   Edita tus datos   ★ </string>
+    <string name="aplicarCambios"> Aplicar Cambios </string>
 
 
 

@@ -85,6 +85,23 @@
         android:layout_marginHorizontal="10dp"/>
 
     <TextView
+        android:id="@+id/editarPerfilAjustes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/buttons_funcionales"
+        android:backgroundTint="@color/violeta"
+        android:elevation="8dp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/editarPerfil"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:drawableEndCompat="@drawable/icon_adelante"
+        app:drawableStartCompat="@drawable/icon_persona_editar" />
+
+    <TextView
         android:id="@+id/idiomaAjustes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

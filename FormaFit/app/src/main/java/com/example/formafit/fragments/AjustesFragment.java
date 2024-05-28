@@ -23,7 +23,7 @@ import java.util.Locale;
 
 public class AjustesFragment extends Fragment {
 
-    TextView infoAjustes, idiomaAjustes;
+    TextView infoAjustes, idiomaAjustes, editarPerfilAjustes;
     RadioButton radioButtonEspanol, radioButtonIngles;
 
     private static String idiomaSeleccionado = "";
@@ -73,14 +73,14 @@ public class AjustesFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(dialogLayout)
                 .setTitle(null)
-                .setNegativeButton(getResources().getText(R.string.cancelar), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                })
                 .setPositiveButton(getResources().getText(R.string.aceptar), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         setLocale(idiomaSeleccionado);
+                    }
+                })
+                .setNegativeButton(getResources().getText(R.string.cancelar), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
                     }
                 });
 
@@ -105,6 +105,14 @@ public class AjustesFragment extends Fragment {
 
         infoAjustes = view.findViewById(R.id.infoAjustes);
         idiomaAjustes = view.findViewById(R.id.idiomaAjustes);
+        editarPerfilAjustes = view.findViewById(R.id.editarPerfilAjustes);
+
+        editarPerfilAjustes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new EditarUserFragment()).commit();
+            }
+        });
 
         infoAjustes.setOnClickListener(new View.OnClickListener() {
             @Override

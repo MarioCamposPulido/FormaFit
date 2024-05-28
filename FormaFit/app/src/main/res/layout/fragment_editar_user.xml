@@ -1,6 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.EditarUserFragment"/>
+    android:orientation="vertical"
+    tools:context=".activities.Registro"
+    android:background="@color/fondo_logo_sombra">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:orientation="vertical"
+        android:background="@color/fondo_logo"
+        android:gravity="center"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="150dp">
+
+        <TextView
+            android:id="@+id/crearPerfilTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/editarDatos"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:textSize="32sp"
+            android:textColor="@color/buttons_color_rosa" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayou55t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nombreUsuario"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/icon_tarjeta_persona"
+            app:endIconContentDescription="@string/nombreUsuario">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nombreRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/icon_email"
+            app:endIconContentDescription="@string/email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            app:endIconMode="password_toggle"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <ImageButton
+                android:id="@+id/maleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_hombre"
+                android:layout_marginRight="14dp"
+                android:padding="12dp"
+                android:backgroundTint="@color/buttons_color_verde"
+                android:background="@drawable/backgroud_rounded"/>
+
+            <ImageButton
+                android:id="@+id/femaleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_mujer"
+                android:padding="12dp"
+                android:backgroundTint="@color/buttons_color_verde"
+                android:background="@drawable/backgroud_rounded"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/nacimientoButtonRegistro"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/buttons_color_rosa"
+            android:text="@string/fechaNacimiento"
+            android:textColor="@color/white"
+            android:textColorHint="@color/black"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:id="@+id/alturaTextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/altura"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/medidaPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:text="@string/alturaPorDefecto"/>
+        </LinearLayout>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderAlturaRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:valueFrom="50"
+            android:valueTo="250"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            app:trackColor="@color/buttons_color_rosa"
+            app:thumbColor="@color/buttons_color_verde"
+            app:tickColor="@color/buttons_color_verde"
+            app:thumbStrokeColor="@color/buttons_color_rosa"
+            android:layout_marginBottom="16dp"/>
+
+        <ImageButton
+            android:id="@+id/maleB5utton"
+            android:layout_width="250dp"
+            android:layout_height="54dp"
+            android:src="@drawable/icon_check"
+            android:padding="12dp"
+            android:backgroundTint="@color/buttons_color_verde"
+            android:background="@drawable/backgroud_rounded"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
