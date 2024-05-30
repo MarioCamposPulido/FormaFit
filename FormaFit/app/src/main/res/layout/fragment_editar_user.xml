@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="650dp"
+        android:layout_height="666dp"
         android:orientation="vertical"
         android:background="@color/fondo_logo"
         android:gravity="center"
@@ -30,7 +30,7 @@
             android:textColor="@color/buttons_color_rosa" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayou55t"
+            android:id="@+id/bhgyhh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nombreUsuario"
@@ -42,7 +42,7 @@
             app:endIconContentDescription="@string/nombreUsuario">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nombreRegistro"
+                android:id="@+id/userNameEditarUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -64,7 +64,7 @@
             app:endIconContentDescription="@string/email">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailRegistro"
+                android:id="@+id/emailEditarUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -79,10 +79,10 @@
             app:endIconMode="password_toggle"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="25dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordRegistro"
+                android:id="@+id/passwordEditarUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"/>
@@ -97,11 +97,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/maleButton"
+                android:id="@+id/maleButtonEdiartUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/selector_hombre"
@@ -111,7 +110,7 @@
                 android:background="@drawable/backgroud_rounded"/>
 
             <ImageButton
-                android:id="@+id/femaleButton"
+                android:id="@+id/femaleButtonEditarUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/selector_mujer"
@@ -121,11 +120,11 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/nacimientoButtonRegistro"
+            android:id="@+id/nacimientoButtonEditarUser"
             style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:backgroundTint="@color/buttons_color_rosa"
             android:text="@string/fechaNacimiento"
             android:textColor="@color/white"
@@ -150,7 +149,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/medidaPeso"
+                android:id="@+id/medidaEditarUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -161,7 +160,7 @@
         </LinearLayout>
 
         <com.google.android.material.slider.Slider
-            android:id="@+id/sliderAlturaRegistro"
+            android:id="@+id/sliderAlturaEditarUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stepSize="1"
@@ -176,14 +175,13 @@
             android:layout_marginBottom="16dp"/>
 
         <ImageButton
-            android:id="@+id/maleB5utton"
+            android:id="@+id/confirmButtonEdiatPerfil"
             android:layout_width="250dp"
             android:layout_height="54dp"
             android:src="@drawable/icon_check"
             android:padding="12dp"
             android:backgroundTint="@color/buttons_color_verde"
             android:background="@drawable/backgroud_rounded"/>
-
 
     </LinearLayout>
 

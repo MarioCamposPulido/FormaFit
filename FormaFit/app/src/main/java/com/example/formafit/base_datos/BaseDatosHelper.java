@@ -7,18 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import com.example.formafit.activities.MainActivity;
-import com.example.formafit.fragments.EntradaPesoFragment;
 import com.example.formafit.java.EntradaPeso;
 
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -348,6 +344,30 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         }
         db.close();
         return deletedRows;
+    }
+
+        public boolean upgradeEditarUser(String user_name, String email, String password, String birth, String gender, int height) {
+
+        // Nuevo valor para la columna
+        ContentValues values = new ContentValues();
+        values.put(EstructuraBBDD.COLUMN_USERNAME_USERSANDWEIGHT, user_name);
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT, email);
+        values.put(EstructuraBBDD.COLUMN_PASSWORD_USERSANDWEIGHT, password);
+        values.put(EstructuraBBDD.COLUMN_BIRTH_USERSANDWEIGHT, birth);
+        values.put(EstructuraBBDD.COLUMN_GENDER_USERSANDWEIGHT, gender);
+        values.put(EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT, height);
+
+        // NOmbre columna a actualizar
+        String selection = EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " LIKE ?";
+
+        int count = this.getWritableDatabase().update(
+                EstructuraBBDD.TABLE_USERSANDWEIGHT,
+                values,
+                selection,
+                new String[]{MainActivity.email});
+
+        return count > 0;
+
     }
 
 }
