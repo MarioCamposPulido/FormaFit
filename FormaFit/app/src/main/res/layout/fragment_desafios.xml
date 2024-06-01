@@ -48,7 +48,8 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             app:icon="@drawable/icon_plus"
-            app:iconTint="@color/white" />
+            app:iconTint="@color/white"
+            app:iconSize="26sp"/>
 
         <Button
             android:id="@+id/desafiosCambioButton"
@@ -60,19 +61,19 @@
             android:layout_weight="1"
             android:backgroundTint="@color/buttons_color_verde"
             android:fontFamily="@font/barlowsemicondensedsemibold"
-            android:gravity="center"
-            android:text="@string/CambiarDesafiosCompletados"
+            android:text="@string/cambiarDesafiosCompletados"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:icon="@drawable/icon_persona_celebrando"
-            app:iconTint="@color/black" />
+            app:iconTint="@color/black"
+            app:iconSize="26sp"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/retosActuales"
+        android:text="@string/desafiosActuales"
         android:fontFamily="@font/barlowsemicondensedsemibold"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="20dp"

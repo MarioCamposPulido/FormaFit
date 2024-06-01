@@ -73,9 +73,10 @@
     <!-- Fragment Desfios -->
     <string name="crearDesafio"> Crear Desafío </string>
     <string name="crearPropioDesafio"> Crea tu Propio Desafío </string>
-    <string name="retosActuales"> Retos Actuales </string>
+    <string name="desafiosActuales"> Desafíos Actuales </string>
     <string name="completados"> Completados </string>
-    <string name="CambiarDesafiosCompletados"> Cambiar a Desafíos Completados </string>
+    <string name="cambiarDesafiosCompletados"> Cambiar a Desafíos Completados </string>
+    <string name="cambiarDesafiosActuales"> Cambiar a Desafíos Actuales </string>
     <string name="tituloDesafio"> Título del Desafío </string>
     <string name="aniadirDescripcion"> Añade una descripción </string>
 

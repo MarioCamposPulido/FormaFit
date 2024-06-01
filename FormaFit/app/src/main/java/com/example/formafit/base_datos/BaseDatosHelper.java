@@ -177,10 +177,43 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return entradasPeso;
     }
 
-    public LinkedList<Desafio> getAllDesafiosUser(String email){
+    public LinkedList<Desafio> getAllDesafiosActualesUser(String email){
         Cursor cursor = this.getReadableDatabase().rawQuery(
                 "SELECT title, description, img, is_checked FROM " + EstructuraBBDD.TABLE_CHALLENGES +
-                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + "=?",
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + "=? AND "
+                        + EstructuraBBDD.COLUMN_IS_CHECKED_CHALLENGE + "=0",
+                new String[]{email});
+
+        // Crear un array para almacenar los resultados
+        LinkedList<Desafio> desafios = new LinkedList<>();
+
+        // Extraer los datos del cursor
+        int index = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+                int is_checked = cursor.getInt(cursor.getColumnIndexOrThrow("is_checked"));
+                if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null){
+                    Bitmap imagen = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndexOrThrow("img")));
+                    desafios.add(new Desafio(title, description, imagen, is_checked));
+                }else {
+                    desafios.add(new Desafio(title, description, null, is_checked));
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        //this.close();
+
+        return desafios;
+    }
+
+    public LinkedList<Desafio> getAllDesafiosCompletadosUser(String email){
+        Cursor cursor = this.getReadableDatabase().rawQuery(
+                "SELECT title, description, img, is_checked FROM " + EstructuraBBDD.TABLE_CHALLENGES +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + "=? AND "
+                        + EstructuraBBDD.COLUMN_IS_CHECKED_CHALLENGE + "=1",
                 new String[]{email});
 
         // Crear un array para almacenar los resultados

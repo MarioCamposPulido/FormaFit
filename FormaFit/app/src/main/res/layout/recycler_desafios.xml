@@ -42,7 +42,8 @@
                 android:text="@string/titulo"
                 android:textSize="16sp"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
-                android:textColor="@color/buttons_color_rosa"/>
+                android:textColor="@color/buttons_color_rosa"
+                android:layout_marginBottom="2dp"/>
 
             <View
                 android:layout_width="match_parent"
