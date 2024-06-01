@@ -17,11 +17,11 @@
         android:title="@string/navigation_imc"
         app:showAsAction="always" />
     <item
-        android:id="@+id/notificaciones"
+        android:id="@+id/desafios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/icon_notificacion"
-        android:title="@string/navigation_notificacion"
+        android:icon="@drawable/icon_trofeo"
+        android:title="@string/navigation_desafios"
         app:showAsAction="always" />
     <item
         android:id="@+id/ajustes"

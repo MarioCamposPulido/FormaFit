@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.DesafiosFragment"
+    android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/backgroud_white_rounded"
+            android:backgroundTint="@color/violeta"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/navigation_desafios"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            app:drawableStartCompat="@drawable/icon_medalla_conseguida"
+            app:drawableEndCompat="@drawable/icon_medalla_conseguida" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/buttons_color_verde" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginVertical="10dp">
+
+        <Button
+            android:id="@+id/desafiosCrearDesafio"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/buttons_color_rosa"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:gravity="center"
+            android:text="@string/crearPropioDesafio"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:icon="@drawable/icon_plus"
+            app:iconTint="@color/white" />
+
+        <Button
+            android:id="@+id/desafiosCambioButton"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/buttons_color_verde"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:gravity="center"
+            android:text="@string/CambiarDesafiosCompletados"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:icon="@drawable/icon_persona_celebrando"
+            app:iconTint="@color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/retosActuales"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="24sp"
+        android:padding="10dp"
+        android:background="@drawable/backgroud_white_rounded"
+        android:backgroundTint="@color/violeta"
+        android:textColor="@color/white"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerDesafios"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="58dp"/>
+
+</LinearLayout>

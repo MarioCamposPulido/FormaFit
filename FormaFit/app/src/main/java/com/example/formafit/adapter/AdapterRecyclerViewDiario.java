@@ -113,24 +113,6 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
                     comentariosDiario.setVisibility(View.VISIBLE);
                     comentariosDiario.setText(entradaPeso.getComentario());
                 }
-//            if (!Objects.isNull(usuario.getGenero())){
-//                descripcionUsuario.setText(usuario.getGenero());
-//            }
-//            if (!Objects.isNull(usuario.getImagenPerfil())){
-//                fotoUsuario.setImageBitmap(usuario.getImagenPerfil());
-//            }
-//
-//            seguirButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dbHelper = new BaseDatosHelper(itemView.getContext());
-//                    dbHelper.upgradeSeguidores(usuario.getEmail());
-//
-//                    Toast.makeText(itemView.getContext(), itemView.getContext().getResources().getString(R.string.seguisteA) + " " +
-//                            usuario.getEmail(), Toast.LENGTH_SHORT).show();
-//                    dbHelper.close();
-//                }
-//            });
         }
     }
 }

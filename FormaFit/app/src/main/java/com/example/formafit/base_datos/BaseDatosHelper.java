@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.example.formafit.activities.MainActivity;
+import com.example.formafit.java.Desafio;
 import com.example.formafit.java.EntradaPeso;
 
 import java.io.ByteArrayOutputStream;
@@ -30,7 +31,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(EstructuraBBDD.SQL_CREATE_TABLE_USERS);
+        db.execSQL(EstructuraBBDD.SQL_CREATE_TABLE_USERSANDWEIGHT);
+        db.execSQL(EstructuraBBDD.SQL_CREATE_TABLE_CHALLENGES);
     }
 
     /**
@@ -44,6 +46,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Código para actualizar la estructura de la base de datos
         db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_USERSANDWEIGHT);
+        db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_CHALLENGES);
         onCreate(db);
     }
 
@@ -172,6 +175,37 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         //this.close();
 
         return entradasPeso;
+    }
+
+    public LinkedList<Desafio> getAllDesafiosUser(String email){
+        Cursor cursor = this.getReadableDatabase().rawQuery(
+                "SELECT title, description, img, is_checked FROM " + EstructuraBBDD.TABLE_CHALLENGES +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + "=?",
+                new String[]{email});
+
+        // Crear un array para almacenar los resultados
+        LinkedList<Desafio> desafios = new LinkedList<>();
+
+        // Extraer los datos del cursor
+        int index = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
+                int is_checked = cursor.getInt(cursor.getColumnIndexOrThrow("is_checked"));
+                if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null){
+                    Bitmap imagen = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndexOrThrow("img")));
+                    desafios.add(new Desafio(title, description, imagen, is_checked));
+                }else {
+                    desafios.add(new Desafio(title, description, null, is_checked));
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        //this.close();
+
+        return desafios;
     }
 
     public int getAltura(String email) {
@@ -322,8 +356,31 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
+    public void insertNewDesafio(Bitmap img, String title, String description) {
 
+        // Creamos mapa de valores con los nombres de las tablas
+        ContentValues values = new ContentValues();
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE, MainActivity.email);
+        values.put(EstructuraBBDD.COLUMN_TITLE_CHALLENGE, title);
+        values.put(EstructuraBBDD.COLUMN_DESCRIPTION_CHALLENGE, description);
+        if (!Objects.isNull(img)){
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
+            img.compress(Bitmap.CompressFormat.PNG, 0 , baos);
+            byte[] blob = baos.toByteArray();
+            values.put(EstructuraBBDD.COLUMN_IMG_CHALLENGE, blob);
+        }
+        values.put(EstructuraBBDD.COLUMN_IS_CHECKED_CHALLENGE, 0);
+
+        try {
+            // Insertar nueva fila indicando nombre de la tabla
+            long newRowId = this.getWritableDatabase().insert(
+                    EstructuraBBDD.TABLE_CHALLENGES, null, values);
+            //this.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public int deleteAllEntradasPesoUserExceptLast(String email) {

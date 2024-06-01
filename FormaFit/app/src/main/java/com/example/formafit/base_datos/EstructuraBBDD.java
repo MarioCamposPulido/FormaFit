@@ -20,10 +20,19 @@ public class EstructuraBBDD {
     public static final String COLUMN_IMG_USERSANDWEIGHT = "img";
     public static final String COLUMN_WEIGHT_USERSANDWEIGHT = "weight";
 
+    // Tabla Challenges
+    public static final String TABLE_CHALLENGES = "Challenges";
+    public static final String COLUMN_ID_CHALLENGE = "id";
+    public static final String COLUMN_EMAIL_USER_CHALLENGE = "email_user";
+    public static final String COLUMN_TITLE_CHALLENGE = "title";
+    public static final String COLUMN_DESCRIPTION_CHALLENGE = "description";
+    public static final String COLUMN_IMG_CHALLENGE = "img";
+    public static final String COLUMN_IS_CHECKED_CHALLENGE = "is_checked";
+
 
 
     // Creamos las tablas
-    public static final String SQL_CREATE_TABLE_USERS =
+    public static final String SQL_CREATE_TABLE_USERSANDWEIGHT =
             "CREATE TABLE " + EstructuraBBDD.TABLE_USERSANDWEIGHT + " (" +
                     EstructuraBBDD.COLUMN_ID_USERSANDWEIGHT + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " TEXT," +
@@ -36,5 +45,14 @@ public class EstructuraBBDD {
                     EstructuraBBDD.COLUMN_DESCRIPTION_USERSANDWEIGHT + " TEXT," +
                     EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT + " BLOB," +
                     EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT + " INT);" ;
+
+    public static final String SQL_CREATE_TABLE_CHALLENGES =
+            "CREATE TABLE " + EstructuraBBDD.TABLE_CHALLENGES + " (" +
+                    EstructuraBBDD.COLUMN_ID_CHALLENGE + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + " TEXT," +
+                    EstructuraBBDD.COLUMN_TITLE_CHALLENGE + " TEXT," +
+                    EstructuraBBDD.COLUMN_DESCRIPTION_CHALLENGE + " TEXT," +
+                    EstructuraBBDD.COLUMN_IMG_CHALLENGE + " BLOB," +
+                    EstructuraBBDD.COLUMN_IS_CHECKED_CHALLENGE + " INTEGER);";
 
 }

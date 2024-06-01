@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.example.formafit.fragments.AjustesFragment;
 import com.example.formafit.R;
 import com.example.formafit.fragments.BasculaFragment;
+import com.example.formafit.fragments.DesafiosFragment;
 import com.example.formafit.fragments.ImcFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -42,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (idItemn == R.id.ajustes) {
                 fragment = new AjustesFragment();
+            }
+
+            if (idItemn == R.id.desafios) {
+                fragment = new DesafiosFragment();
             }
 
             if (fragment != null) {

@@ -6,7 +6,7 @@
     <!-- Bottom navigation View MainActivity -->
     <string name="navigation_bascula"> Báscula </string>
     <string name="navigation_imc"> IMC </string>
-    <string name="navigation_notificacion"> Notificaciones </string>
+    <string name="navigation_desafios"> Desafíos </string>
     <string name="navigation_ajustes"> Ajustes </string>
 
     <!-- Nombres de botones flotantes -->
@@ -66,6 +66,17 @@
     <string name="editarDatos"> ★   Edita tus datos   ★ </string>
     <string name="aplicarCambios"> Aplicar Cambios </string>
 
+    <!-- Recycler Desfios -->
+    <string name="titulo"> Título </string>
+    <string name="descripcion"> Una descripción breve con textos de ejemplos y textos largos </string>
 
+    <!-- Fragment Desfios -->
+    <string name="crearDesafio"> Crear Desafío </string>
+    <string name="crearPropioDesafio"> Crea tu Propio Desafío </string>
+    <string name="retosActuales"> Retos Actuales </string>
+    <string name="completados"> Completados </string>
+    <string name="CambiarDesafiosCompletados"> Cambiar a Desafíos Completados </string>
+    <string name="tituloDesafio"> Título del Desafío </string>
+    <string name="aniadirDescripcion"> Añade una descripción </string>
 
 </resources>

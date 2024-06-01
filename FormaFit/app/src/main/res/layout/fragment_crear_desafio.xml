@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fondo_logo_sombra">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/backgroud_white_rounded"
+        android:gravity="center"
+        android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="14dp"
+                android:gravity="center"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:text="@string/crearDesafio"
+                android:textSize="22sp"
+                android:textColor="@color/violeta"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/buttons_color_rosa" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgCrearDesafio"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:padding="6dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_plus"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/buttons_color_verde"
+            app:strokeWidth="5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:text="@string/aniadirImg"
+            android:textSize="22sp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tituloDesafio"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="20dp"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/icon_lista">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tituloCrearDesafio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/aniadirDescripcion"
+            android:textColor="@color/white"
+            android:textColorHint="@color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descripcionCrearDesafio"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:gravity="start|top"
+                android:maxLines="8"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:inputType="textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/confirmarCrearDesafioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroud_white_rounded"
+            android:backgroundTint="@color/buttons_color_verde"
+            android:padding="6dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="14dp"
+            android:src="@drawable/icon_check" />
+
+
+    </LinearLayout>
+</LinearLayout>

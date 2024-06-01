@@ -31,6 +31,7 @@ public class EditarUserFragment extends Fragment {
     private TextView medidaEditarUser, userNameEditarUser, emailEditarUser, passwordEditarUser;
     private Button nacimientoButtonEditarUser;
     private ImageButton femaleButtonEditarUser, maleButtonEdiartUser, confirmButtonEdiatPerfil;
+    private BottomNavigationView bottomNavigation;
     private static int editarAltura = 0;
     private BaseDatosHelper dbHelper;
 
@@ -128,7 +129,11 @@ public class EditarUserFragment extends Fragment {
                 if (dbHelper.upgradeEditarUser(userNameEditarUser.getText().toString(), emailEditarUser.getText().toString(), passwordEditarUser.getText().toString(),
                         nacimientoButtonEditarUser.getText().toString() ,getGeneroLogin(), editarAltura)){
                     MainActivity.email = emailEditarUser.getText().toString();
-                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new AjustesFragment()).commit();
+                    if (getActivity() != null) {
+                        bottomNavigation = getActivity().findViewById(R.id.bottom_navigation);
+                        bottomNavigation.setSelectedItemId(R.id.bascula);
+                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
+                    }
                 }else {
                     Toast.makeText(getContext(), "ERROR", Toast.LENGTH_SHORT).show();
                 }
