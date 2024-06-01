@@ -101,6 +101,12 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
             }
             tituloDesafios.setText(desafio.getTitulo());
             descripcionDesafios.setText(desafio.getDescripcion());
+
+            if (desafio.getIs_checked() == 0){
+                checkboxDesafios.setChecked(false);
+            }else {
+                checkboxDesafios.setChecked(true);
+            }
         }
     }
 }
