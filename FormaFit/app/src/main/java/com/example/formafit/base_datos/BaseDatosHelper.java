@@ -179,7 +179,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     public LinkedList<Desafio> getAllDesafiosActualesUser(String email){
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT title, description, img, is_checked FROM " + EstructuraBBDD.TABLE_CHALLENGES +
+                "SELECT * FROM " + EstructuraBBDD.TABLE_CHALLENGES +
                         " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + "=? AND "
                         + EstructuraBBDD.COLUMN_IS_CHECKED_CHALLENGE + "=0",
                 new String[]{email});
@@ -191,14 +191,15 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         int index = 0;
         if (cursor.moveToFirst()) {
             do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
                 String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
                 int is_checked = cursor.getInt(cursor.getColumnIndexOrThrow("is_checked"));
                 if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null){
                     Bitmap imagen = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndexOrThrow("img")));
-                    desafios.add(new Desafio(title, description, imagen, is_checked));
+                    desafios.add(new Desafio(id, title, description, imagen, is_checked));
                 }else {
-                    desafios.add(new Desafio(title, description, null, is_checked));
+                    desafios.add(new Desafio(id, title, description, null, is_checked));
                 }
             } while (cursor.moveToNext());
         }
@@ -211,7 +212,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     public LinkedList<Desafio> getAllDesafiosCompletadosUser(String email){
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT title, description, img, is_checked FROM " + EstructuraBBDD.TABLE_CHALLENGES +
+                "SELECT * FROM " + EstructuraBBDD.TABLE_CHALLENGES +
                         " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + "=? AND "
                         + EstructuraBBDD.COLUMN_IS_CHECKED_CHALLENGE + "=1",
                 new String[]{email});
@@ -223,14 +224,15 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         int index = 0;
         if (cursor.moveToFirst()) {
             do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
                 String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
                 int is_checked = cursor.getInt(cursor.getColumnIndexOrThrow("is_checked"));
                 if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null){
                     Bitmap imagen = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndexOrThrow("img")));
-                    desafios.add(new Desafio(title, description, imagen, is_checked));
+                    desafios.add(new Desafio(id, title, description, imagen, is_checked));
                 }else {
-                    desafios.add(new Desafio(title, description, null, is_checked));
+                    desafios.add(new Desafio(id, title, description, null, is_checked));
                 }
             } while (cursor.moveToNext());
         }
@@ -455,6 +457,25 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 new String[]{MainActivity.email});
+
+        return count > 0;
+
+    }
+
+    public boolean upgradeCambiarDesafiosIs_Checked(int id_desafio, int is_checked) {
+
+        // Nuevo valor para la columna
+        ContentValues values = new ContentValues();
+        values.put(EstructuraBBDD.COLUMN_IS_CHECKED_CHALLENGE, is_checked);
+
+        // NOmbre columna a actualizar
+        String selection = EstructuraBBDD.COLUMN_ID_CHALLENGE + " LIKE ?";
+
+        int count = this.getWritableDatabase().update(
+                EstructuraBBDD.TABLE_CHALLENGES,
+                values,
+                selection,
+                new String[]{String.valueOf(id_desafio)});
 
         return count > 0;
 

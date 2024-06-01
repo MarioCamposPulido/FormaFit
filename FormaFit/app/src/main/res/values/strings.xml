@@ -74,7 +74,7 @@
     <string name="crearDesafio"> Crear Desafío </string>
     <string name="crearPropioDesafio"> Crea tu Propio Desafío </string>
     <string name="desafiosActuales"> Desafíos Actuales </string>
-    <string name="completados"> Completados </string>
+    <string name="desafiosCompletados"> Desafíos Completados </string>
     <string name="cambiarDesafiosCompletados"> Cambiar a Desafíos Completados </string>
     <string name="cambiarDesafiosActuales"> Cambiar a Desafíos Actuales </string>
     <string name="tituloDesafio"> Título del Desafío </string>

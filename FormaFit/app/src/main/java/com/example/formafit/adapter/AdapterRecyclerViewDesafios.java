@@ -3,13 +3,18 @@ package com.example.formafit.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.formafit.R;
+import com.example.formafit.base_datos.BaseDatosHelper;
+import com.example.formafit.fragments.BasculaFragment;
+import com.example.formafit.fragments.CrearDesafioFragment;
 import com.example.formafit.java.Desafio;
 import com.example.formafit.java.EntradaPeso;
 
@@ -35,7 +40,27 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
 
     @Override
     public void onBindViewHolder(@NonNull DesafiosViewHolder holder, int position) {
+        Desafio itemActual = desafios.get(position);
+
         holder.bind(desafios.get(position));
+
+        holder.checkboxDesafios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemActual.getIs_checked() == 0){
+                    BaseDatosHelper dbHelper = new BaseDatosHelper(v.getContext());
+                    dbHelper.upgradeCambiarDesafiosIs_Checked(itemActual.getId(), 1);
+                    desafios.remove(itemActual);
+                    notifyItemRemoved(position);
+                }else {
+                    BaseDatosHelper dbHelper = new BaseDatosHelper(v.getContext());
+                    dbHelper.upgradeCambiarDesafiosIs_Checked(itemActual.getId(), 0);
+                    desafios.remove(itemActual);
+                    notifyItemRemoved(position);
+                }
+            }
+        });
+
     }
 
     /**
@@ -52,8 +77,9 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
      */
     class DesafiosViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tituloDesafios, descripcionDesafios, checkboxDesafios;
+        private TextView tituloDesafios, descripcionDesafios;
         private ImageView imagenDesafios;
+        private CheckBox checkboxDesafios;
 
 
         /**

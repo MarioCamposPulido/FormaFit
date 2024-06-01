@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.formafit.R;
@@ -20,9 +21,10 @@ import com.google.android.material.button.MaterialButton;
 
 public class DesafiosFragment extends Fragment {
 
-    BaseDatosHelper dbHelper;
-    RecyclerView recyclerDesafios;
-    MaterialButton desafiosCrearDesafio, desafiosCambioButton;
+    private BaseDatosHelper dbHelper;
+    private RecyclerView recyclerDesafios;
+    private MaterialButton desafiosCrearDesafio, desafiosCambioButton;
+    private TextView tipoDesafiosTextView;
 
     public DesafiosFragment() {
         // Required empty public constructor
@@ -43,6 +45,7 @@ public class DesafiosFragment extends Fragment {
         recyclerDesafios = view.findViewById(R.id.recyclerDesafios);
         desafiosCrearDesafio = view.findViewById(R.id.desafiosCrearDesafio);
         desafiosCambioButton = view.findViewById(R.id.desafiosCambioButton);
+        tipoDesafiosTextView = view.findViewById(R.id.tipoDesafiosTextView);
 
         dbHelper = new BaseDatosHelper(getContext());
 
@@ -64,12 +67,14 @@ public class DesafiosFragment extends Fragment {
                         desafiosCambioButton.setIcon(ContextCompat.getDrawable(getContext(), R.drawable.icon_medalla_conseguida));
                         recyclerDesafios.setLayoutManager(new LinearLayoutManager(getContext()));
                         recyclerDesafios.setAdapter(new AdapterRecyclerViewDesafios(dbHelper.getAllDesafiosCompletadosUser(MainActivity.email)));
+                        tipoDesafiosTextView.setText(getResources().getString(R.string.desafiosCompletados));
                         view.setSelected(true);
                     }else {
                         desafiosCambioButton.setText(getResources().getString(R.string.cambiarDesafiosCompletados));
                         desafiosCambioButton.setIcon(ContextCompat.getDrawable(getContext(), R.drawable.icon_persona_celebrando));
                         recyclerDesafios.setLayoutManager(new LinearLayoutManager(getContext()));
                         recyclerDesafios.setAdapter(new AdapterRecyclerViewDesafios(dbHelper.getAllDesafiosActualesUser(MainActivity.email)));
+                        tipoDesafiosTextView.setText(getResources().getString(R.string.desafiosActuales));
                         view.setSelected(false);
                     }
             }

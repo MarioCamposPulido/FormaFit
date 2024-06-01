@@ -3,16 +3,26 @@ package com.example.formafit.java;
 import android.graphics.Bitmap;
 
 public class Desafio {
+    private int id;
     private String titulo;
     private String descripcion;
     private Bitmap img;
     private int is_checked;
 
-    public Desafio(String titulo, String descripcion, Bitmap img, int is_checked) {
+    public Desafio(int id, String titulo, String descripcion, Bitmap img, int is_checked) {
+        this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.img = img;
         this.is_checked = is_checked;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -50,7 +60,8 @@ public class Desafio {
     @Override
     public String toString() {
         return "Desafio{" +
-                "titulo='" + titulo + '\'' +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", img=" + img +
                 ", is_checked=" + is_checked +
