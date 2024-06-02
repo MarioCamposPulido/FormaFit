@@ -29,7 +29,7 @@ public class DiarioFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void showCustomDialog() {
+    private void showCustomDialogEliminarAllEntradasPeso() {
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.dialog_borrar_peso, null);
 
@@ -83,7 +83,7 @@ public class DiarioFragment extends Fragment {
         eliminarTodasEntradasPesoDiario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCustomDialog();
+                showCustomDialogEliminarAllEntradasPeso();
             }
         });
 

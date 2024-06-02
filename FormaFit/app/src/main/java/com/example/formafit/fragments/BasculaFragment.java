@@ -155,18 +155,19 @@ public class BasculaFragment extends Fragment {
 
         lineChart.getXAxis().setDrawAxisLine(false);
         lineChart.getAxisRight().setDrawLabels(false);
-        lineChart.getXAxis().setDrawGridLines(false);
         lineChart.getXAxis().setDrawLabels(false);
+        lineChart.getAxisRight().setDrawAxisLine(false);
+        lineChart.getAxisRight().setDrawGridLines(false);
         lineChart.getXAxis().setDrawGridLines(false);
         lineChart.getDescription().setEnabled(false);
         lineChart.getLegend().setEnabled(false);
         lineData = new LineData(lineDataSet);
 
-        if (dbHelper.getObjetivoByUser(MainActivity.email) != -1){
+        if (dbHelper.getObjetivoByUser(MainActivity.email) != 0){
             LimitLine limitLine = new LimitLine(dbHelper.getObjetivoByUser(MainActivity.email), getResources().getString(R.string.objetivoPeso));
             limitLine.setLineWidth(3f);
-            limitLine.setLineColor(ContextCompat.getColor(getContext(), R.color.violeta));
-            limitLine.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            limitLine.setLineColor(ContextCompat.getColor(getContext(), R.color.buttons_color_verde));
+            limitLine.setTextColor(ContextCompat.getColor(getContext(), R.color.verdeMasOscuro));
             limitLine.setTextSize(16f);
             limitLine.setTypeface(Typeface.DEFAULT_BOLD);
             yAxis.addLimitLine(limitLine);

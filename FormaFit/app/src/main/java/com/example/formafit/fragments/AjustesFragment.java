@@ -2,6 +2,7 @@ package com.example.formafit.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -16,15 +17,18 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.formafit.R;
+import com.example.formafit.activities.Login;
 import com.example.formafit.activities.MainActivity;
+import com.example.formafit.base_datos.BaseDatosHelper;
 import com.github.mikephil.charting.BuildConfig;
 
 import java.util.Locale;
 
 public class AjustesFragment extends Fragment {
 
-    TextView infoAjustes, idiomaAjustes, editarPerfilAjustes;
-    RadioButton radioButtonEspanol, radioButtonIngles;
+    private TextView infoAjustes, idiomaAjustes, editarPerfilAjustes, cerrarSesionAjustes, eliminarCuentaAjustes;
+    private RadioButton radioButtonEspanol, radioButtonIngles;
+    private BaseDatosHelper dbHelper;
 
     private static String idiomaSeleccionado = "";
 
@@ -41,6 +45,27 @@ public class AjustesFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(getResources().getString(R.string.version) + ": " + BuildConfig.VERSION_NAME)
                 .setTitle(null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void showDialogEliminarCuenta() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(getResources().getString(R.string.confirmacionEliminacion))
+                .setTitle(getResources().getString(R.string.eliminarCuenta))
+                .setPositiveButton(getResources().getString(R.string.aceptar), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dbHelper = new BaseDatosHelper(getContext());
+                        dbHelper.deleteAllDataUser(MainActivity.email);
+                        MainActivity.email = null;
+                        startActivity(new Intent(getActivity(), Login.class));
+                    }
+                })
+                .setNegativeButton(getResources().getString(R.string.cancelar), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -106,6 +131,8 @@ public class AjustesFragment extends Fragment {
         infoAjustes = view.findViewById(R.id.infoAjustes);
         idiomaAjustes = view.findViewById(R.id.idiomaAjustes);
         editarPerfilAjustes = view.findViewById(R.id.editarPerfilAjustes);
+        cerrarSesionAjustes = view.findViewById(R.id.cerrarSesionAjustes);
+        eliminarCuentaAjustes = view.findViewById(R.id.eliminarCuentaAjustes);
 
         editarPerfilAjustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +152,21 @@ public class AjustesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 showDialogIdioma();
+            }
+        });
+
+        cerrarSesionAjustes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.email = null;
+                startActivity(new Intent(getActivity(), Login.class));
+            }
+        });
+
+        eliminarCuentaAjustes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogEliminarCuenta();
             }
         });
 

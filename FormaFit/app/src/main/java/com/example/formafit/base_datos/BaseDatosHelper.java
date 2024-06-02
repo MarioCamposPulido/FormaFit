@@ -52,6 +52,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     /**
      * Comprueba si existe el Usuario en BBDD por su email
+     *
      * @param email
      * @return
      */
@@ -122,6 +123,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     /**
      * Comprueba si el Usuario existe por su email y contraseña
+     *
      * @param emailParam
      * @param passwordParam
      * @return
@@ -146,7 +148,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
     }
 
-    public LinkedList<EntradaPeso> getAllEntradasPeso(String email){
+    public LinkedList<EntradaPeso> getAllEntradasPeso(String email) {
         Cursor cursor = this.getReadableDatabase().rawQuery(
                 "SELECT date, weight, description, img FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
                         " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=?",
@@ -162,10 +164,10 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
                 String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
                 int weight = cursor.getInt(cursor.getColumnIndexOrThrow("weight"));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
-                if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null){
+                if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null) {
                     Bitmap imagen = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndexOrThrow("img")));
                     entradasPeso.add(new EntradaPeso(date, getAltura(email), weight, getEdadUser(email), description, imagen, getGenero(MainActivity.email)));
-                }else {
+                } else {
                     entradasPeso.add(new EntradaPeso(date, getAltura(email), weight, getEdadUser(email), description, null, getGenero(MainActivity.email)));
                 }
             } while (cursor.moveToNext());
@@ -177,7 +179,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return entradasPeso;
     }
 
-    public LinkedList<Desafio> getAllDesafiosActualesUser(String email){
+    public LinkedList<Desafio> getAllDesafiosActualesUser(String email) {
         Cursor cursor = this.getReadableDatabase().rawQuery(
                 "SELECT * FROM " + EstructuraBBDD.TABLE_CHALLENGES +
                         " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + "=? AND "
@@ -195,10 +197,10 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
                 String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
                 int is_checked = cursor.getInt(cursor.getColumnIndexOrThrow("is_checked"));
-                if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null){
+                if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null) {
                     Bitmap imagen = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndexOrThrow("img")));
                     desafios.add(new Desafio(id, title, description, imagen, is_checked));
-                }else {
+                } else {
                     desafios.add(new Desafio(id, title, description, null, is_checked));
                 }
             } while (cursor.moveToNext());
@@ -210,7 +212,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return desafios;
     }
 
-    public LinkedList<Desafio> getAllDesafiosCompletadosUser(String email){
+    public LinkedList<Desafio> getAllDesafiosCompletadosUser(String email) {
         Cursor cursor = this.getReadableDatabase().rawQuery(
                 "SELECT * FROM " + EstructuraBBDD.TABLE_CHALLENGES +
                         " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + "=? AND "
@@ -228,10 +230,10 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
                 String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
                 int is_checked = cursor.getInt(cursor.getColumnIndexOrThrow("is_checked"));
-                if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null){
+                if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null) {
                     Bitmap imagen = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndexOrThrow("img")));
                     desafios.add(new Desafio(id, title, description, imagen, is_checked));
-                }else {
+                } else {
                     desafios.add(new Desafio(id, title, description, null, is_checked));
                 }
             } while (cursor.moveToNext());
@@ -243,16 +245,16 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return desafios;
     }
 
-    public int getObjetivoByUser(String email){
+    public int getObjetivoByUser(String email) {
         Cursor cursor = this.getReadableDatabase().rawQuery(
                 "SELECT goal FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
                         " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? LIMIT 1",
                 new String[]{email});
 
         // Extraer los datos del cursor
-        int goal = -1;
+        int goal = 0;
         if (cursor.moveToFirst()) {
-             goal = cursor.getInt(cursor.getColumnIndexOrThrow("goal"));
+            goal = cursor.getInt(cursor.getColumnIndexOrThrow("goal"));
         }
 
         cursor.close();
@@ -393,9 +395,9 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         values.put(EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT, getAltura(email));
         values.put(EstructuraBBDD.COLUMN_DATE_USERSANDWEIGHT, date);
         values.put(EstructuraBBDD.COLUMN_DESCRIPTION_USERSANDWEIGHT, description);
-        if (!Objects.isNull(img)){
+        if (!Objects.isNull(img)) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
-            img.compress(Bitmap.CompressFormat.PNG, 0 , baos);
+            img.compress(Bitmap.CompressFormat.PNG, 0, baos);
             byte[] blob = baos.toByteArray();
             values.put(EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT, blob);
         }
@@ -406,7 +408,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
             long newRowId = this.getWritableDatabase().insert(
                     EstructuraBBDD.TABLE_USERSANDWEIGHT, null, values);
             //this.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -418,9 +420,9 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         values.put(EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE, MainActivity.email);
         values.put(EstructuraBBDD.COLUMN_TITLE_CHALLENGE, title);
         values.put(EstructuraBBDD.COLUMN_DESCRIPTION_CHALLENGE, description);
-        if (!Objects.isNull(img)){
+        if (!Objects.isNull(img)) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
-            img.compress(Bitmap.CompressFormat.PNG, 0 , baos);
+            img.compress(Bitmap.CompressFormat.PNG, 0, baos);
             byte[] blob = baos.toByteArray();
             values.put(EstructuraBBDD.COLUMN_IMG_CHALLENGE, blob);
         }
@@ -431,7 +433,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
             long newRowId = this.getWritableDatabase().insert(
                     EstructuraBBDD.TABLE_CHALLENGES, null, values);
             //this.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -446,7 +448,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
                     " FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
                     " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " = ? " +
                     " ORDER BY " + EstructuraBBDD.COLUMN_ID_USERSANDWEIGHT + " DESC LIMIT 1)";
-            String[] selectionArgs = { email, email };
+            String[] selectionArgs = {email, email};
             deletedRows = db.delete(EstructuraBBDD.TABLE_USERSANDWEIGHT, selection, selectionArgs);
             db.setTransactionSuccessful();
         } finally {
@@ -456,7 +458,25 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return deletedRows;
     }
 
-        public boolean upgradeEditarUser(String user_name, String email, String password, String birth, String gender, int height) {
+    public int deleteAllDataUser(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        int deletedRows = 0;
+        try {
+            String selection = EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " = ?";
+            String selection2 = EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + " = ?";
+            String[] selectionArgs = {email};
+            deletedRows = db.delete(EstructuraBBDD.TABLE_USERSANDWEIGHT, selection, selectionArgs) +
+                    db.delete(EstructuraBBDD.TABLE_CHALLENGES, selection2, selectionArgs);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+        return deletedRows;
+    }
+
+    public boolean upgradeEditarUser(String user_name, String email, String password, String birth, String gender, int height) {
 
         // Nuevo valor para la columna
         ContentValues values = new ContentValues();

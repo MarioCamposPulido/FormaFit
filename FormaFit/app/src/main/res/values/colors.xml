@@ -13,4 +13,6 @@
     <color name="verde">#37D837</color>
     <color name="naranja">#FF7F50</color>
     <color name="rojo"> #E34234 </color>
+
+    <color name="verdeMasOscuro">#0BA34F</color>
 </resources>

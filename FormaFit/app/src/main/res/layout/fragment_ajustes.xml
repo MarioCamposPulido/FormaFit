@@ -35,7 +35,7 @@
         android:orientation="horizontal"
         android:background="@drawable/backgroud_white_rounded"
         android:layout_margin="10dp"
-        android:padding="12dp">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/diarioImagen"
@@ -118,11 +118,29 @@
         app:drawableEndCompat="@drawable/icon_adelante"
         app:drawableStartCompat="@drawable/icon_idioma" />
 
+
     <TextView
         android:id="@+id/infoAjustes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/buttons_funcionales"
+        android:backgroundTint="@color/azul"
+        android:elevation="8dp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="@string/version"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:drawableEndCompat="@drawable/icon_adelante"
+        app:drawableStartCompat="@drawable/icon_info" />
+
+    <TextView
+        android:id="@+id/cerrarSesionAjustes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cerrarSesion"
         android:textColor="@color/white"
         android:background="@drawable/buttons_funcionales"
         android:padding="10dp"
@@ -132,8 +150,27 @@
         android:elevation="8dp"
         android:gravity="center"
         app:drawableEndCompat="@drawable/icon_adelante"
-        app:drawableStartCompat="@drawable/icon_info"
-        android:backgroundTint="@color/azul"/>
+        app:drawableStartCompat="@drawable/icon_cerrar_sesion"
+        android:backgroundTint="@color/verdeMasOscuro"
+        app:drawableTint="@color/white" />
+
+    <TextView
+        android:id="@+id/eliminarCuentaAjustes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/buttons_funcionales"
+        android:backgroundTint="@color/rojo"
+        android:elevation="8dp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/eliminarCuenta"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:drawableEndCompat="@drawable/icon_adelante"
+        app:drawableStartCompat="@drawable/icon_corazon_roto"
+        app:drawableTint="@color/white" />
 
 
 </LinearLayout>

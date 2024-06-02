@@ -41,26 +41,24 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
     @Override
     public void onBindViewHolder(@NonNull DesafiosViewHolder holder, int position) {
         Desafio itemActual = desafios.get(position);
-
-        holder.bind(desafios.get(position));
+        holder.bind(itemActual);
 
         holder.checkboxDesafios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (itemActual.getIs_checked() == 0){
-                    BaseDatosHelper dbHelper = new BaseDatosHelper(v.getContext());
-                    dbHelper.upgradeCambiarDesafiosIs_Checked(itemActual.getId(), 1);
-                    desafios.remove(itemActual);
-                    notifyItemRemoved(position);
-                }else {
-                    BaseDatosHelper dbHelper = new BaseDatosHelper(v.getContext());
-                    dbHelper.upgradeCambiarDesafiosIs_Checked(itemActual.getId(), 0);
-                    desafios.remove(itemActual);
-                    notifyItemRemoved(position);
+                BaseDatosHelper dbHelper = new BaseDatosHelper(v.getContext());
+                int newCheckedState = (itemActual.getIs_checked() == 0) ? 1 : 0;
+                dbHelper.upgradeCambiarDesafiosIs_Checked(itemActual.getId(), newCheckedState);
+
+                // Obtener la posición actual del elemento
+                int currentPosition = holder.getAdapterPosition();
+                if (currentPosition != RecyclerView.NO_POSITION) {
+                    desafios.remove(currentPosition);
+                    notifyItemRemoved(currentPosition);
+                    notifyItemRangeChanged(currentPosition, desafios.size());
                 }
             }
         });
-
     }
 
     /**

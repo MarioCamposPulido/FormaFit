@@ -138,6 +138,7 @@ public class EntradaPesoFragment extends Fragment {
                     dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
                             descripcionEntradaPeso.getText().toString(), imgTomada,
                             pesoNuevo);
+                    imgTomada = null;
                 }else {
                     dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
                             descripcionEntradaPeso.getText().toString(), null,

@@ -68,6 +68,9 @@
     <string name="editarPerfil"> Editar Perfil </string>
     <string name="editarDatos"> ★   Edita tus datos   ★ </string>
     <string name="aplicarCambios"> Aplicar Cambios </string>
+    <string name="cerrarSesion"> Cerrar Sesión </string>
+    <string name="eliminarCuenta"> Eliminar Cuenta </string>
+    <string name="confirmacionEliminacion"> ¿Estás seguro que quieres eliminar la cuenta? </string>
 
     <!-- Recycler Desfios -->
     <string name="titulo"> Título </string>
