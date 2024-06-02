@@ -4,7 +4,7 @@ public class EstructuraBBDD {
 
     /* Definimos datos de la tabla*/
     public static final String DATABASE_NAME = "FormaFit";
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
 
     // Tabla Users
     public static final String TABLE_USERSANDWEIGHT = "UsersAndWeight";
@@ -19,6 +19,7 @@ public class EstructuraBBDD {
     public static final String COLUMN_DESCRIPTION_USERSANDWEIGHT = "description";
     public static final String COLUMN_IMG_USERSANDWEIGHT = "img";
     public static final String COLUMN_WEIGHT_USERSANDWEIGHT = "weight";
+    public static final String COLUMN_GOAL_USERSANDWEIGHT = "goal";
 
     // Tabla Challenges
     public static final String TABLE_CHALLENGES = "Challenges";
@@ -44,7 +45,8 @@ public class EstructuraBBDD {
                     EstructuraBBDD.COLUMN_DATE_USERSANDWEIGHT + " DATE," +
                     EstructuraBBDD.COLUMN_DESCRIPTION_USERSANDWEIGHT + " TEXT," +
                     EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT + " BLOB," +
-                    EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT + " INT);" ;
+                    EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT + " INTEGER," +
+                    EstructuraBBDD.COLUMN_GOAL_USERSANDWEIGHT + " INTEGER);" ;
 
     public static final String SQL_CREATE_TABLE_CHALLENGES =
             "CREATE TABLE " + EstructuraBBDD.TABLE_CHALLENGES + " (" +

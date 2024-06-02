@@ -2,6 +2,7 @@ package com.example.formafit.fragments;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -52,6 +53,16 @@ public class EditarUserFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new AjustesFragment()).commit();
+            }
+        };
+
+        // Añadir el callback al dispatcher de onBackPressed
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override

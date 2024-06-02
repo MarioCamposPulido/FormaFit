@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -50,6 +51,16 @@ public class CrearDesafioFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new DesafiosFragment()).commit();
+            }
+        };
+
+        // Añadir el callback al dispatcher de onBackPressed
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override

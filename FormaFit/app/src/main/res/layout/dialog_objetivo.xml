@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.Registro"
+    android:gravity="center"
+    android:paddingTop="26dp"
+    android:paddingHorizontal="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/establecerObjetivo"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:textSize="32sp"
+            android:textColor="@color/white"
+            android:background="@drawable/backgroud_white_rounded"
+            android:backgroundTint="@color/violeta"
+            android:padding="12dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/backgroud_white_rounded"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/peso"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/pesoKgObjetivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/pesoPorDefecto"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+
+    <com.google.android.material.slider.Slider
+            android:id="@+id/sliderPesoObjetivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:valueFrom="10"
+            android:valueTo="200"
+            app:trackColor="@color/buttons_color_verde"
+            app:thumbColor="@color/buttons_color_rosa"
+            app:tickColor="@color/buttons_color_rosa"
+            app:thumbStrokeColor="@color/buttons_color_rosa"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

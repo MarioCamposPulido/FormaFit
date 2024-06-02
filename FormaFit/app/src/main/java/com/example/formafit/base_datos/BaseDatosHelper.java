@@ -243,6 +243,24 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return desafios;
     }
 
+    public int getObjetivoByUser(String email){
+        Cursor cursor = this.getReadableDatabase().rawQuery(
+                "SELECT goal FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? LIMIT 1",
+                new String[]{email});
+
+        // Extraer los datos del cursor
+        int goal = -1;
+        if (cursor.moveToFirst()) {
+             goal = cursor.getInt(cursor.getColumnIndexOrThrow("goal"));
+        }
+
+        cursor.close();
+        //this.close();
+
+        return goal;
+    }
+
     public int getAltura(String email) {
         int altura = -1; // Valor predeterminado si no se encuentra ninguna altura
 
@@ -476,6 +494,25 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
                 values,
                 selection,
                 new String[]{String.valueOf(id_desafio)});
+
+        return count > 0;
+
+    }
+
+    public boolean upgradeCambiarObjetivo(String email, int objetivoPeso) {
+
+        // Nuevo valor para la columna
+        ContentValues values = new ContentValues();
+        values.put(EstructuraBBDD.COLUMN_GOAL_USERSANDWEIGHT, objetivoPeso);
+
+        // NOmbre columna a actualizar
+        String selection = EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " LIKE ?";
+
+        int count = this.getWritableDatabase().update(
+                EstructuraBBDD.TABLE_USERSANDWEIGHT,
+                values,
+                selection,
+                new String[]{String.valueOf(email)});
 
         return count > 0;
 

@@ -42,8 +42,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="382dp"
-        android:layout_margin="20dp">
+        android:layout_height="380dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="14dp">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAdd"
@@ -51,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:contentDescription="@string/floating_add"
             android:src="@drawable/icon_plus"
             app:backgroundTint="@color/buttons_color_verde" />
@@ -74,13 +76,31 @@
         android:textColor="@color/white"
         android:background="@drawable/buttons_funcionales"
         android:padding="10dp"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
         android:textSize="20sp"
         android:fontFamily="@font/barlowsemicondensedsemibold"
         android:elevation="4dp"
         android:gravity="center"
         app:drawableEndCompat="@drawable/icon_adelante"
         app:drawableStartCompat="@drawable/icon_diario" />
+
+    <TextView
+        android:id="@+id/obetivoButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/objetivo"
+        android:textColor="@color/black"
+        android:background="@drawable/buttons_funcionales"
+        android:backgroundTint="@color/buttons_color_verde"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:elevation="4dp"
+        android:gravity="center"
+        app:drawableEndCompat="@drawable/icon_adelante"
+        app:drawableStartCompat="@drawable/icon_bandera"
+        android:drawableTint="@color/black"/>
 
 
 </LinearLayout>

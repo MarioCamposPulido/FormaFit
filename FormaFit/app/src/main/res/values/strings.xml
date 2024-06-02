@@ -37,6 +37,9 @@
 
     <!-- Fragment Bascula -->
     <string name="diario"> Diario </string>
+    <string name="objetivo"> Marcar un Objetivo </string>
+    <string name="establecerObjetivo"> ★ Fija tu Objetivo ★ </string>
+    <string name="objetivoPeso"> Objetivo </string>
 
     <!-- Fragment Diario -->
     <string name="advertencia"> ¡Advertencia! </string>
