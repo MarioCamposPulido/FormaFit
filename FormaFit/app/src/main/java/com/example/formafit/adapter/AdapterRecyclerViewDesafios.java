@@ -27,8 +27,7 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
 
     public AdapterRecyclerViewDesafios(LinkedList<Desafio> desafioRecycler){
         this.desafios = desafioRecycler;
-    };
-
+    }
 
     @NonNull
     @Override
@@ -36,7 +35,6 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_desafios, parent, false);
         return new AdapterRecyclerViewDesafios.DesafiosViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull DesafiosViewHolder holder, int position) {
@@ -55,35 +53,23 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
                 if (currentPosition != RecyclerView.NO_POSITION) {
                     desafios.remove(currentPosition);
                     notifyItemRemoved(currentPosition);
-                    notifyItemRangeChanged(currentPosition, desafios.size());
+                    notifyItemRangeChanged(currentPosition, desafios.size()); // Notificar cambios en la lista
                 }
             }
         });
     }
 
-    /**
-     * Devuelve el número total de elementos de la lista
-     * @return
-     */
     @Override
     public int getItemCount() {
         return desafios.size();
     }
 
-    /**
-     * Clase para referirse a la celda personalizada del recycler
-     */
     class DesafiosViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tituloDesafios, descripcionDesafios;
         private ImageView imagenDesafios;
         private CheckBox checkboxDesafios;
 
-
-        /**
-         * Declaramos lo que es cada item, para interactuar con él
-         * @param itemView
-         */
         public DesafiosViewHolder(@NonNull View itemView) {
             super(itemView);
             this.tituloDesafios = itemView.findViewById(R.id.tituloDesafios);
@@ -92,19 +78,22 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
             this.imagenDesafios = itemView.findViewById(R.id.imagenDesafios);
         }
 
-
         public void bind(Desafio desafio){
-            if (!Objects.isNull(desafio.getImg())){
+            // Limpiar las vistas antes de configurarlas
+            imagenDesafios.setImageDrawable(null);
+            tituloDesafios.setText("");
+            descripcionDesafios.setText("");
+            checkboxDesafios.setChecked(false);
+
+            // Configurar las vistas con los datos del desafio actual
+            if (desafio.getImg() != null){
                 imagenDesafios.setImageBitmap(desafio.getImg());
+            }else {
+                imagenDesafios.setImageResource(R.drawable.logo_formafit);
             }
             tituloDesafios.setText(desafio.getTitulo());
             descripcionDesafios.setText(desafio.getDescripcion());
-
-            if (desafio.getIs_checked() == 0){
-                checkboxDesafios.setChecked(false);
-            }else {
-                checkboxDesafios.setChecked(true);
-            }
+            checkboxDesafios.setChecked(desafio.getIs_checked() == 1);
         }
     }
 }
