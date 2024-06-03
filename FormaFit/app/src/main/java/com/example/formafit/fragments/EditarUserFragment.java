@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.transition.Slide;
@@ -21,6 +22,7 @@ import com.example.formafit.base_datos.BaseDatosHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.slider.Slider;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,8 +34,10 @@ public class EditarUserFragment extends Fragment {
     private TextView medidaEditarUser, userNameEditarUser, emailEditarUser, passwordEditarUser;
     private Button nacimientoButtonEditarUser;
     private ImageButton femaleButtonEditarUser, maleButtonEdiartUser, confirmButtonEdiatPerfil;
+    private TextInputLayout campoNombreEditar, campoEmailEditar, campoPasswordEditar;
     private BottomNavigationView bottomNavigation;
     private static int editarAltura = 0;
+    private static boolean fechaIntroducida;
     private BaseDatosHelper dbHelper;
 
     private String getGeneroLogin() {
@@ -80,9 +84,13 @@ public class EditarUserFragment extends Fragment {
         userNameEditarUser = view.findViewById(R.id.userNameEditarUser);
         emailEditarUser = view.findViewById(R.id.emailEditarUser);
         passwordEditarUser = view.findViewById(R.id.passwordEditarUser);
-
+        campoEmailEditar = view.findViewById(R.id.campoEmailEditar);
+        campoPasswordEditar = view.findViewById(R.id.campoPasswordEditar);
+        campoNombreEditar = view.findViewById(R.id.campoNombreEditar);
 
         maleButtonEdiartUser.setSelected(true);
+
+        fechaIntroducida = false;
 
         sliderAlturaEditarUser.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
@@ -105,8 +113,14 @@ public class EditarUserFragment extends Fragment {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                     String formattedDate = sdf.format(date);
 
-                    // Hacer algo con la fecha seleccionada
-                    nacimientoButtonEditarUser.setText(formattedDate);
+                    if (MainActivity.calcularEdad(formattedDate) != -1){
+                        nacimientoButtonEditarUser.setText(formattedDate);
+                        nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(view.getContext(), R.color.white));
+                        fechaIntroducida = true;
+                    }else {
+                        nacimientoButtonEditarUser.setText(getResources().getString(R.string.fechaNoValida));
+                        nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(view.getContext(), R.color.buttons_color_verde));
+                    }
                 });
 
                 datePicker.show(getActivity().getSupportFragmentManager(), "DATE_PICKER");
@@ -119,6 +133,8 @@ public class EditarUserFragment extends Fragment {
                 v.setSelected(!v.isSelected());
                 if (femaleButtonEditarUser.isSelected()) {
                     femaleButtonEditarUser.setSelected(false);
+                } else if (!maleButtonEdiartUser.isSelected()) {
+                    maleButtonEdiartUser.setSelected(true);
                 }
             }
         });
@@ -129,6 +145,8 @@ public class EditarUserFragment extends Fragment {
                 v.setSelected(!v.isSelected());
                 if (maleButtonEdiartUser.isSelected()) {
                     maleButtonEdiartUser.setSelected(false);
+                }else if (!femaleButtonEditarUser.isSelected()) {
+                    femaleButtonEditarUser.setSelected(true);
                 }
             }
         });
@@ -136,17 +154,69 @@ public class EditarUserFragment extends Fragment {
         confirmButtonEdiatPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper = new BaseDatosHelper(getContext());
-                if (dbHelper.upgradeEditarUser(userNameEditarUser.getText().toString(), emailEditarUser.getText().toString(), passwordEditarUser.getText().toString(),
-                        nacimientoButtonEditarUser.getText().toString() ,getGeneroLogin(), editarAltura)){
-                    MainActivity.email = emailEditarUser.getText().toString();
-                    if (getActivity() != null) {
-                        bottomNavigation = getActivity().findViewById(R.id.bottom_navigation);
-                        bottomNavigation.setSelectedItemId(R.id.bascula);
-                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
+                dbHelper = new BaseDatosHelper(v.getContext());
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+                if (emailEditarUser.getText().toString().matches(emailPattern)) {
+                    campoEmailEditar.setErrorEnabled(false);
+
+                    if (!dbHelper.checkEmail(emailEditarUser.getText().toString())) {
+                        campoEmailEditar.setErrorEnabled(false);
+
+                        if (!userNameEditarUser.getText().toString().isEmpty()) {
+                            campoNombreEditar.setErrorEnabled(false);
+
+                            if (!passwordEditarUser.getText().toString().isEmpty()) {
+                                campoPasswordEditar.setErrorEnabled(false);
+
+                                if (editarAltura != 0) {
+
+                                    if (fechaIntroducida) {
+
+                                        if (dbHelper.upgradeEditarUser(
+                                                userNameEditarUser.getText().toString(),
+                                                emailEditarUser.getText().toString(),
+                                                passwordEditarUser.getText().toString(),
+                                                nacimientoButtonEditarUser.getText().toString(),
+                                                getGeneroLogin(),
+                                                editarAltura
+                                        )) {
+                                            MainActivity.email = emailEditarUser.getText().toString();
+
+                                            if (getActivity() != null) {
+                                                bottomNavigation = getActivity().findViewById(R.id.bottom_navigation);
+                                                bottomNavigation.setSelectedItemId(R.id.bascula);
+                                                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
+                                            }
+
+                                        } else {
+                                            Toast.makeText(getContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    } else {
+                                        nacimientoButtonEditarUser.setText(getResources().getString(R.string.introduceFecha));
+                                        nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.buttons_color_verde));
+                                    }
+
+                                } else {
+                                    medidaEditarUser.setText(getResources().getString(R.string.introduceAltura));
+                                    medidaEditarUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.verdeMasOscuro));
+                                }
+
+                            } else {
+                                campoPasswordEditar.setError(getResources().getString(R.string.campoVacio));
+                            }
+
+                        } else {
+                            campoNombreEditar.setError(getResources().getString(R.string.campoVacio));
+                        }
+
+                    } else {
+                        campoEmailEditar.setError(getResources().getString(R.string.usuarioExiste));
                     }
-                }else {
-                    Toast.makeText(getContext(), "ERROR", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    campoEmailEditar.setError(getResources().getString(R.string.correoNoValido));
                 }
             }
         });
