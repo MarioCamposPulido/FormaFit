@@ -94,5 +94,6 @@
     <string name="introduceAltura"> ¡Introduce una Altura! </string>
     <string name="fechaNoValida"> Fecha no válida </string>
     <string name="introduceFecha"> ¡Introduce una Fecha! </string>
+    <string name="emailOPasswordMal"> El Correo o la Contraseña no son correctos </string>
 
 </resources>

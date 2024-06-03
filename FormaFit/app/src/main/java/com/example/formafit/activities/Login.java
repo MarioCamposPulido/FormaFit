@@ -12,13 +12,14 @@ import android.widget.TextView;
 
 import com.example.formafit.R;
 import com.example.formafit.base_datos.BaseDatosHelper;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class Login extends AppCompatActivity {
 
     private BaseDatosHelper dbHelper;
     private Button loginButton, registroButton;
-
     private TextView emailLogin, passwordLogin;
+    private TextInputLayout campoEmailLogin, campoPasswordLogin;
 
 
     private void openMainActivity(){
@@ -51,6 +52,8 @@ public class Login extends AppCompatActivity {
         emailLogin = findViewById(R.id.emailLogin);
         passwordLogin = findViewById(R.id.passwordLogin);
         registroButton = findViewById(R.id.registroButton);
+        campoEmailLogin = findViewById(R.id.campoEmailLogin);
+        campoPasswordLogin = findViewById(R.id.campoPasswordLogin);
 
         // Obtener el Intent que inició esta actividad
         Intent intent = getIntent();
@@ -75,8 +78,13 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 dbHelper = new BaseDatosHelper(getBaseContext());
                 if (dbHelper.checkUserLogin(emailLogin.getText().toString(), passwordLogin.getText().toString())){
+                    campoEmailLogin.setErrorEnabled(false);
+                    campoPasswordLogin.setErrorEnabled(false);
                     openMainActivity();
                     MainActivity.email = emailLogin.getText().toString();
+                }else {
+                    campoEmailLogin.setError(getResources().getText(R.string.emailOPasswordMal));
+                    campoPasswordLogin.setError(getResources().getText(R.string.emailOPasswordMal));
                 }
             }
         });
