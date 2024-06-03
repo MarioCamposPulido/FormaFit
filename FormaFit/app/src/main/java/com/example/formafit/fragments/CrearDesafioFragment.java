@@ -22,12 +22,14 @@ import android.widget.TextView;
 import com.example.formafit.R;
 import com.example.formafit.base_datos.BaseDatosHelper;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class CrearDesafioFragment extends Fragment {
 
     private TextView tituloCrearDesafio, descripcionCrearDesafio;
     private ShapeableImageView imgCrearDesafio;
     private ImageButton confirmarCrearDesafioButton;
+    private TextInputLayout campoTituloCrearDesafio, campoDescripcionCrearDesafio;
     private BaseDatosHelper dbHelper;
     private Bitmap imgDesafio = null;
 
@@ -72,6 +74,8 @@ public class CrearDesafioFragment extends Fragment {
         tituloCrearDesafio = view.findViewById(R.id.tituloCrearDesafio);
         descripcionCrearDesafio = view.findViewById(R.id.descripcionCrearDesafio);
         imgCrearDesafio = view.findViewById(R.id.imgCrearDesafio);
+        campoTituloCrearDesafio = view.findViewById(R.id.campoTituloCrearDesafio);
+        campoDescripcionCrearDesafio = view.findViewById(R.id.campoDescripcionCrearDesafio);
         confirmarCrearDesafioButton = view.findViewById(R.id.confirmarCrearDesafioButton);
 
         imgCrearDesafio.setOnClickListener(new View.OnClickListener() {
@@ -84,9 +88,19 @@ public class CrearDesafioFragment extends Fragment {
         confirmarCrearDesafioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbHelper = new BaseDatosHelper(getContext());
-                dbHelper.insertNewDesafio(imgDesafio, tituloCrearDesafio.getText().toString(), descripcionCrearDesafio.getText().toString());
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new DesafiosFragment()).commit();
+                if (!tituloCrearDesafio.getText().toString().isEmpty()){
+                    campoTituloCrearDesafio.setErrorEnabled(false);
+                    if (!descripcionCrearDesafio.getText().toString().isEmpty()){
+                        campoDescripcionCrearDesafio.setErrorEnabled(false);
+                        dbHelper = new BaseDatosHelper(getContext());
+                        dbHelper.insertNewDesafio(imgDesafio, tituloCrearDesafio.getText().toString(), descripcionCrearDesafio.getText().toString());
+                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new DesafiosFragment()).commit();
+                    }else {
+                        campoDescripcionCrearDesafio.setError(getResources().getString(R.string.campoVacio));
+                    }
+                }else {
+                    campoTituloCrearDesafio.setError(getResources().getString(R.string.campoVacio));
+                }
             }
         });
 

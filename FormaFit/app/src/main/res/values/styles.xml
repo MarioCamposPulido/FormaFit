@@ -12,7 +12,7 @@
     </style>
 
     <style name="MyDatePickerTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
-        <item name="colorPrimary">@color/buttons_color_rosa</item> <!-- Cambia el color principal -->
+        <item name="colorPrimary">@color/buttons_color_rosa</item>
         <item name="colorOnPrimary">@color/white</item> <!-- Cambia el color del texto -->
     </style>
 
@@ -23,6 +23,19 @@
     <style name="roundedImageViewRounded">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="CustomTextInputLayoutNoIcon" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="errorIconDrawable">@null</item>
+    </style>
+
+    <style name="ShadowedText">
+        <item name="android:textColor">#FF579C</item> <!-- Color del texto -->
+        <item name="android:shadowColor">#80000000</item>
+        <item name="android:shadowDx">5</item> <!-- Desplazamiento horizontal de la sombra -->
+        <item name="android:shadowDy">5</item> <!-- Desplazamiento vertical de la sombra -->
+        <item name="android:shadowRadius">5</item> <!-- Radio de desenfoque de la sombra -->
+        <item name="android:textSize">18sp</item> <!-- Tamaño del texto -->
     </style>
 
 </resources>

@@ -167,7 +167,7 @@ public class BasculaFragment extends Fragment {
             LimitLine limitLine = new LimitLine(dbHelper.getObjetivoByUser(MainActivity.email), getResources().getString(R.string.objetivoPeso));
             limitLine.setLineWidth(3f);
             limitLine.setLineColor(ContextCompat.getColor(getContext(), R.color.buttons_color_verde));
-            limitLine.setTextColor(ContextCompat.getColor(getContext(), R.color.verdeMasOscuro));
+            limitLine.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
             limitLine.setTextSize(16f);
             limitLine.setTypeface(Typeface.DEFAULT_BOLD);
             yAxis.addLimitLine(limitLine);
