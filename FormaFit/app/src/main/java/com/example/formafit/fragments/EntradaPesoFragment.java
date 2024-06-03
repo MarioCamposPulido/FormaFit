@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -50,8 +51,8 @@ public class EntradaPesoFragment extends Fragment {
     private Button fechaButtonEntradaPeso;
     private ImageButton introducirNuevoPeso;
     private BaseDatosHelper dbHelper;
-
     private static int pesoNuevo;
+    private static boolean fechaIntroducida;
     private static Bitmap imgTomada;
 
 
@@ -101,6 +102,9 @@ public class EntradaPesoFragment extends Fragment {
         introducirNuevoPeso = view.findViewById(R.id.introducirNuevoPeso);
         descripcionEntradaPeso = view.findViewById(R.id.descripcionEntradaPeso);
 
+        pesoNuevo = 0;
+        fechaIntroducida = false;
+
         fechaButtonEntradaPeso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,8 +118,15 @@ public class EntradaPesoFragment extends Fragment {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                     String formattedDate = sdf.format(date);
 
-                    // Hacer algo con la fecha seleccionada
-                    fechaButtonEntradaPeso.setText(formattedDate);
+                    if (MainActivity.calcularEdad(formattedDate) != -1) {
+                        fechaButtonEntradaPeso.setText(formattedDate);
+                        fechaButtonEntradaPeso.setTextColor(ContextCompat.getColor(view.getContext(), R.color.white));
+                        fechaIntroducida = true;
+                    } else {
+                        fechaButtonEntradaPeso.setText(getResources().getString(R.string.fechaNoValida));
+                        fechaButtonEntradaPeso.setTextColor(ContextCompat.getColor(view.getContext(), R.color.buttons_color_verde));
+                    }
+
                 });
 
                 datePicker.show(getParentFragmentManager(), "DATE_PICKER");
@@ -133,19 +144,28 @@ public class EntradaPesoFragment extends Fragment {
         introducirNuevoPeso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbHelper = new BaseDatosHelper(getContext());
-                if (!Objects.isNull(imgTomada)){
-                    dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
-                            descripcionEntradaPeso.getText().toString(), imgTomada,
-                            pesoNuevo);
-                    imgTomada = null;
-                }else {
-                    dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
-                            descripcionEntradaPeso.getText().toString(), null,
-                            pesoNuevo);
+                if (pesoNuevo != 0) {
+                    if (fechaIntroducida) {
+                        dbHelper = new BaseDatosHelper(getContext());
+                        if (!Objects.isNull(imgTomada)) {
+                            dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
+                                    descripcionEntradaPeso.getText().toString(), imgTomada,
+                                    pesoNuevo);
+                            imgTomada = null;
+                        } else {
+                            dbHelper.insertNewEntradaPeso(MainActivity.email, fechaButtonEntradaPeso.getText().toString(),
+                                    descripcionEntradaPeso.getText().toString(), null,
+                                    pesoNuevo);
+                        }
+                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
+                    } else {
+                        fechaButtonEntradaPeso.setText(getResources().getString(R.string.introduceFecha));
+                        fechaButtonEntradaPeso.setTextColor(ContextCompat.getColor(view.getContext(), R.color.buttons_color_verde));
+                    }
+                } else {
+                    entradaPesoKg.setText(getResources().getString(R.string.introducePeso));
+                    entradaPesoKg.setTextColor(ContextCompat.getColor(view.getContext(), R.color.buttons_color_rosa));
                 }
-
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
             }
         });
 
@@ -158,20 +178,20 @@ public class EntradaPesoFragment extends Fragment {
                 imcCalculado.setText("{" + imc + "}");
 
 
-                switch (dbHelper.getGenero(MainActivity.email)){
+                switch (dbHelper.getGenero(MainActivity.email)) {
                     case "M":
                         double grasaCorporalHombre = Math.floor((1.20 * imc + 0.23 * dbHelper.getEdadUser(MainActivity.email) - 16.2) * 10) / 10;
-                        if (grasaCorporalHombre > 7 ){
+                        if (grasaCorporalHombre > 7) {
                             grasasPorcentaje.setText("[" + grasaCorporalHombre + "]");
-                        }else {
+                        } else {
                             grasasPorcentaje.setText("[" + 7.0 + "]");
                         }
                         break;
                     case "F":
                         double grasaCorporalMujer = Math.floor((1.20 * imc + 0.23 * dbHelper.getEdadUser(MainActivity.email) - 5.4) * 10) / 10;
-                        if (grasaCorporalMujer > 10 ){
+                        if (grasaCorporalMujer > 10) {
                             grasasPorcentaje.setText("[" + grasaCorporalMujer + "]");
-                        }else {
+                        } else {
                             grasasPorcentaje.setText("[" + 10.0 + "]");
                         }
                         break;

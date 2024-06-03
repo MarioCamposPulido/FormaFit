@@ -75,26 +75,25 @@
             android:layout_gravity="center"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/pesoTextVie"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
                 android:text="@string/peso"
+                android:layout_marginEnd="20dp"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/entradaPesoKg"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
                 android:text="@string/pesoPorDefecto"

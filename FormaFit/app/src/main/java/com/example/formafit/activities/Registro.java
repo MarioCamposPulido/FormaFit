@@ -43,11 +43,11 @@ public class Registro extends AppCompatActivity {
 
     private BaseDatosHelper dbHelper;
 
-    private static int crearAltura = 0;
-    private static int crearPeso = 0;
-    private static boolean fechaIntroducida = false;
+    private static int crearAltura;
+    private static int crearPeso;
+    private static boolean fechaIntroducida;
 
-    public int calcularEdad(String fechaNacimientoStr) {
+    public static int calcularEdad(String fechaNacimientoStr) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
             // Parsear la fecha de nacimiento
@@ -128,6 +128,9 @@ public class Registro extends AppCompatActivity {
 
         maleButton.setSelected(true);
 
+        crearPeso = 0;
+        crearAltura = 0;
+        fechaIntroducida = false;
 
         maleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,8 +218,6 @@ public class Registro extends AppCompatActivity {
                                         if (fechaIntroducida){
                                             dbHelper.insertNewUserRegistro(emailRegistro.getText().toString(), passwordRegistro.getText().toString(), nombreRegistro.getText().toString(),
                                                     getGeneroLogin(), nacimientoButtonRegistro.getText().toString(), crearAltura, getFechaActual(), crearPeso);
-                                            crearPeso = 0;
-                                            crearAltura = 0;
                                             fechaIntroducida = false;
                                             openLogin(emailRegistro.getText().toString(), passwordRegistro.getText().toString());
                                         }else {
