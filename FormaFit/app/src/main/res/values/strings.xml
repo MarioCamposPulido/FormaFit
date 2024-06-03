@@ -86,4 +86,13 @@
     <string name="tituloDesafio"> Título del Desafío </string>
     <string name="aniadirDescripcion"> Añade una descripción </string>
 
+    <!-- Mensajes de Error -->
+    <string name="correoNoValido"> Correo Electrónico no válido </string>
+    <string name="usuarioExiste"> El usuario ya existe </string>
+    <string name="campoVacio"> Campo Vacío </string>
+    <string name="introducePeso"> ¡Introduce un Peso! </string>
+    <string name="introduceAltura"> ¡Introduce una Altura! </string>
+    <string name="fechaNoValida"> Fecha no válida </string>
+    <string name="introduceFecha"> ¡Introduce una Fecha! </string>
+
 </resources>

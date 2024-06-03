@@ -60,7 +60,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
         Cursor cursor = this.getReadableDatabase().rawQuery(
                 "SELECT * FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? ",
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? LIMIT 1",
                 new String[]{email});
 
         boolean exists = cursor.getCount() > 0;
