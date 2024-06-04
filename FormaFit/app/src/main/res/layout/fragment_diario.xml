@@ -12,16 +12,17 @@
         android:layout_marginTop="5dp">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textViewDiario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
+            android:layout_toEndOf="@id/textViewDiario"
             android:fontFamily="@font/barlowsemicondensedsemibold"
             android:text="@string/diario"
-            android:textSize="22sp"
-            android:layout_centerVertical="true"/>
+            android:textSize="22sp" />
 
         <ImageButton
             android:id="@+id/eliminarTodasEntradasPesoDiario"
@@ -32,8 +33,11 @@
             android:layout_marginEnd="14dp"
             android:background="@drawable/backgroud_white_rounded"
             android:backgroundTint="@color/buttons_color_verde"
-            android:src="@drawable/icon_basura"
-            android:padding="6dp"/>
+            android:contentDescription="@string/borrarEntradasPesoDescripcion"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:padding="6dp"
+            android:src="@drawable/icon_basura" />
 
     </RelativeLayout>
 
@@ -47,7 +51,7 @@
         android:id="@+id/recyclerDiario"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
-        android:layout_marginHorizontal="16dp" />
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="60dp" />
 
 </LinearLayout>

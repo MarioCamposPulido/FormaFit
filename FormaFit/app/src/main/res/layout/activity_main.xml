@@ -13,24 +13,24 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
+            android:name="com.example.formafit.fragments.BasculaFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:name="com.example.formafit.fragments.BasculaFragment"
             tools:layout="@layout/fragment_bascula" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
+            style="@style/CustomBottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/buttons_color_rosa"
-            app:menu="@menu/bottom_navigation"
-            app:itemTextColor="@color/white"
             app:itemIconTint="@color/white"
-            style="@style/CustomBottomNavigationView"
-            app:labelVisibilityMode="selected"/>
+            app:itemTextColor="@color/white"
+            app:labelVisibilityMode="selected"
+            app:menu="@menu/bottom_navigation" />
 
     </RelativeLayout>
 

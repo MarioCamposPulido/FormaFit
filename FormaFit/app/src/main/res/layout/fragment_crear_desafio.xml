@@ -3,28 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/fondo_logo_sombra">
+    android:background="@color/fondo_logo_sombra"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="50dp"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="50dp"
         android:background="@drawable/backgroud_white_rounded"
         android:gravity="center"
         android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="14dp"
-                android:gravity="center"
-                android:fontFamily="@font/barlowsemicondensedsemibold"
-                android:text="@string/crearDesafio"
-                android:textSize="22sp"
-                android:textColor="@color/violeta"/>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:gravity="center"
+            android:text="@string/crearDesafio"
+            android:textColor="@color/violeta"
+            android:textSize="22sp" />
 
         <View
             android:layout_width="match_parent"
@@ -35,69 +35,62 @@
             android:id="@+id/imgCrearDesafio"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:padding="6dp"
             android:scaleType="fitXY"
             android:src="@drawable/icon_plus"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:strokeColor="@color/buttons_color_verde"
-            app:strokeWidth="5dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            app:strokeWidth="5dp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/barlowsemicondensedsemibold"
             android:text="@string/aniadirImg"
-            android:textSize="22sp"
-            android:layout_gravity="center"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"/>
+            android:textSize="22sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/campoTituloCrearDesafio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tituloDesafio"
-            android:layout_marginBottom="10dp"
             android:layout_marginHorizontal="20dp"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/icon_lista">
+            android:layout_marginBottom="10dp"
+            android:hint="@string/tituloDesafio"
+            app:endIconDrawable="@drawable/icon_lista"
+            app:endIconMode="custom">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tituloCrearDesafio"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/campoDescripcionCrearDesafio"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
             android:hint="@string/aniadirDescripcion"
             android:textColor="@color/white"
-            android:textColorHint="@color/black"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="20dp">
+            android:textColorHint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/descripcionCrearDesafio"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:gravity="start|top"
+                android:inputType="textMultiLine"
                 android:maxLines="5"
-                android:textSize="16sp"
                 android:padding="12dp"
-                android:inputType="textMultiLine" />
+                android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,11 +98,12 @@
             android:id="@+id/confirmarCrearDesafioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/backgroud_white_rounded"
-            android:backgroundTint="@color/buttons_color_verde"
-            android:padding="6dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="14dp"
+            android:background="@drawable/backgroud_white_rounded"
+            android:backgroundTint="@color/buttons_color_verde"
+            android:contentDescription="@string/imagenDesafio"
+            android:padding="6dp"
             android:src="@drawable/icon_check" />
 
 

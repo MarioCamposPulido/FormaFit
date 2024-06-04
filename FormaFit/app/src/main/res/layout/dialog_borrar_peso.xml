@@ -8,18 +8,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/advertencia"
-        android:textSize="18sp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
         android:paddingBottom="10dp"
-        android:fontFamily="@font/barlowsemicondensedsemibold"/>
+        android:text="@string/advertencia"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/borrarEntradasPeso"
         android:fontFamily="@font/barlowsemicondensedmedium"
-        android:textStyle="italic"
-        android:textSize="20sp"/>
+        android:text="@string/borrarEntradasPeso"
+        android:textSize="20sp"
+        android:textStyle="italic" />
 
 </LinearLayout>

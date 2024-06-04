@@ -4,43 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activities.Registro"
     android:gravity="center"
-    android:paddingTop="26dp"
-    android:paddingHorizontal="10dp">
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingTop="26dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/establecerObjetivo"
-            android:gravity="center"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/barlowsemicondensedsemibold"
-            android:textSize="32sp"
-            android:textColor="@color/white"
-            android:background="@drawable/backgroud_white_rounded"
-            android:backgroundTint="@color/violeta"
-            android:padding="12dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/backgroud_white_rounded"
+        android:backgroundTint="@color/violeta"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="@string/establecerObjetivo"
+        android:textColor="@color/white"
+        android:textSize="32sp" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:background="@drawable/backgroud_white_rounded"
+        android:gravity="center"
+        android:orientation="vertical"
         android:padding="20dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
                 android:text="@string/peso"
@@ -50,25 +50,25 @@
                 android:id="@+id/pesoKgObjetivo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
                 android:text="@string/pesoPorDefecto"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
 
-    <com.google.android.material.slider.Slider
+        <com.google.android.material.slider.Slider
             android:id="@+id/sliderPesoObjetivo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/peso"
             android:stepSize="1"
             android:valueFrom="10"
             android:valueTo="200"
-            app:trackColor="@color/buttons_color_verde"
             app:thumbColor="@color/buttons_color_rosa"
+            app:thumbStrokeColor="@color/buttons_color_rosa"
             app:tickColor="@color/buttons_color_rosa"
-            app:thumbStrokeColor="@color/buttons_color_rosa"/>
+            app:trackColor="@color/buttons_color_verde" />
 
     </LinearLayout>
 

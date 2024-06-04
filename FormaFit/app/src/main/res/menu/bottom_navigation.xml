@@ -15,14 +15,14 @@
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_people"
         android:title="@string/navigation_imc"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/desafios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_trofeo"
         android:title="@string/navigation_desafios"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/ajustes"
         android:layout_width="wrap_content"

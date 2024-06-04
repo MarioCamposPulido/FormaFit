@@ -5,36 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.AjustesFragment" >
+    tools:context=".fragments.AjustesFragment">
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/navigation_ajustes"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:fontFamily="@font/barlowsemicondensedsemibold"
-        android:padding="20dp"
-        android:background="@drawable/backgroud_white_rounded"
         android:layout_margin="10dp"
+        android:background="@drawable/backgroud_white_rounded"
         android:backgroundTint="@color/buttons_color_rosa"
-        app:drawableStartCompat="@drawable/icon_herramienta"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/navigation_ajustes"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         app:drawableEndCompat="@drawable/icon_varias_herramientas"
-        android:textColor="@color/white"/>
+        app:drawableStartCompat="@drawable/icon_herramienta" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/buttons_color_verde"
-        android:layout_marginHorizontal="10dp"/>
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/buttons_color_verde" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/backgroud_white_rounded"
         android:layout_margin="10dp"
+        android:background="@drawable/backgroud_white_rounded"
+        android:orientation="horizontal"
         android:padding="10dp">
 
         <ImageView
@@ -44,25 +44,26 @@
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:background="@drawable/backgroud_white_rounded"
+            android:backgroundTint="@color/fondo_logo"
+            android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/logo_formafit"
-            android:backgroundTint="@color/fondo_logo"/>
+            app:srcCompat="@drawable/logo_formafit" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView656"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="@string/app_name"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
-                android:textSize="24sp"/>
+                android:text="@string/app_name"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -80,9 +81,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/buttons_color_verde"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginHorizontal="10dp"/>
+        android:background="@color/buttons_color_verde" />
 
     <TextView
         android:id="@+id/editarPerfilAjustes"
@@ -140,18 +141,18 @@
         android:id="@+id/cerrarSesionAjustes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/buttons_funcionales"
+        android:backgroundTint="@color/verdeMasOscuro"
+        android:elevation="8dp"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="@string/cerrarSesion"
         android:textColor="@color/white"
-        android:background="@drawable/buttons_funcionales"
-        android:padding="10dp"
-        android:layout_margin="10dp"
         android:textSize="20sp"
-        android:fontFamily="@font/barlowsemicondensedsemibold"
-        android:elevation="8dp"
-        android:gravity="center"
         app:drawableEndCompat="@drawable/icon_adelante"
         app:drawableStartCompat="@drawable/icon_cerrar_sesion"
-        android:backgroundTint="@color/verdeMasOscuro"
         app:drawableTint="@color/white" />
 
     <TextView

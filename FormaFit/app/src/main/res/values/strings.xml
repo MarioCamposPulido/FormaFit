@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name" translatable="false">Forma Fit</string>
 
+    <string name="app_name" translatable="false">Forma Fit</string>
     <string name="slogan"> “Si te pesa la vida, hagamos cambios” </string>
 
     <!-- Bottom navigation View MainActivity -->
@@ -12,12 +12,14 @@
     <!-- Nombres de botones flotantes -->
     <string name="floating_add"> Añadir </string>
 
-    <!-- Activitie Login -->
+    <!-- Activity Login -->
     <string name="email"> Email </string>
     <string name="password"> Contraseña </string>
     <string name="iniciarSesion"> Iniciar Sesión </string>
     <string name="crear"> Crear </string>
     <string name="sinCuenta"> ¿No tienes cuenta? </string>
+
+    <!-- Activity Registro -->
     <string name="nombreUsuario"> Nombre de usuario </string>
     <string name="altura"> Altura </string>
     <string name="fechaNacimiento"> Fecha De Nacimiento </string>
@@ -25,6 +27,8 @@
     <string name="crearPerfil"> ★ Crea tu perfil ★ </string>
     <string name="alturaPorDefecto"> 0 cm </string>
     <string name="pesoPorDefecto"> 0 kg </string>
+    <string name="hombre"> Hombre </string>
+    <string name="mujer"> Mujer </string>
 
     <!-- Fragment Crear Entrada Peso -->
     <string name="nuevaEntradaPeso"> Nueva Entrada de Peso </string>
@@ -34,6 +38,8 @@
     <string name="fecha"> ★   Fecha   ★ </string>
     <string name="aniadirComentario"> Añadir comentario… </string>
     <string name="imcPromedio"> {??.?} </string>
+
+    <string name="imagenEntradaPeso"> Imágen Entrada Peso </string>
 
     <!-- Fragment Bascula -->
     <string name="diario"> Diario </string>
@@ -60,6 +66,8 @@
     <string name="sobrePesoIMC"> {25.00 – 29.99} </string>
     <string name="obesidadIMC"> &gt; {30.00} </string>
 
+    <string name="borrarEntradasPesoDescripcion"> Borrar Entradas de Peso </string>
+
     <!-- Fragment Ajustes -->
     <string name="version"> Versión </string>
     <string name="idioma"> Idioma </string>
@@ -75,6 +83,7 @@
     <!-- Recycler Desfios -->
     <string name="titulo"> Título </string>
     <string name="descripcion"> Una descripción breve con textos de ejemplos y textos largos </string>
+    <string name="imagenDesafio"> Imágen Desafío </string>
 
     <!-- Fragment Desfios -->
     <string name="crearDesafio"> Crear Desafío </string>

@@ -10,17 +10,17 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/backgroud_white_rounded"
+        android:backgroundTint="@color/buttons_color_rosa"
         android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center"
         android:padding="12dp"
         android:text="@string/navigation_imc"
         android:textColor="@color/white"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:textSize="40sp"
-        android:background="@drawable/backgroud_white_rounded"
-        android:backgroundTint="@color/buttons_color_rosa"/>
+        android:textSize="40sp" />
 
     <View
         android:layout_width="match_parent"
@@ -30,8 +30,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -51,8 +52,8 @@
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="start"
                 android:text="@string/pesoPorDefecto"
-                android:textSize="22sp"
-                android:textColor="@color/buttons_color_rosa"/>
+                android:textColor="@color/buttons_color_rosa"
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/textView96"
@@ -61,8 +62,8 @@
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="start"
                 android:text="@string/peso"
-                android:textSize="20sp"
-                android:textColor="@color/gris_texto"/>
+                android:textColor="@color/gris_texto"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,8 +83,8 @@
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="end"
                 android:text="@string/alturaPorDefecto"
-                android:textSize="22sp"
-                android:textColor="@color/buttons_color_verde"/>
+                android:textColor="@color/buttons_color_verde"
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -92,8 +93,8 @@
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="end"
                 android:text="@string/altura"
-                android:textSize="20sp"
-                android:textColor="@color/gris_texto"/>
+                android:textColor="@color/gris_texto"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -111,12 +112,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="14dp"
         android:background="@drawable/backgroud_rounded"
-        android:padding="12dp"
-        android:backgroundTint="@color/verde">
+        android:backgroundTint="@color/verde"
+        android:orientation="vertical"
+        android:padding="12dp">
 
         <LinearLayout
             android:id="@+id/muyDelgadoLayout"
@@ -136,10 +137,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/muyDelgadoIMC"
                 android:fontFamily="@font/barlowsemicondensedmedium"
-                android:textSize="16sp"
-                android:gravity="end"/>
+                android:gravity="end"
+                android:text="@string/muyDelgadoIMC"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -159,10 +160,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/bajoPesoIMC"
                 android:fontFamily="@font/barlowsemicondensedmedium"
-                android:textSize="16sp"
-                android:gravity="end"/>
+                android:gravity="end"
+                android:text="@string/bajoPesoIMC"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -182,11 +183,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pesoNormalIMC"
                 android:fontFamily="@font/barlowsemicondensedmedium"
-                android:textSize="16sp"
-                android:gravity="end"/>
+                android:gravity="end"
+                android:text="@string/pesoNormalIMC"
+                android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/sobrePesoLayout"
             android:layout_width="match_parent"
@@ -205,11 +207,12 @@
                 android:id="@+id/textView611"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sobrePesoIMC"
                 android:fontFamily="@font/barlowsemicondensedmedium"
-                android:textSize="16sp"
-                android:gravity="end"/>
+                android:gravity="end"
+                android:text="@string/sobrePesoIMC"
+                android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/obesidadLayout"
             android:layout_width="match_parent"
@@ -227,10 +230,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/obesidadIMC"
                 android:fontFamily="@font/barlowsemicondensedmedium"
-                android:textSize="16sp"
-                android:gravity="end"/>
+                android:gravity="end"
+                android:text="@string/obesidadIMC"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 

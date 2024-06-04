@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".fragments.DesafiosFragment"
-    android:gravity="center">
+    tools:context=".fragments.DesafiosFragment">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@drawable/backgroud_white_rounded"
-            android:backgroundTint="@color/violeta"
-            android:fontFamily="@font/barlowsemicondensedsemibold"
-            android:gravity="center"
-            android:padding="12dp"
-            android:text="@string/navigation_desafios"
-            android:textColor="@color/white"
-            android:textSize="40sp"
-            app:drawableStartCompat="@drawable/icon_medalla_conseguida"
-            app:drawableEndCompat="@drawable/icon_medalla_conseguida" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/backgroud_white_rounded"
+        android:backgroundTint="@color/violeta"
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="@string/navigation_desafios"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:drawableEndCompat="@drawable/icon_medalla_conseguida"
+        app:drawableStartCompat="@drawable/icon_medalla_conseguida" />
 
     <View
         android:layout_width="match_parent"
@@ -32,8 +32,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginVertical="10dp">
+        android:layout_marginVertical="10dp"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/desafiosCrearDesafio"
@@ -48,8 +48,8 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             app:icon="@drawable/icon_plus"
-            app:iconTint="@color/white"
-            app:iconSize="26sp"/>
+            app:iconSize="26sp"
+            app:iconTint="@color/white" />
 
         <Button
             android:id="@+id/desafiosCambioButton"
@@ -58,36 +58,35 @@
             android:layout_height="60dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="1"
             android:backgroundTint="@color/buttons_color_verde"
             android:fontFamily="@font/barlowsemicondensedsemibold"
             android:text="@string/cambiarDesafiosCompletados"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:icon="@drawable/icon_persona_celebrando"
-            app:iconTint="@color/black"
-            app:iconSize="26sp"/>
+            app:iconSize="26sp"
+            app:iconTint="@color/black" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/tipoDesafiosTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/desafiosActuales"
-        android:fontFamily="@font/barlowsemicondensedsemibold"
-        android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="20dp"
-        android:textSize="24sp"
-        android:padding="10dp"
+        android:layout_marginVertical="10dp"
         android:background="@drawable/backgroud_white_rounded"
         android:backgroundTint="@color/violeta"
-        android:textColor="@color/white"/>
+        android:fontFamily="@font/barlowsemicondensedsemibold"
+        android:padding="10dp"
+        android:text="@string/desafiosActuales"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerDesafios"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="58dp"/>
+        android:layout_marginBottom="58dp" />
 
 </LinearLayout>

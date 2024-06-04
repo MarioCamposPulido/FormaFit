@@ -8,34 +8,38 @@
         android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/idioma"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/backgroud_white_rounded"
+        android:backgroundTint="@color/buttons_color_rosa"
         android:fontFamily="@font/barlowsemicondensedsemibold"
         android:gravity="center"
-        android:textSize="35sp"
-        android:layout_margin="10dp"
-        android:background="@drawable/backgroud_rounded"
         android:padding="10dp"
-        android:backgroundTint="@color/buttons_color_rosa"/>
+        android:text="@string/idioma"
+        android:textColor="@color/white"
+        android:textSize="35sp" />
 
     <RadioGroup
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp">
+        android:layout_marginHorizontal="10dp"
+        android:padding="6dp">
 
         <RadioButton
             android:id="@+id/radioButtonEspanol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/espanol"
+            android:layout_height="match_parent"
             android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:text="@string/espanol"
             android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/radioButtonIngles"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ingles"
+            android:layout_height="match_parent"
             android:fontFamily="@font/barlowsemicondensedsemibold"
-            android:textSize="20sp"/>
+            android:text="@string/ingles"
+            android:textSize="20sp" />
+
     </RadioGroup>
 </LinearLayout>

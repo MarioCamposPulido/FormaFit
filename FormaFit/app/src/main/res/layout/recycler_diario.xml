@@ -1,140 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/backgroud_square"
     android:orientation="vertical">
 
+
     <LinearLayout
-        android:layout_width="320dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/backgroud_square"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginHorizontal="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp">
+        android:backgroundTint="@color/fondo_logo"
+        android:orientation="vertical">
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+        <ImageView
+            android:id="@+id/diarioImagen"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_gravity="center"
-            android:backgroundTint="@color/fondo_logo">
+            android:layout_margin="20dp"
+            android:background="@drawable/backgroud_white_rounded"
+            android:contentDescription="@string/app_name"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/logo_formafit" />
+    </LinearLayout>
 
-            <ImageView
-                android:id="@+id/diarioImagen"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_gravity="center"
-                android:layout_margin="20dp"
-                android:background="@drawable/backgroud_white_rounded"
-                android:padding="8dp"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/logo_formafit" />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backgroud_white_rounded"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:padding="40dp">
+
+        <TextView
+            android:id="@+id/fechaEntradaPeso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:gravity="center"
+            android:text="@string/fecha"
+            android:textSize="22sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="40dp"
-            android:background="@drawable/backgroud_white_rounded">
+            android:layout_gravity="center"
+            android:layout_marginVertical="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:text="@string/navigation_imc"
+                android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/fechaEntradaPeso"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/fecha"
-                    android:textSize="22sp"
-                    android:fontFamily="@font/barlowsemicondensedsemibold"/>
+            <TextView
+                android:id="@+id/imcCalculadoDiario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/imcPromedio"
+                android:textSize="20sp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/grasaCorporal"
+                android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="10dp"
-                        android:fontFamily="@font/barlowsemicondensedsemibold"
-                        android:gravity="center"
-                        android:text="@string/navigation_imc"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/imcCalculadoDiario"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/barlowsemicondensedsemibold"
-                        android:gravity="center"
-                        android:text="@string/imcPromedio"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/pes2o2Kg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/barlowsemicondensedsemibold"
-                        android:gravity="center"
-                        android:text="@string/grasaCorporal"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/grasasPorcentajeDiario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/barlowsemicondensedsemibold"
-                        android:gravity="center"
-                        android:text="@string/grasaPorDefecto"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/diferenciaPesoDiario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/barlowsemicondensedsemibolditalic"
-                    android:text="@string/pesoPorDefecto"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:id="@+id/kilosDiario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/barlowsemicondensedsemibold"
-                    android:text="@string/pesoPorDefecto"
-                    android:textSize="34sp" />
-
-                <TextView
-                    android:id="@+id/comentariosDiario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/barlowsemicondensedsemibold" />
-
-            </LinearLayout>
-
+            <TextView
+                android:id="@+id/grasasPorcentajeDiario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlowsemicondensedsemibold"
+                android:gravity="center"
+                android:text="@string/grasaPorDefecto"
+                android:textSize="20sp" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/diferenciaPesoDiario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlowsemicondensedsemibolditalic"
+            android:text="@string/pesoPorDefecto"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/kilosDiario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
+            android:text="@string/pesoPorDefecto"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/comentariosDiario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlowsemicondensedsemibold" />
+
     </LinearLayout>
 
 </LinearLayout>

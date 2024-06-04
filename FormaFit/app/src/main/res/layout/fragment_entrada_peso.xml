@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo_logo_sombra"
     android:orientation="vertical"
-    tools:context=".fragments.EntradaPesoFragment"
-    android:background="@color/fondo_logo_sombra">
+    tools:context=".fragments.EntradaPesoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,17 +26,16 @@
             android:layout_marginBottom="10dp">
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:text="@string/nuevaEntradaPeso"
-                android:textSize="22sp"
-                android:layout_centerVertical="true"/>
+                android:textSize="22sp" />
 
             <ImageButton
                 android:id="@+id/introducirNuevoPeso"
@@ -44,11 +43,12 @@
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="14dp"
                 android:background="@drawable/backgroud_rounded"
                 android:backgroundTint="@color/buttons_color_verde"
+                android:contentDescription="@string/imagenEntradaPeso"
                 android:padding="12dp"
-                android:src="@drawable/icon_check"
-                android:layout_marginEnd="14dp"/>
+                android:src="@drawable/icon_check" />
 
         </RelativeLayout>
 
@@ -56,38 +56,37 @@
             android:id="@+id/photoButton"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_gravity="center"
             android:padding="6dp"
             android:scaleType="centerCrop"
             android:src="@drawable/icon_plus"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:strokeColor="@color/buttons_color_verde"
-            app:strokeWidth="5dp"
-            android:layout_gravity="center"/>
+            app:strokeWidth="5dp" />
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/barlowsemicondensedsemibold"
             android:text="@string/aniadirImg"
-            android:textSize="22sp"
-            android:layout_gravity="center"/>
+            android:textSize="22sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/pesoTextVie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
                 android:text="@string/peso"
-                android:layout_marginEnd="20dp"
                 android:textSize="20sp" />
 
             <TextView
@@ -106,6 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:contentDescription="@string/peso"
             android:stepSize="1"
             android:valueFrom="10"
             android:valueTo="200"
@@ -117,9 +117,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="center">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
@@ -134,23 +134,22 @@
                 android:id="@+id/imcCalculado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="65dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
                 android:text="@string/imcPromedio"
-                android:textSize="20sp"
-                android:layout_marginEnd="65dp"/>
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/pes2o2Kg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
                 android:text="@string/grasaCorporal"
-                android:textSize="20sp"
-                android:layout_marginEnd="10dp"/>
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/grasasPorcentaje"
@@ -168,34 +167,34 @@
             style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/buttons_color_rosa"
             android:text="@string/fecha"
             android:textColor="@color/white"
             android:textColorHint="@color/black"
-            android:textStyle="bold"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="center"/>
+            android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
             android:hint="@string/aniadirComentario"
             android:textColor="@color/white"
-            android:textColorHint="@color/black"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="20dp">
+            android:textColorHint="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/descripcionEntradaPeso"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:gravity="start|top"
+                android:inputType="textMultiLine"
                 android:maxLines="6"
-                android:textSize="16sp"
                 android:padding="12dp"
-                android:inputType="textMultiLine" />
+                android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

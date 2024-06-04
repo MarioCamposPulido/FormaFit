@@ -4,107 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo_logo_sombra"
     android:orientation="vertical"
-    tools:context=".activities.Registro"
-    android:background="@color/fondo_logo_sombra">
+    tools:context=".activities.Registro">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_margin="25dp"
         android:background="@color/fondo_logo"
         android:gravity="center"
-        android:layout_margin="25dp">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/crearPerfilTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/crearPerfil"
-            android:gravity="center"
             android:layout_marginBottom="30dp"
             android:fontFamily="@font/barlowsemicondensedsemibold"
-            android:textSize="32sp"
-            android:textColor="@color/buttons_color_rosa" />
+            android:gravity="center"
+            android:text="@string/crearPerfil"
+            android:textColor="@color/buttons_color_rosa"
+            android:textSize="32sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/campoNombreRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nombreUsuario"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            app:endIconMode="custom"
+            android:hint="@string/nombreUsuario"
+            app:endIconContentDescription="@string/nombreUsuario"
             app:endIconDrawable="@drawable/icon_tarjeta_persona"
-            app:endIconContentDescription="@string/nombreUsuario">
+            app:endIconMode="custom">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nombreRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLines="1"/>
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/campoEmailRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            app:endIconMode="custom"
+            android:hint="@string/email"
+            app:endIconContentDescription="@string/email"
             app:endIconDrawable="@drawable/icon_email"
-            app:endIconContentDescription="@string/email">
+            app:endIconMode="custom">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"/>
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/campoPasswordRegistro"
+            style="@style/CustomTextInputLayoutNoIcon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
-            app:endIconMode="password_toggle"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="16dp"
-            style="CustomTextInputLayoutNoIcon">
+            android:hint="@string/password"
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:maxLines="1"/>
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/pesoTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
                 android:text="@string/peso"
-                android:layout_marginEnd="20dp"
                 android:textSize="20sp" />
 
             <TextView
@@ -113,49 +107,51 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
-                android:textSize="20sp"
-                android:text="@string/pesoPorDefecto"/>
+                android:text="@string/pesoPorDefecto"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <com.google.android.material.slider.Slider
             android:id="@+id/sliderPesoRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="5dp"
+            android:contentDescription="@string/peso"
             android:stepSize="1"
             android:valueFrom="10"
             android:valueTo="200"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="5dp"
-            app:trackColor="@color/buttons_color_verde"
             app:thumbColor="@color/buttons_color_rosa"
+            app:thumbStrokeColor="@color/buttons_color_rosa"
             app:tickColor="@color/buttons_color_rosa"
-            app:thumbStrokeColor="@color/buttons_color_rosa"/>
+            app:trackColor="@color/buttons_color_verde" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/maleButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/selector_hombre"
                 android:layout_marginEnd="14dp"
-                android:padding="12dp"
+                android:background="@drawable/backgroud_rounded"
                 android:backgroundTint="@color/buttons_color_verde"
-                android:background="@drawable/backgroud_rounded"/>
+                android:contentDescription="@string/hombre"
+                android:padding="12dp"
+                android:src="@drawable/selector_hombre" />
 
             <ImageButton
                 android:id="@+id/femaleButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/selector_mujer"
-                android:padding="12dp"
+                android:background="@drawable/backgroud_rounded"
                 android:backgroundTint="@color/buttons_color_verde"
-                android:background="@drawable/backgroud_rounded"/>
+                android:contentDescription="@string/mujer"
+                android:padding="12dp"
+                android:src="@drawable/selector_mujer" />
         </LinearLayout>
 
         <Button
@@ -165,22 +161,23 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/buttons_color_rosa"
+            android:fontFamily="@font/barlowsemicondensedsemibold"
             android:text="@string/fechaNacimiento"
             android:textColor="@color/white"
-            android:textColorHint="@color/black"
-            android:textStyle="bold"/>
+            android:textColorHint="@color/black" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/alturaTextview"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
                 android:text="@string/altura"
@@ -190,28 +187,26 @@
                 android:id="@+id/medidaPeso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/barlowsemicondensedsemibold"
                 android:gravity="center"
-                android:textSize="20dp"
-                android:text="@string/alturaPorDefecto"/>
+                android:text="@string/alturaPorDefecto"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <com.google.android.material.slider.Slider
             android:id="@+id/sliderAlturaRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:contentDescription="@string/altura"
             android:stepSize="1"
             android:valueFrom="50"
             android:valueTo="250"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            app:trackColor="@color/buttons_color_rosa"
             app:thumbColor="@color/buttons_color_verde"
+            app:thumbStrokeColor="@color/buttons_color_rosa"
             app:tickColor="@color/buttons_color_verde"
-            app:thumbStrokeColor="@color/buttons_color_rosa"/>
-
-
+            app:trackColor="@color/buttons_color_rosa" />
 
         <Button
             android:id="@+id/crearUsuarioButton"
@@ -222,8 +217,7 @@
             android:backgroundTint="@color/buttons_color_verde"
             android:text="@string/crear"
             android:textColor="@color/black"
-            android:textStyle="bold"/>
-
+            android:textStyle="bold" />
 
     </LinearLayout>
 
