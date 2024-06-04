@@ -11,11 +11,13 @@ import android.graphics.BitmapFactory;
 import com.example.formafit.activities.MainActivity;
 import com.example.formafit.java.Desafio;
 import com.example.formafit.java.EntradaPeso;
+import com.example.formafit.java.Usuario;
 
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -70,7 +72,7 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         return exists;
     }
 
-    public int getEdadUser(String fechaNacimientoStr) {
+    public int getEdadNumber(String fechaNacimientoStr) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
             // Parsear la fecha de nacimiento
@@ -166,9 +168,9 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
                 String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
                 if (cursor.getBlob(cursor.getColumnIndexOrThrow("img")) != null) {
                     Bitmap imagen = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndexOrThrow("img")));
-                    entradasPeso.add(new EntradaPeso(date, getAltura(email), weight, getEdadUser(email), description, imagen, getGenero(MainActivity.email)));
+                    entradasPeso.add(new EntradaPeso(date, getAltura(email), weight, getEdadNumber(email), description, imagen, getGenero(MainActivity.email)));
                 } else {
-                    entradasPeso.add(new EntradaPeso(date, getAltura(email), weight, getEdadUser(email), description, null, getGenero(MainActivity.email)));
+                    entradasPeso.add(new EntradaPeso(date, getAltura(email), weight, getEdadNumber(email), description, null, getGenero(MainActivity.email)));
                 }
             } while (cursor.moveToNext());
         }
@@ -177,6 +179,33 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         //this.close();
 
         return entradasPeso;
+    }
+
+    public Usuario getAllDataUser(String emailParam) {
+        Cursor cursor = this.getReadableDatabase().rawQuery(
+                "SELECT * FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=?",
+                new String[]{emailParam});
+
+        Usuario usuario = null;
+
+        // Extraer los datos del cursor
+        int index = 0;
+        if (cursor.moveToFirst()) {
+                String nombre_usuario = cursor.getString(cursor.getColumnIndexOrThrow("user_name"));
+                String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+                String password = cursor.getString(cursor.getColumnIndexOrThrow("password"));
+                String gender = cursor.getString(cursor.getColumnIndexOrThrow("gender"));
+                String nacimientoFecha = cursor.getString(cursor.getColumnIndexOrThrow("birth"));
+                int height = cursor.getInt(cursor.getColumnIndexOrThrow("height"));
+
+            usuario = new Usuario(email, nombre_usuario, password, gender, nacimientoFecha, String.valueOf(height));
+        }
+
+        cursor.close();
+        //this.close();
+
+        return usuario;
     }
 
     public LinkedList<Desafio> getAllDesafiosActualesUser(String email) {

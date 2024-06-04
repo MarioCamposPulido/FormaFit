@@ -29,15 +29,8 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -180,7 +173,7 @@ public class EntradaPesoFragment extends Fragment {
 
                 switch (dbHelper.getGenero(MainActivity.email)) {
                     case "M":
-                        double grasaCorporalHombre = Math.floor((1.20 * imc + 0.23 * dbHelper.getEdadUser(MainActivity.email) - 16.2) * 10) / 10;
+                        double grasaCorporalHombre = Math.floor((1.20 * imc + 0.23 * dbHelper.getEdadNumber(MainActivity.email) - 16.2) * 10) / 10;
                         if (grasaCorporalHombre > 7) {
                             grasasPorcentaje.setText("[" + grasaCorporalHombre + "]");
                         } else {
@@ -188,7 +181,7 @@ public class EntradaPesoFragment extends Fragment {
                         }
                         break;
                     case "F":
-                        double grasaCorporalMujer = Math.floor((1.20 * imc + 0.23 * dbHelper.getEdadUser(MainActivity.email) - 5.4) * 10) / 10;
+                        double grasaCorporalMujer = Math.floor((1.20 * imc + 0.23 * dbHelper.getEdadNumber(MainActivity.email) - 5.4) * 10) / 10;
                         if (grasaCorporalMujer > 10) {
                             grasasPorcentaje.setText("[" + grasaCorporalMujer + "]");
                         } else {

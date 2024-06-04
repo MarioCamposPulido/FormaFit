@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.formafit.R;
 import com.example.formafit.activities.MainActivity;
 import com.example.formafit.base_datos.BaseDatosHelper;
+import com.example.formafit.java.Usuario;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.slider.Slider;
@@ -26,6 +27,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Locale;
 
 public class EditarUserFragment extends Fragment {
@@ -36,7 +38,7 @@ public class EditarUserFragment extends Fragment {
     private ImageButton femaleButtonEditarUser, maleButtonEdiartUser, confirmButtonEdiatPerfil;
     private TextInputLayout campoNombreEditar, campoEmailEditar, campoPasswordEditar;
     private BottomNavigationView bottomNavigation;
-    private static int editarAltura = 0;
+    private static int editarAltura;
     private static boolean fechaIntroducida;
     private BaseDatosHelper dbHelper;
 
@@ -90,7 +92,22 @@ public class EditarUserFragment extends Fragment {
 
         maleButtonEdiartUser.setSelected(true);
 
-        fechaIntroducida = false;
+        fechaIntroducida = true;
+
+        dbHelper = new BaseDatosHelper(getContext());
+        Usuario datosUsuario = dbHelper.getAllDataUser(MainActivity.email);
+
+        editarAltura = Integer.parseInt(datosUsuario.getAltura());
+        userNameEditarUser.setText(datosUsuario.getNombreUsuario());
+        emailEditarUser.setText(datosUsuario.getEmail());
+        passwordEditarUser.setText(datosUsuario.getPassword());
+        nacimientoButtonEditarUser.setText(datosUsuario.getNacimiento());
+        if (datosUsuario.getGenero().equals("F")) {
+            maleButtonEdiartUser.setSelected(false);
+            femaleButtonEditarUser.setSelected(true);
+        }
+        medidaEditarUser.setText(datosUsuario.getAltura() + " cm");
+        sliderAlturaEditarUser.setValue(Float.parseFloat((datosUsuario.getAltura())));
 
         sliderAlturaEditarUser.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
@@ -113,13 +130,14 @@ public class EditarUserFragment extends Fragment {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                     String formattedDate = sdf.format(date);
 
-                    if (MainActivity.calcularEdad(formattedDate) != -1){
+                    if (MainActivity.calcularEdad(formattedDate) != -1) {
                         nacimientoButtonEditarUser.setText(formattedDate);
                         nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(view.getContext(), R.color.white));
                         fechaIntroducida = true;
-                    }else {
+                    } else {
                         nacimientoButtonEditarUser.setText(getResources().getString(R.string.fechaNoValida));
                         nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(view.getContext(), R.color.buttons_color_verde));
+                        fechaIntroducida = false;
                     }
                 });
 
@@ -145,7 +163,7 @@ public class EditarUserFragment extends Fragment {
                 v.setSelected(!v.isSelected());
                 if (maleButtonEdiartUser.isSelected()) {
                     maleButtonEdiartUser.setSelected(false);
-                }else if (!femaleButtonEditarUser.isSelected()) {
+                } else if (!femaleButtonEditarUser.isSelected()) {
                     femaleButtonEditarUser.setSelected(true);
                 }
             }
@@ -160,7 +178,7 @@ public class EditarUserFragment extends Fragment {
                 if (emailEditarUser.getText().toString().matches(emailPattern)) {
                     campoEmailEditar.setErrorEnabled(false);
 
-                    if (!dbHelper.checkEmail(emailEditarUser.getText().toString())) {
+                    if (!dbHelper.checkEmail(emailEditarUser.getText().toString()) || emailEditarUser.getText().toString().equals(MainActivity.email)) {
                         campoEmailEditar.setErrorEnabled(false);
 
                         if (!userNameEditarUser.getText().toString().isEmpty()) {
@@ -169,38 +187,31 @@ public class EditarUserFragment extends Fragment {
                             if (!passwordEditarUser.getText().toString().isEmpty()) {
                                 campoPasswordEditar.setErrorEnabled(false);
 
-                                if (editarAltura != 0) {
+                                if (fechaIntroducida) {
 
-                                    if (fechaIntroducida) {
+                                    if (dbHelper.upgradeEditarUser(
+                                            userNameEditarUser.getText().toString(),
+                                            emailEditarUser.getText().toString(),
+                                            passwordEditarUser.getText().toString(),
+                                            nacimientoButtonEditarUser.getText().toString(),
+                                            getGeneroLogin(),
+                                            editarAltura
+                                    )) {
+                                        MainActivity.email = emailEditarUser.getText().toString();
 
-                                        if (dbHelper.upgradeEditarUser(
-                                                userNameEditarUser.getText().toString(),
-                                                emailEditarUser.getText().toString(),
-                                                passwordEditarUser.getText().toString(),
-                                                nacimientoButtonEditarUser.getText().toString(),
-                                                getGeneroLogin(),
-                                                editarAltura
-                                        )) {
-                                            MainActivity.email = emailEditarUser.getText().toString();
-
-                                            if (getActivity() != null) {
-                                                bottomNavigation = getActivity().findViewById(R.id.bottom_navigation);
-                                                bottomNavigation.setSelectedItemId(R.id.bascula);
-                                                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
-                                            }
-
-                                        } else {
-                                            Toast.makeText(getContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                                        if (getActivity() != null) {
+                                            bottomNavigation = getActivity().findViewById(R.id.bottom_navigation);
+                                            bottomNavigation.setSelectedItemId(R.id.bascula);
+                                            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
                                         }
 
                                     } else {
-                                        nacimientoButtonEditarUser.setText(getResources().getString(R.string.introduceFecha));
-                                        nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.buttons_color_verde));
+                                        Toast.makeText(getContext(), "ERROR", Toast.LENGTH_SHORT).show();
                                     }
 
                                 } else {
-                                    medidaEditarUser.setText(getResources().getString(R.string.introduceAltura));
-                                    medidaEditarUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.verdeMasOscuro));
+                                    nacimientoButtonEditarUser.setText(getResources().getString(R.string.introduceFecha));
+                                    nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.buttons_color_verde));
                                 }
 
                             } else {
