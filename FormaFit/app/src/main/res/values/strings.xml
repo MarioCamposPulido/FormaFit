@@ -25,21 +25,21 @@
     <string name="fechaNacimiento"> Fecha De Nacimiento </string>
     <string name="peso"> Peso </string>
     <string name="crearPerfil"> ★ Crea tu perfil ★ </string>
-    <string name="alturaPorDefecto"> 0 cm </string>
-    <string name="pesoPorDefecto"> 0 kg </string>
+    <string name="alturaPorDefecto" translatable="false"> 0 cm </string>
+    <string name="pesoPorDefecto" translatable="false"> 0 kg </string>
     <string name="hombre"> Hombre </string>
     <string name="mujer"> Mujer </string>
 
     <!-- Fragment Crear Entrada Peso -->
     <string name="nuevaEntradaPeso"> Nueva Entrada de Peso </string>
     <string name="aniadirImg"> Añade una imagen </string>
-    <string name="grasaCorporal"> BF% </string>
-    <string name="grasaPorDefecto"> [?? %] </string>
+    <string name="grasaCorporal" translatable="false"> BF% </string>
+    <string name="grasaPorDefecto" translatable="false"> [?? %] </string>
     <string name="fecha"> ★   Fecha   ★ </string>
     <string name="aniadirComentario"> Añadir comentario… </string>
-    <string name="imcPromedio"> {??.?} </string>
+    <string name="imcPromedio" translatable="false"> {??.?} </string>
 
-    <string name="imagenEntradaPeso"> Imágen Entrada Peso </string>
+    <string name="imagenEntradaPeso">" Imagen Entrada Peso "</string>
 
     <!-- Fragment Bascula -->
     <string name="diario"> Diario </string>
@@ -60,11 +60,11 @@
     <string name="sobrePeso"> Sobrepeso </string>
     <string name="obesidad"> Obesidad </string>
 
-    <string name="muyDelgadoIMC"> &lt; {16.99} </string>
-    <string name="bajoPesoIMC"> {17.00 – 18.49} </string>
-    <string name="pesoNormalIMC"> {18.50 – 24.99} </string>
-    <string name="sobrePesoIMC"> {25.00 – 29.99} </string>
-    <string name="obesidadIMC"> &gt; {30.00} </string>
+    <string name="muyDelgadoIMC" translatable="false"> &lt; {16.99} </string>
+    <string name="bajoPesoIMC" translatable="false"> {17.00 – 18.49} </string>
+    <string name="pesoNormalIMC" translatable="false"> {18.50 – 24.99} </string>
+    <string name="sobrePesoIMC" translatable="false"> {25.00 – 29.99} </string>
+    <string name="obesidadIMC" translatable="false"> &gt; {30.00} </string>
 
     <string name="borrarEntradasPesoDescripcion"> Borrar Entradas de Peso </string>
 
@@ -83,7 +83,7 @@
     <!-- Recycler Desfios -->
     <string name="titulo"> Título </string>
     <string name="descripcion"> Una descripción breve con textos de ejemplos y textos largos </string>
-    <string name="imagenDesafio"> Imágen Desafío </string>
+    <string name="imagenDesafio">" Imagen Desafío "</string>
 
     <!-- Fragment Desfios -->
     <string name="crearDesafio"> Crear Desafío </string>

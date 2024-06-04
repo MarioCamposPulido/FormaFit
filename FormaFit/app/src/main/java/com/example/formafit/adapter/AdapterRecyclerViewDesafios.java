@@ -6,24 +6,23 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.formafit.R;
 import com.example.formafit.base_datos.BaseDatosHelper;
-import com.example.formafit.fragments.BasculaFragment;
-import com.example.formafit.fragments.CrearDesafioFragment;
 import com.example.formafit.java.Desafio;
-import com.example.formafit.java.EntradaPeso;
 
 import java.util.LinkedList;
-import java.util.Objects;
 
+/**
+ * Class AdapterRecyclerViewDesafios
+ * Adaptador del recyclerView de los Desafíos
+ */
 public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRecyclerViewDesafios.DesafiosViewHolder> {
 
-    private LinkedList<Desafio> desafios;
+    private final LinkedList<Desafio> desafios;
 
     public AdapterRecyclerViewDesafios(LinkedList<Desafio> desafioRecycler){
         this.desafios = desafioRecycler;
@@ -33,28 +32,27 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
     @Override
     public AdapterRecyclerViewDesafios.DesafiosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_desafios, parent, false);
-        return new AdapterRecyclerViewDesafios.DesafiosViewHolder(view);
+        return new DesafiosViewHolder(view);
     }
 
+    // Definimos lo que queremos hacer con los desafíos si se seleccionaron o no
     @Override
     public void onBindViewHolder(@NonNull DesafiosViewHolder holder, int position) {
         Desafio itemActual = desafios.get(position);
         holder.bind(itemActual);
 
-        holder.checkboxDesafios.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BaseDatosHelper dbHelper = new BaseDatosHelper(v.getContext());
-                int newCheckedState = (itemActual.getIs_checked() == 0) ? 1 : 0;
-                dbHelper.upgradeCambiarDesafiosIs_Checked(itemActual.getId(), newCheckedState);
+        holder.checkboxDesafios.setOnClickListener(v -> {
+            BaseDatosHelper dbHelper = new BaseDatosHelper(v.getContext());
+            // Cambiar el estado de seleccionado
+            int newCheckedState = (itemActual.getIs_checked() == 0) ? 1 : 0;
+            dbHelper.upgradeCambiarDesafiosIs_Checked(itemActual.getId(), newCheckedState);
 
-                // Obtener la posición actual del elemento
-                int currentPosition = holder.getAdapterPosition();
-                if (currentPosition != RecyclerView.NO_POSITION) {
-                    desafios.remove(currentPosition);
-                    notifyItemRemoved(currentPosition);
-                    notifyItemRangeChanged(currentPosition, desafios.size()); // Notificar cambios en la lista
-                }
+            // Obtener la posición actual del elemento
+            int currentPosition = holder.getAdapterPosition();
+            if (currentPosition != RecyclerView.NO_POSITION) {
+                desafios.remove(currentPosition);
+                notifyItemRemoved(currentPosition);
+                notifyItemRangeChanged(currentPosition, desafios.size()); // Notificar cambios en la lista
             }
         });
     }
@@ -64,11 +62,16 @@ public class AdapterRecyclerViewDesafios extends RecyclerView.Adapter<AdapterRec
         return desafios.size();
     }
 
-    class DesafiosViewHolder extends RecyclerView.ViewHolder{
+    /**
+     * Class DesafiosViewHolder
+     * Pinta los desafíos que se van a mostrar en pantalla con un formato
+     */
+    static class DesafiosViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tituloDesafios, descripcionDesafios;
-        private ImageView imagenDesafios;
-        private CheckBox checkboxDesafios;
+        private final TextView tituloDesafios;
+        private final TextView descripcionDesafios;
+        private final ImageView imagenDesafios;
+        private final CheckBox checkboxDesafios;
 
         public DesafiosViewHolder(@NonNull View itemView) {
             super(itemView);

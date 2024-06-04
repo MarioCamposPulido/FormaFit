@@ -1,33 +1,33 @@
 package com.example.formafit.adapter;
 
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.formafit.R;
-import com.example.formafit.base_datos.BaseDatosHelper;
 import com.example.formafit.java.EntradaPeso;
 
 import java.util.LinkedList;
 import java.util.Objects;
 
+/**
+ * Class AdapterRecyclerViewDiario
+ * Adaptador del recyclerView Diario,
+ * visualiza todas las entradas de peso con información adicional
+ */
 public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyclerViewDiario.EntradasPesosViewHolder> {
 
-    private LinkedList<EntradaPeso> entradaPesos;
+    private final LinkedList<EntradaPeso> entradaPesos;
 
-    public AdapterRecyclerViewDiario (LinkedList<EntradaPeso> entradaPesoRecyclers){
+    public AdapterRecyclerViewDiario(LinkedList<EntradaPeso> entradaPesoRecyclers) {
         this.entradaPesos = entradaPesoRecyclers;
-    };
-
+    }
 
     @NonNull
     @Override
@@ -40,6 +40,7 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
     @Override
     public void onBindViewHolder(@NonNull EntradasPesosViewHolder holder, int position) {
 
+        // Calculamos la diferencia de peso
         int diferenciaPeso = 0;
         if (position > 0) {
             int entradaPesoPrevia = entradaPesos.get(position - 1).getPeso();
@@ -49,29 +50,22 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
         holder.bind(entradaPesos.get(position), diferenciaPeso);
     }
 
-    /**
-     * Devuelve el número total de elementos de la lista
-     * @return
-     */
+
     @Override
     public int getItemCount() {
         return entradaPesos.size();
     }
 
     /**
-     * Clase para referirse a la celda personalizada del recycler
+     * Class EntradasPesosViewHolder
+     * Pinta las Entradas de peso con unos valores específicos
      */
-    class EntradasPesosViewHolder extends RecyclerView.ViewHolder{
+    static class EntradasPesosViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView fechaEntradaPeso, grasasPorcentajeDiario, imcCalculadoDiario, kilosDiario, diferenciaPesoDiario, comentariosDiario;
-        private ImageView diarioImagen;
+        private final TextView fechaEntradaPeso, grasasPorcentajeDiario, imcCalculadoDiario;
+        private final TextView kilosDiario, diferenciaPesoDiario, comentariosDiario;
+        private final ImageView diarioImagen;
 
-
-
-        /**
-         * Declaramos lo que es cada item, para interactuar con él
-         * @param itemView
-         */
         public EntradasPesosViewHolder(@NonNull View itemView) {
             super(itemView);
             this.fechaEntradaPeso = itemView.findViewById(R.id.fechaEntradaPeso);
@@ -83,36 +77,38 @@ public class AdapterRecyclerViewDiario extends RecyclerView.Adapter<AdapterRecyc
             this.comentariosDiario = itemView.findViewById(R.id.comentariosDiario);
         }
 
+        // Pinta el contenido de la entrada de peso y algunos datos los calcula
+        public void bind(EntradaPeso entradaPeso, int diferenciasPeso) {
+            fechaEntradaPeso.setText(entradaPeso.getFecha());
+            if (!Objects.isNull(entradaPeso.getImagen())) {
+                diarioImagen.setVisibility(View.VISIBLE);
+                diarioImagen.setImageBitmap(entradaPeso.getImagen());
+            } else {
+                diarioImagen.setVisibility(View.GONE);
+            }
+            grasasPorcentajeDiario.setText("[" + entradaPeso.getPorcentajeGrasa() + " %]");
+            imcCalculadoDiario.setText("{ " + entradaPeso.getImc() + " }");
+            kilosDiario.setText(entradaPeso.getPeso() + " kg");
+            // Pinta la diferencia de peso dependiendo si es más, igual o menos que el peso actual
+            if (diferenciasPeso > 0) {
+                diferenciaPesoDiario.setText("+" + diferenciasPeso + " kg");
+                diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.buttons_color_rosa));
+            } else {
+                if (diferenciasPeso < 0) {
+                    diferenciaPesoDiario.setText("-" + diferenciasPeso + " kg");
+                    diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.buttons_color_verde));
+                } else {
+                    diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.gris_texto));
+                }
+            }
 
-        public void bind(EntradaPeso entradaPeso, int diferenciasPeso){
-                fechaEntradaPeso.setText(entradaPeso.getFecha());
-                if (!Objects.isNull(entradaPeso.getImagen())){
-                    diarioImagen.setVisibility(View.VISIBLE);
-                    diarioImagen.setImageBitmap(entradaPeso.getImagen());
-                }else {
-                    diarioImagen.setVisibility(View.GONE);
-                }
-                grasasPorcentajeDiario.setText("[" + entradaPeso.getPorcentajeGrasa() + " %]");
-                imcCalculadoDiario.setText("{ " + entradaPeso.getImc() + " }");
-                kilosDiario.setText(entradaPeso.getPeso() + " kg");
-                if (diferenciasPeso > 0){
-                    diferenciaPesoDiario.setText("+" + diferenciasPeso + " kg");
-                    diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.buttons_color_rosa));
-                }else {
-                    if (diferenciasPeso < 0){
-                        diferenciaPesoDiario.setText("-" + diferenciasPeso + " kg");
-                        diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.buttons_color_verde));
-                    }else {
-                        diferenciaPesoDiario.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.gris_texto));
-                    }
-                }
-
-                if (entradaPeso.getComentario() == null || entradaPeso.getComentario().equals("")){
-                    comentariosDiario.setVisibility(View.GONE);
-                }else {
-                    comentariosDiario.setVisibility(View.VISIBLE);
-                    comentariosDiario.setText(entradaPeso.getComentario());
-                }
+            // No pinta el comentario si es nulo o está en blanco
+            if (entradaPeso.getComentario() == null || entradaPeso.getComentario().equals("")) {
+                comentariosDiario.setVisibility(View.GONE);
+            } else {
+                comentariosDiario.setVisibility(View.VISIBLE);
+                comentariosDiario.setText(entradaPeso.getComentario());
+            }
         }
     }
 }

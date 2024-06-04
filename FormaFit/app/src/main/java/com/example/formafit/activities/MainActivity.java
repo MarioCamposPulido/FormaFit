@@ -1,5 +1,6 @@
 package com.example.formafit.activities;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -17,13 +18,23 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
+/**
+ * Class MainActivity
+ * Ejecuta la gran mayoría de los fragmentos aquí,
+ * también contiene métodos utilizados por otras clases,
+ * contiene el email del usuario que inició sesión, esto servirá para
+ * hacer futuras consultas y otras acciones con el email del usuario
+ */
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
     private Fragment fragment;
+    // Email del usuario que inició sesión
     public static String email;
 
+    // Calcula la edad y devuelve el número de años
     public static int calcularEdad(String fechaNacimientoStr) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -35,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Crear un calendario con la fecha de nacimiento
             Calendar nacimiento = Calendar.getInstance();
-            nacimiento.setTime(fechaNacimiento);
+            nacimiento.setTime(Objects.requireNonNull(fechaNacimiento));
 
             // Calcular la edad
             int edad = fechaActual.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR);
@@ -47,10 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
             return edad;
         } catch (ParseException e) {
-            // Manejar la excepción si el formato de la fecha es incorrecto
             e.printStackTrace();
             return -1;
         }
+    }
+
+    // Devuelve la fecha actual
+    public static String getFechaActual() {
+        Date fechaActual = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        return formatoFecha.format(fechaActual);
     }
 
     @Override
@@ -61,8 +78,19 @@ public class MainActivity extends AppCompatActivity {
         // Cambiar la barra de color de arriba en negro
         getWindow().setStatusBarColor(Color.BLACK);
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        // Deshabilita el botón de retroceso
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // No hacer nada para deshabilitar el botón de retroceso
+            }
+        };
 
+        getOnBackPressedDispatcher().addCallback(this, callback);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        // Configuración de la barra de navegación
         bottomNavigationView.setOnItemSelectedListener(item -> {
 
             int idItemn = item.getItemId();

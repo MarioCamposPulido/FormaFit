@@ -3,10 +3,10 @@ package com.example.formafit.activities;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,21 +14,24 @@ import com.example.formafit.R;
 import com.example.formafit.base_datos.BaseDatosHelper;
 import com.google.android.material.textfield.TextInputLayout;
 
+/**
+ * Class Login
+ * Inicia sesión y comprueba los datos, con esta clase también será posible cambiar al
+ * Activity Registro para registrarse
+ */
 public class Login extends AppCompatActivity {
 
     private BaseDatosHelper dbHelper;
-    private Button loginButton, registroButton;
     private TextView emailLogin, passwordLogin;
     private TextInputLayout campoEmailLogin, campoPasswordLogin;
 
-
-    private void openMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    private void openRegistro(){
-        Intent intent = new Intent(this, Registro.class);
+    /**
+     * Abre una actividad
+     * @param context Referencia al entorno actual
+     * @param clase Clase para cambiar a ese Activity
+     */
+    private void openActivities(Context context, Class<?> clase) {
+        Intent intent = new Intent(context, clase);
         startActivity(intent);
     }
 
@@ -37,7 +40,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Crear un callback que no hace nada para deshabilitar el botón de retroceso
+        // Deshabilita el botón de retroceso
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -45,20 +48,18 @@ public class Login extends AppCompatActivity {
             }
         };
 
-        // Añadir el callback al dispatcher de onBackPressed
         getOnBackPressedDispatcher().addCallback(this, callback);
 
-        loginButton = findViewById(R.id.loginButton);
+        Button loginButton = findViewById(R.id.loginButton);
+        Button registroButton = findViewById(R.id.registroButton);
         emailLogin = findViewById(R.id.emailLogin);
         passwordLogin = findViewById(R.id.passwordLogin);
-        registroButton = findViewById(R.id.registroButton);
         campoEmailLogin = findViewById(R.id.campoEmailLogin);
         campoPasswordLogin = findViewById(R.id.campoPasswordLogin);
 
         // Obtener el Intent que inició esta actividad
+        // Esto servirá cuando te registres, los datos se colocarán en el Login
         Intent intent = getIntent();
-
-        // Extraer los datos del Intent
         if (intent != null) {
             if (intent.hasExtra("EXTRA_EMAIL")) {
                 String email = intent.getStringExtra("EXTRA_EMAIL");
@@ -73,29 +74,22 @@ public class Login extends AppCompatActivity {
         // Cambiar la barra de color de arriba en negro
         getWindow().setStatusBarColor(Color.BLACK);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dbHelper = new BaseDatosHelper(getBaseContext());
-                if (dbHelper.checkUserLogin(emailLogin.getText().toString(), passwordLogin.getText().toString())){
-                    campoEmailLogin.setErrorEnabled(false);
-                    campoPasswordLogin.setErrorEnabled(false);
-                    openMainActivity();
-                    MainActivity.email = emailLogin.getText().toString();
-                }else {
-                    campoEmailLogin.setError(getResources().getText(R.string.emailOPasswordMal));
-                    campoPasswordLogin.setError(getResources().getText(R.string.emailOPasswordMal));
-                }
+        // Verifica si los datos introducidos son correctos
+        loginButton.setOnClickListener(view -> {
+            dbHelper = new BaseDatosHelper(getBaseContext());
+            if (dbHelper.checkUserLogin(emailLogin.getText().toString(), passwordLogin.getText().toString())) {
+                campoEmailLogin.setErrorEnabled(false);
+                campoPasswordLogin.setErrorEnabled(false);
+                openActivities(getBaseContext(), MainActivity.class);
+                MainActivity.email = emailLogin.getText().toString();
+            } else {
+                campoEmailLogin.setError(getResources().getText(R.string.emailOPasswordMal));
+                campoPasswordLogin.setError(getResources().getText(R.string.emailOPasswordMal));
             }
         });
 
-        registroButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRegistro();
-            }
-        });
-
+        // Abre el Activity Registro
+        registroButton.setOnClickListener(view -> openActivities(getBaseContext(), Registro.class));
 
 
     }

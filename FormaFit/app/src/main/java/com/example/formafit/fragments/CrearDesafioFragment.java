@@ -61,7 +61,6 @@ public class CrearDesafioFragment extends Fragment {
             }
         };
 
-        // Añadir el callback al dispatcher de onBackPressed
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
