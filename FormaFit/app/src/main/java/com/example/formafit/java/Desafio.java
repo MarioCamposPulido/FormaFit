@@ -2,6 +2,12 @@ package com.example.formafit.java;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
+
+/**
+ * Class Desafio
+ * Ayuda a crear todos los datos de un desafío en una misma clase
+ */
 public class Desafio {
     private int id;
     private String titulo;
@@ -57,6 +63,7 @@ public class Desafio {
         this.is_checked = is_checked;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Desafio{" +

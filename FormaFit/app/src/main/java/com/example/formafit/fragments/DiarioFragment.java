@@ -1,24 +1,26 @@
 package com.example.formafit.fragments;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-
 import com.example.formafit.R;
 import com.example.formafit.activities.MainActivity;
 import com.example.formafit.adapter.AdapterRecyclerViewDiario;
 import com.example.formafit.base_datos.BaseDatosHelper;
 
+/**
+ * Class DiarioFragment
+ * Muestra todas las entradas de peso con info adicional
+ */
 public class DiarioFragment extends Fragment {
 
     RecyclerView recyclerDiario;
@@ -36,17 +38,11 @@ public class DiarioFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(dialogLayout)
                 .setTitle(null)
-                .setPositiveButton(getResources().getText(R.string.aceptar), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dbHelper.deleteAllEntradasPesoUserExceptLast(MainActivity.email);
-                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new DiarioFragment()).commit();
-                    }
+                .setPositiveButton(getResources().getText(R.string.aceptar), (dialog, id) -> {
+                    dbHelper.deleteAllEntradasPesoUserExceptLast(MainActivity.email);
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new DiarioFragment()).commit();
                 })
-                .setNegativeButton(getResources().getText(R.string.cancelar), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
+                .setNegativeButton(getResources().getText(R.string.cancelar), (dialog, id) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -80,12 +76,7 @@ public class DiarioFragment extends Fragment {
         recyclerDiario.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerDiario.setAdapter(new AdapterRecyclerViewDiario(dbHelper.getAllEntradasPeso(MainActivity.email)));
 
-        eliminarTodasEntradasPesoDiario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showCustomDialogEliminarAllEntradasPeso();
-            }
-        });
+        eliminarTodasEntradasPesoDiario.setOnClickListener(view1 -> showCustomDialogEliminarAllEntradasPeso());
 
         return view;
     }

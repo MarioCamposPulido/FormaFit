@@ -2,10 +2,12 @@ package com.example.formafit.java;
 
 import android.graphics.Bitmap;
 
-import com.example.formafit.activities.MainActivity;
+import androidx.annotation.NonNull;
 
-import java.util.Date;
-
+/**
+ * Class EntradaPeso
+ * Ayuda a contener los datos de una Entrada de Peso
+ */
 public class EntradaPeso {
 
     private String fecha;
@@ -107,6 +109,7 @@ public class EntradaPeso {
         }
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "EntradaPeso{" +

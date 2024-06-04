@@ -1,36 +1,33 @@
 package com.example.formafit.fragments;
 
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.example.formafit.R;
 import com.example.formafit.activities.MainActivity;
 import com.example.formafit.base_datos.BaseDatosHelper;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.LinkedList;
 
+/**
+ * Class ImcFragment
+ * Muestra el IMC con todos sus datos para calcularlo
+ */
 public class ImcFragment extends Fragment {
 
-    private PieChart pieChartIMC;
-    private TextView alturaIMC, pesoIMC;
-    private BaseDatosHelper dbHelper;
     LinearLayout muyDelgadoLayout, bajoPesoLayout, pesoNormalLayout, sobrePesoLayout, obesidadLayout;
 
     public ImcFragment() {
@@ -38,18 +35,13 @@ public class ImcFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_imc, container, false);
 
-        pieChartIMC = view.findViewById(R.id.pieChartIMC);
-        alturaIMC = view.findViewById(R.id.alturaIMC);
-        pesoIMC = view.findViewById(R.id.pesoIMC);
+        PieChart pieChartIMC = view.findViewById(R.id.pieChartIMC);
+        TextView alturaIMC = view.findViewById(R.id.alturaIMC);
+        TextView pesoIMC = view.findViewById(R.id.pesoIMC);
 
         muyDelgadoLayout = view.findViewById(R.id.muyDelgadoLayout);
         bajoPesoLayout = view.findViewById(R.id.bajoPesoLayout);
@@ -57,11 +49,12 @@ public class ImcFragment extends Fragment {
         sobrePesoLayout = view.findViewById(R.id.sobrePesoLayout);
         obesidadLayout = view.findViewById(R.id.obesidadLayout);
 
-        dbHelper = new BaseDatosHelper(getContext());
+        BaseDatosHelper dbHelper = new BaseDatosHelper(getContext());
 
         alturaIMC.setText(dbHelper.getAltura(MainActivity.email) + " cm");
         pesoIMC.setText(dbHelper.getAllEntradasPeso(MainActivity.email).getLast().getPeso() + " kg");
 
+        // Datos del gráfico
         LinkedList<PieEntry> entries = new LinkedList<>();
         entries.add(new PieEntry(20.0f, getString(R.string.muyDelgado)));
         entries.add(new PieEntry(20.0f, getString(R.string.bajoPeso)));
@@ -69,7 +62,7 @@ public class ImcFragment extends Fragment {
         entries.add(new PieEntry(20.0f, getString(R.string.sobrePeso)));
         entries.add(new PieEntry(20.0f, getString(R.string.obesidad)));
 
-        PieDataSet dataSet = new PieDataSet(entries, "Frutas");
+        PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         PieData data = new PieData(dataSet);
@@ -79,22 +72,18 @@ public class ImcFragment extends Fragment {
         pieChartIMC.setCenterTextSize(35f);
         dataSet.setSliceSpace(2f);
         dataSet.setSliceSpace(2f);
+
         // Establece los colores específicos para cada entrada
         LinkedList<Integer> colors = new LinkedList<>();
-        colors.add(ContextCompat.getColor(getContext(), R.color.azul));
-        colors.add(ContextCompat.getColor(getContext(), R.color.violeta));
-        colors.add(ContextCompat.getColor(getContext(), R.color.verde));
-        colors.add(ContextCompat.getColor(getContext(), R.color.naranja));
-        colors.add(ContextCompat.getColor(getContext(), R.color.rojo));
+        colors.add(ContextCompat.getColor(requireContext(), R.color.azul));
+        colors.add(ContextCompat.getColor(requireContext(), R.color.violeta));
+        colors.add(ContextCompat.getColor(requireContext(), R.color.verde));
+        colors.add(ContextCompat.getColor(requireContext(), R.color.naranja));
+        colors.add(ContextCompat.getColor(requireContext(), R.color.rojo));
 
         dataSet.setColors(colors);
 
-        data.setValueFormatter(new IValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                return "";
-            }
-        });
+        data.setValueFormatter((value, entry, dataSetIndex, viewPortHandler) -> "");
 
         pieChartIMC.setData(data);
 
@@ -128,7 +117,7 @@ public class ImcFragment extends Fragment {
 
         // Configurar animación de entrada
         pieChartIMC.animateY(850, Easing.EasingOption.EaseInOutQuad); // Duración de la animación y tipo de interpolación
-        pieChartIMC.invalidate(); // refresh
+        pieChartIMC.invalidate(); // Refresca el gráfico
 
         return view;
     }

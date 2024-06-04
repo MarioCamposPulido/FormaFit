@@ -24,20 +24,25 @@ import com.example.formafit.base_datos.BaseDatosHelper;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputLayout;
 
+/**
+ * Class CrearDesafioFragment
+ * Crea un desafío y lo añade a la BBDD
+ */
 public class CrearDesafioFragment extends Fragment {
 
     private TextView tituloCrearDesafio, descripcionCrearDesafio;
     private ShapeableImageView imgCrearDesafio;
-    private ImageButton confirmarCrearDesafioButton;
     private TextInputLayout campoTituloCrearDesafio, campoDescripcionCrearDesafio;
     private BaseDatosHelper dbHelper;
     private Bitmap imgDesafio = null;
 
+    // Abre la cámara
     private final ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
+                        assert result.getData() != null;
                         Bundle extras = result.getData().getExtras();
                         Bitmap imgBitmap = (Bitmap) extras.get("data");
                         imgCrearDesafio.setImageBitmap(imgBitmap);
@@ -75,34 +80,27 @@ public class CrearDesafioFragment extends Fragment {
         imgCrearDesafio = view.findViewById(R.id.imgCrearDesafio);
         campoTituloCrearDesafio = view.findViewById(R.id.campoTituloCrearDesafio);
         campoDescripcionCrearDesafio = view.findViewById(R.id.campoDescripcionCrearDesafio);
-        confirmarCrearDesafioButton = view.findViewById(R.id.confirmarCrearDesafioButton);
+        ImageButton confirmarCrearDesafioButton = view.findViewById(R.id.confirmarCrearDesafioButton);
 
-        imgCrearDesafio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
-            }
-        });
+        imgCrearDesafio.setOnClickListener(view1 -> camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE)));
 
-        confirmarCrearDesafioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!tituloCrearDesafio.getText().toString().isEmpty()){
-                    campoTituloCrearDesafio.setErrorEnabled(false);
-                    if (!descripcionCrearDesafio.getText().toString().isEmpty()){
-                        campoDescripcionCrearDesafio.setErrorEnabled(false);
-                        dbHelper = new BaseDatosHelper(getContext());
-                        dbHelper.insertNewDesafio(imgDesafio, tituloCrearDesafio.getText().toString(), descripcionCrearDesafio.getText().toString());
-                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new DesafiosFragment()).commit();
-                    }else {
-                        campoDescripcionCrearDesafio.setError(getResources().getString(R.string.campoVacio));
-                    }
-                }else {
-                    campoTituloCrearDesafio.setError(getResources().getString(R.string.campoVacio));
+        confirmarCrearDesafioButton.setOnClickListener(view12 -> {
+
+            if (!tituloCrearDesafio.getText().toString().isEmpty()) {
+                campoTituloCrearDesafio.setErrorEnabled(false);
+                if (!descripcionCrearDesafio.getText().toString().isEmpty()) {
+                    campoDescripcionCrearDesafio.setErrorEnabled(false);
+                    dbHelper = new BaseDatosHelper(getContext());
+                    dbHelper.insertNewDesafio(imgDesafio, tituloCrearDesafio.getText().toString(), descripcionCrearDesafio.getText().toString());
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new DesafiosFragment()).commit();
+                } else {
+                    campoDescripcionCrearDesafio.setError(getResources().getString(R.string.campoVacio));
                 }
+            } else {
+                campoTituloCrearDesafio.setError(getResources().getString(R.string.campoVacio));
             }
-        });
 
+        });
 
 
         return view;

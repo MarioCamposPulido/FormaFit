@@ -1,5 +1,11 @@
 package com.example.formafit.java;
 
+import androidx.annotation.NonNull;
+
+/**
+ * Class Usuario
+ * Almacena datos del usuario y los organiza aquí
+ */
 public class Usuario {
 
     private String email;
@@ -66,6 +72,7 @@ public class Usuario {
         this.altura = altura;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Usuario{" +

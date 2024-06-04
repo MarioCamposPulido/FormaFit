@@ -1,13 +1,6 @@
 package com.example.formafit.fragments;
 
 import android.os.Bundle;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +8,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.example.formafit.R;
 import com.example.formafit.activities.MainActivity;
@@ -27,22 +24,25 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.Locale;
 
+/**
+ * Class EditarUserFragment
+ * Edita todos los datos del Usuario
+ */
 public class EditarUserFragment extends Fragment {
 
-    private Slider sliderAlturaEditarUser;
     private TextView medidaEditarUser, userNameEditarUser, emailEditarUser, passwordEditarUser;
     private Button nacimientoButtonEditarUser;
-    private ImageButton femaleButtonEditarUser, maleButtonEdiartUser, confirmButtonEdiatPerfil;
+    private ImageButton femaleButtonEditarUser;
+    private ImageButton maleButtonEdiartUser;
     private TextInputLayout campoNombreEditar, campoEmailEditar, campoPasswordEditar;
     private BottomNavigationView bottomNavigation;
     private static int editarAltura;
     private static boolean fechaIntroducida;
     private BaseDatosHelper dbHelper;
 
-    private String getGeneroLogin() {
+    private String getGeneroEditar() {
         if (maleButtonEdiartUser.isSelected()) {
             return "M";
         }
@@ -77,12 +77,12 @@ public class EditarUserFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_editar_user, container, false);
 
-        sliderAlturaEditarUser = view.findViewById(R.id.sliderAlturaEditarUser);
+        Slider sliderAlturaEditarUser = view.findViewById(R.id.sliderAlturaEditarUser);
         medidaEditarUser = view.findViewById(R.id.medidaEditarUser);
         femaleButtonEditarUser = view.findViewById(R.id.femaleButtonEditarUser);
         maleButtonEdiartUser = view.findViewById(R.id.maleButtonEdiartUser);
         nacimientoButtonEditarUser = view.findViewById(R.id.nacimientoButtonEditarUser);
-        confirmButtonEdiatPerfil = view.findViewById(R.id.confirmButtonEdiatPerfil);
+        ImageButton confirmButtonEdiatPerfil = view.findViewById(R.id.confirmButtonEdiatPerfil);
         userNameEditarUser = view.findViewById(R.id.userNameEditarUser);
         emailEditarUser = view.findViewById(R.id.emailEditarUser);
         passwordEditarUser = view.findViewById(R.id.passwordEditarUser);
@@ -109,126 +109,111 @@ public class EditarUserFragment extends Fragment {
         medidaEditarUser.setText(datosUsuario.getAltura() + " cm");
         sliderAlturaEditarUser.setValue(Float.parseFloat((datosUsuario.getAltura())));
 
-        sliderAlturaEditarUser.addOnChangeListener(new Slider.OnChangeListener() {
-            @Override
-            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-                medidaEditarUser.setText((int) value + " cm");
-                editarAltura = (int) value;
-            }
+        sliderAlturaEditarUser.addOnChangeListener((slider, value, fromUser) -> {
+            medidaEditarUser.setText((int) value + " cm");
+            editarAltura = (int) value;
         });
 
-        nacimientoButtonEditarUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker().setTheme(R.style.MyDatePickerTheme);
-                MaterialDatePicker<Long> datePicker = builder.build();
+        nacimientoButtonEditarUser.setOnClickListener(view1 -> {
+            MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker().setTheme(R.style.MyDatePickerTheme);
+            MaterialDatePicker<Long> datePicker = builder.build();
 
-                datePicker.addOnPositiveButtonClickListener(selection -> {
-                    // La fecha seleccionada está en milisegundos desde la época (Unix time)
-                    // Puedes convertirlo al formato deseado
-                    Date date = new Date(selection);
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    String formattedDate = sdf.format(date);
+            datePicker.addOnPositiveButtonClickListener(selection -> {
+                // La fecha seleccionada está en milisegundos desde la época (Unix time)
+                // Puedes convertirlo al formato deseado
+                Date date = new Date(selection);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                String formattedDate = sdf.format(date);
 
-                    if (MainActivity.calcularEdad(formattedDate) != -1) {
-                        nacimientoButtonEditarUser.setText(formattedDate);
-                        nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(view.getContext(), R.color.white));
-                        fechaIntroducida = true;
-                    } else {
-                        nacimientoButtonEditarUser.setText(getResources().getString(R.string.fechaNoValida));
-                        nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(view.getContext(), R.color.buttons_color_verde));
-                        fechaIntroducida = false;
-                    }
-                });
-
-                datePicker.show(getActivity().getSupportFragmentManager(), "DATE_PICKER");
-            }
-        });
-
-        maleButtonEdiartUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setSelected(!v.isSelected());
-                if (femaleButtonEditarUser.isSelected()) {
-                    femaleButtonEditarUser.setSelected(false);
-                } else if (!maleButtonEdiartUser.isSelected()) {
-                    maleButtonEdiartUser.setSelected(true);
+                if (MainActivity.calcularEdad(formattedDate) != -1) {
+                    nacimientoButtonEditarUser.setText(formattedDate);
+                    nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(view1.getContext(), R.color.white));
+                    fechaIntroducida = true;
+                } else {
+                    nacimientoButtonEditarUser.setText(getResources().getString(R.string.fechaNoValida));
+                    nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(view1.getContext(), R.color.buttons_color_verde));
+                    fechaIntroducida = false;
                 }
+            });
+
+            datePicker.show(requireActivity().getSupportFragmentManager(), "DATE_PICKER");
+        });
+
+        maleButtonEdiartUser.setOnClickListener(v -> {
+            v.setSelected(!v.isSelected());
+            if (femaleButtonEditarUser.isSelected()) {
+                femaleButtonEditarUser.setSelected(false);
+            } else if (!maleButtonEdiartUser.isSelected()) {
+                maleButtonEdiartUser.setSelected(true);
             }
         });
 
-        femaleButtonEditarUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setSelected(!v.isSelected());
-                if (maleButtonEdiartUser.isSelected()) {
-                    maleButtonEdiartUser.setSelected(false);
-                } else if (!femaleButtonEditarUser.isSelected()) {
-                    femaleButtonEditarUser.setSelected(true);
-                }
+        femaleButtonEditarUser.setOnClickListener(v -> {
+            v.setSelected(!v.isSelected());
+            if (maleButtonEdiartUser.isSelected()) {
+                maleButtonEdiartUser.setSelected(false);
+            } else if (!femaleButtonEditarUser.isSelected()) {
+                femaleButtonEditarUser.setSelected(true);
             }
         });
 
-        confirmButtonEdiatPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dbHelper = new BaseDatosHelper(v.getContext());
-                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        confirmButtonEdiatPerfil.setOnClickListener(v -> {
+            dbHelper = new BaseDatosHelper(v.getContext());
+            String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-                if (emailEditarUser.getText().toString().matches(emailPattern)) {
+            if (emailEditarUser.getText().toString().matches(emailPattern)) {
+                campoEmailEditar.setErrorEnabled(false);
+
+                if (!dbHelper.checkEmail(emailEditarUser.getText().toString()) || emailEditarUser.getText().toString().equals(MainActivity.email)) {
                     campoEmailEditar.setErrorEnabled(false);
 
-                    if (!dbHelper.checkEmail(emailEditarUser.getText().toString()) || emailEditarUser.getText().toString().equals(MainActivity.email)) {
-                        campoEmailEditar.setErrorEnabled(false);
+                    if (!userNameEditarUser.getText().toString().isEmpty()) {
+                        campoNombreEditar.setErrorEnabled(false);
 
-                        if (!userNameEditarUser.getText().toString().isEmpty()) {
-                            campoNombreEditar.setErrorEnabled(false);
+                        if (!passwordEditarUser.getText().toString().isEmpty()) {
+                            campoPasswordEditar.setErrorEnabled(false);
 
-                            if (!passwordEditarUser.getText().toString().isEmpty()) {
-                                campoPasswordEditar.setErrorEnabled(false);
+                            if (fechaIntroducida) {
 
-                                if (fechaIntroducida) {
+                                if (dbHelper.upgradeEditarUser(
+                                        userNameEditarUser.getText().toString(),
+                                        emailEditarUser.getText().toString(),
+                                        passwordEditarUser.getText().toString(),
+                                        nacimientoButtonEditarUser.getText().toString(),
+                                        getGeneroEditar(),
+                                        editarAltura
+                                )) {
+                                    MainActivity.email = emailEditarUser.getText().toString();
 
-                                    if (dbHelper.upgradeEditarUser(
-                                            userNameEditarUser.getText().toString(),
-                                            emailEditarUser.getText().toString(),
-                                            passwordEditarUser.getText().toString(),
-                                            nacimientoButtonEditarUser.getText().toString(),
-                                            getGeneroLogin(),
-                                            editarAltura
-                                    )) {
-                                        MainActivity.email = emailEditarUser.getText().toString();
-
-                                        if (getActivity() != null) {
-                                            bottomNavigation = getActivity().findViewById(R.id.bottom_navigation);
-                                            bottomNavigation.setSelectedItemId(R.id.bascula);
-                                            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
-                                        }
-
-                                    } else {
-                                        Toast.makeText(getContext(), "ERROR", Toast.LENGTH_SHORT).show();
+                                    if (getActivity() != null) {
+                                        bottomNavigation = getActivity().findViewById(R.id.bottom_navigation);
+                                        bottomNavigation.setSelectedItemId(R.id.bascula);
+                                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new BasculaFragment()).commit();
                                     }
 
                                 } else {
-                                    nacimientoButtonEditarUser.setText(getResources().getString(R.string.introduceFecha));
-                                    nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.buttons_color_verde));
+                                    Toast.makeText(getContext(), "ERROR", Toast.LENGTH_SHORT).show();
                                 }
 
                             } else {
-                                campoPasswordEditar.setError(getResources().getString(R.string.campoVacio));
+                                nacimientoButtonEditarUser.setText(getResources().getString(R.string.introduceFecha));
+                                nacimientoButtonEditarUser.setTextColor(ContextCompat.getColor(v.getContext(), R.color.buttons_color_verde));
                             }
 
                         } else {
-                            campoNombreEditar.setError(getResources().getString(R.string.campoVacio));
+                            campoPasswordEditar.setError(getResources().getString(R.string.campoVacio));
                         }
 
                     } else {
-                        campoEmailEditar.setError(getResources().getString(R.string.usuarioExiste));
+                        campoNombreEditar.setError(getResources().getString(R.string.campoVacio));
                     }
 
                 } else {
-                    campoEmailEditar.setError(getResources().getString(R.string.correoNoValido));
+                    campoEmailEditar.setError(getResources().getString(R.string.usuarioExiste));
                 }
+
+            } else {
+                campoEmailEditar.setError(getResources().getString(R.string.correoNoValido));
             }
         });
 
