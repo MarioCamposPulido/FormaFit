@@ -1,5 +1,9 @@
 package com.example.formafit.base_datos;
 
+/**
+ * Class EstructuraBBDD
+ * Define la estructura de la base de datos
+ */
 public class EstructuraBBDD {
 
     /* Definimos datos de la tabla*/
@@ -16,7 +20,7 @@ public class EstructuraBBDD {
     public static final String COLUMN_HEIGHT_USER = "height";
     public static final String COLUMN_GOAL_USER = "goal";
 
-    // Tabla Weight
+    // Tabla Weights
     public static final String TABLE_WEIGHTS = "Weights";
     public static final String COLUMN_ID_WEIGHT = "id";
     public static final String COLUMN_EMAIL_USER_WEIGHT = "email_user";
@@ -36,7 +40,6 @@ public class EstructuraBBDD {
     public static final String COLUMN_IS_CHECKED_CHALLENGE = "is_checked";
 
 
-
     // Creamos las tablas
     public static final String SQL_CREATE_TABLE_USER =
             "CREATE TABLE " + EstructuraBBDD.TABLE_USERS + " (" +
@@ -46,7 +49,7 @@ public class EstructuraBBDD {
                     EstructuraBBDD.COLUMN_GENDER_USER + " TEXT," +
                     EstructuraBBDD.COLUMN_BIRTH_USER + " DATE," +
                     EstructuraBBDD.COLUMN_HEIGHT_USER + " INT," +
-                    EstructuraBBDD.COLUMN_GOAL_USER + " INTEGER);" ;
+                    EstructuraBBDD.COLUMN_GOAL_USER + " INTEGER);";
 
     public static final String SQL_CREATE_TABLE_WEIGHTS =
             "CREATE TABLE " + EstructuraBBDD.TABLE_WEIGHTS + " (" +
@@ -55,7 +58,7 @@ public class EstructuraBBDD {
                     EstructuraBBDD.COLUMN_DATE_WEIGHT + " DATE," +
                     EstructuraBBDD.COLUMN_DESCRIPTION_WEIGHT + " TEXT," +
                     EstructuraBBDD.COLUMN_IMG_WEIGHT + " BLOB," +
-                    EstructuraBBDD.COLUMN_WEIGHT_WEIGHT + " INTEGER);" ;
+                    EstructuraBBDD.COLUMN_WEIGHT_WEIGHT + " INTEGER);";
 
     public static final String SQL_CREATE_TABLE_CHALLENGES =
             "CREATE TABLE " + EstructuraBBDD.TABLE_CHALLENGES + " (" +
