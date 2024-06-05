@@ -4,22 +4,27 @@ public class EstructuraBBDD {
 
     /* Definimos datos de la tabla*/
     public static final String DATABASE_NAME = "FormaFit";
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 6;
 
     // Tabla Users
-    public static final String TABLE_USERSANDWEIGHT = "UsersAndWeight";
-    public static final String COLUMN_ID_USERSANDWEIGHT = "id";
-    public static final String COLUMN_EMAIL_USERSANDWEIGHT = "email";
-    public static final String COLUMN_PASSWORD_USERSANDWEIGHT = "password";
-    public static final String COLUMN_USERNAME_USERSANDWEIGHT = "user_name";
-    public static final String COLUMN_GENDER_USERSANDWEIGHT = "gender";
-    public static final String COLUMN_BIRTH_USERSANDWEIGHT = "birth";
-    public static final String COLUMN_HEIGHT_USERSANDWEIGHT = "height";
-    public static final String COLUMN_DATE_USERSANDWEIGHT = "date";
-    public static final String COLUMN_DESCRIPTION_USERSANDWEIGHT = "description";
-    public static final String COLUMN_IMG_USERSANDWEIGHT = "img";
-    public static final String COLUMN_WEIGHT_USERSANDWEIGHT = "weight";
-    public static final String COLUMN_GOAL_USERSANDWEIGHT = "goal";
+    public static final String TABLE_USERS = "Users";
+    public static final String COLUMN_EMAIL_USER = "email";
+    public static final String COLUMN_PASSWORD_USER = "password";
+    public static final String COLUMN_USERNAME_USER = "user_name";
+    public static final String COLUMN_GENDER_USER = "gender";
+    public static final String COLUMN_BIRTH_USER = "birth";
+    public static final String COLUMN_HEIGHT_USER = "height";
+    public static final String COLUMN_GOAL_USER = "goal";
+
+    // Tabla Weight
+    public static final String TABLE_WEIGHTS = "Weights";
+    public static final String COLUMN_ID_WEIGHT = "id";
+    public static final String COLUMN_EMAIL_USER_WEIGHT = "email_user";
+    public static final String COLUMN_DATE_WEIGHT = "date";
+    public static final String COLUMN_DESCRIPTION_WEIGHT = "description";
+    public static final String COLUMN_IMG_WEIGHT = "img";
+    public static final String COLUMN_WEIGHT_WEIGHT = "weight";
+
 
     // Tabla Challenges
     public static final String TABLE_CHALLENGES = "Challenges";
@@ -33,20 +38,24 @@ public class EstructuraBBDD {
 
 
     // Creamos las tablas
-    public static final String SQL_CREATE_TABLE_USERSANDWEIGHT =
-            "CREATE TABLE " + EstructuraBBDD.TABLE_USERSANDWEIGHT + " (" +
-                    EstructuraBBDD.COLUMN_ID_USERSANDWEIGHT + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " TEXT," +
-                    EstructuraBBDD.COLUMN_PASSWORD_USERSANDWEIGHT + " TEXT," +
-                    EstructuraBBDD.COLUMN_USERNAME_USERSANDWEIGHT + " TEXT," +
-                    EstructuraBBDD.COLUMN_GENDER_USERSANDWEIGHT + " TEXT," +
-                    EstructuraBBDD.COLUMN_BIRTH_USERSANDWEIGHT + " DATE," +
-                    EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT + " INT," +
-                    EstructuraBBDD.COLUMN_DATE_USERSANDWEIGHT + " DATE," +
-                    EstructuraBBDD.COLUMN_DESCRIPTION_USERSANDWEIGHT + " TEXT," +
-                    EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT + " BLOB," +
-                    EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT + " INTEGER," +
-                    EstructuraBBDD.COLUMN_GOAL_USERSANDWEIGHT + " INTEGER);" ;
+    public static final String SQL_CREATE_TABLE_USER =
+            "CREATE TABLE " + EstructuraBBDD.TABLE_USERS + " (" +
+                    EstructuraBBDD.COLUMN_EMAIL_USER + " TEXT PRIMARY KEY," +
+                    EstructuraBBDD.COLUMN_PASSWORD_USER + " TEXT," +
+                    EstructuraBBDD.COLUMN_USERNAME_USER + " TEXT," +
+                    EstructuraBBDD.COLUMN_GENDER_USER + " TEXT," +
+                    EstructuraBBDD.COLUMN_BIRTH_USER + " DATE," +
+                    EstructuraBBDD.COLUMN_HEIGHT_USER + " INT," +
+                    EstructuraBBDD.COLUMN_GOAL_USER + " INTEGER);" ;
+
+    public static final String SQL_CREATE_TABLE_WEIGHTS =
+            "CREATE TABLE " + EstructuraBBDD.TABLE_WEIGHTS + " (" +
+                    EstructuraBBDD.COLUMN_ID_WEIGHT + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    EstructuraBBDD.COLUMN_EMAIL_USER_WEIGHT + " TEXT," +
+                    EstructuraBBDD.COLUMN_DATE_WEIGHT + " DATE," +
+                    EstructuraBBDD.COLUMN_DESCRIPTION_WEIGHT + " TEXT," +
+                    EstructuraBBDD.COLUMN_IMG_WEIGHT + " BLOB," +
+                    EstructuraBBDD.COLUMN_WEIGHT_WEIGHT + " INTEGER);" ;
 
     public static final String SQL_CREATE_TABLE_CHALLENGES =
             "CREATE TABLE " + EstructuraBBDD.TABLE_CHALLENGES + " (" +

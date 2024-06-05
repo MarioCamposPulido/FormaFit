@@ -16,6 +16,7 @@ import com.example.formafit.java.Usuario;
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -33,36 +34,25 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(EstructuraBBDD.SQL_CREATE_TABLE_USERSANDWEIGHT);
+        db.execSQL(EstructuraBBDD.SQL_CREATE_TABLE_USER);
         db.execSQL(EstructuraBBDD.SQL_CREATE_TABLE_CHALLENGES);
+        db.execSQL(EstructuraBBDD.SQL_CREATE_TABLE_WEIGHTS);
     }
 
-    /**
-     * Cuando se realiza alguna actualizacion de la BBDD
-     *
-     * @param db
-     * @param oldVersion
-     * @param newVersion
-     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Código para actualizar la estructura de la base de datos
-        db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_USERSANDWEIGHT);
+        db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_CHALLENGES);
+        db.execSQL("DROP TABLE IF EXISTS " + EstructuraBBDD.TABLE_WEIGHTS);
         onCreate(db);
     }
 
-    /**
-     * Comprueba si existe el Usuario en BBDD por su email
-     *
-     * @param email
-     * @return
-     */
     public boolean checkEmail(String email) {
 
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT * FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? LIMIT 1",
+                "SELECT * FROM " + EstructuraBBDD.TABLE_USERS +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? LIMIT 1",
                 new String[]{email});
 
         boolean exists = cursor.getCount() > 0;
@@ -102,40 +92,46 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
     }
 
     public void insertNewUserRegistro(String email, String pasw, String userName,
-                                      String gender, String birth, int height,
-                                      String date, int weight) {
+                                      String gender, String birth, int height) {
 
         // Creamos mapa de valores con los nombres de las tablas
         ContentValues values = new ContentValues();
-        values.put(EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT, email);
-        values.put(EstructuraBBDD.COLUMN_PASSWORD_USERSANDWEIGHT, pasw);
-        values.put(EstructuraBBDD.COLUMN_USERNAME_USERSANDWEIGHT, userName);
-        values.put(EstructuraBBDD.COLUMN_GENDER_USERSANDWEIGHT, gender);
-        values.put(EstructuraBBDD.COLUMN_BIRTH_USERSANDWEIGHT, birth);
-        values.put(EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT, height);
-        values.put(EstructuraBBDD.COLUMN_DATE_USERSANDWEIGHT, date);
-        values.put(EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT, weight);
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USER, email);
+        values.put(EstructuraBBDD.COLUMN_PASSWORD_USER, pasw);
+        values.put(EstructuraBBDD.COLUMN_USERNAME_USER, userName);
+        values.put(EstructuraBBDD.COLUMN_GENDER_USER, gender);
+        values.put(EstructuraBBDD.COLUMN_BIRTH_USER, birth);
+        values.put(EstructuraBBDD.COLUMN_HEIGHT_USER, height);
 
         // Insertar nueva fila indicando nombre de la tabla
         long newRowId = this.getWritableDatabase().insert(
-                EstructuraBBDD.TABLE_USERSANDWEIGHT, null, values);
+                EstructuraBBDD.TABLE_USERS, null, values);
         //this.close();
 
     }
 
-    /**
-     * Comprueba si el Usuario existe por su email y contraseña
-     *
-     * @param emailParam
-     * @param passwordParam
-     * @return
-     */
+    public void insertNewWeightRegistro(String email, int weight) {
+
+        // Creamos mapa de valores con los nombres de las tablas
+        ContentValues values = new ContentValues();
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USER_WEIGHT, email);
+        values.put(EstructuraBBDD.COLUMN_DATE_WEIGHT, MainActivity.getFechaActual());
+        values.put(EstructuraBBDD.COLUMN_WEIGHT_WEIGHT, weight);
+
+        // Insertar nueva fila indicando nombre de la tabla
+        long newRowId = this.getWritableDatabase().insert(
+                EstructuraBBDD.TABLE_WEIGHTS, null, values);
+        //this.close();
+
+    }
+
+
     public boolean checkUserLogin(String emailParam, String passwordParam) {
 
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT * FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? AND " +
-                        EstructuraBBDD.COLUMN_PASSWORD_USERSANDWEIGHT + "=? ",
+                "SELECT * FROM " + EstructuraBBDD.TABLE_USERS +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? AND " +
+                        EstructuraBBDD.COLUMN_PASSWORD_USER + "=? ",
                 new String[]{emailParam, passwordParam});
 
         boolean exists = cursor.getCount() >= 1;
@@ -152,8 +148,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     public LinkedList<EntradaPeso> getAllEntradasPeso(String email) {
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT date, weight, description, img FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=?",
+                "SELECT * FROM " + EstructuraBBDD.TABLE_WEIGHTS +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_WEIGHT + "=?",
                 new String[]{email});
 
         // Crear un array para almacenar los resultados
@@ -183,8 +179,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     public Usuario getAllDataUser(String emailParam) {
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT * FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=?",
+                "SELECT * FROM " + EstructuraBBDD.TABLE_USERS +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=?",
                 new String[]{emailParam});
 
         Usuario usuario = null;
@@ -276,8 +272,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     public int getObjetivoByUser(String email) {
         Cursor cursor = this.getReadableDatabase().rawQuery(
-                "SELECT goal FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? LIMIT 1",
+                "SELECT goal FROM " + EstructuraBBDD.TABLE_USERS +
+                        " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? LIMIT 1",
                 new String[]{email});
 
         // Extraer los datos del cursor
@@ -296,8 +292,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         int altura = -1; // Valor predeterminado si no se encuentra ninguna altura
 
         // Consulta SQL para obtener la altura limitada a un solo registro
-        String query = "SELECT height FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+        String query = "SELECT height FROM " + EstructuraBBDD.TABLE_USERS +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? " +
                 " LIMIT 1";
 
         Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
@@ -316,8 +312,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         String fechaNacimiento = ""; // Valor predeterminado si no se encuentra ninguna fecha de nacimiento
 
         // Consulta SQL para obtener la altura limitada a un solo registro
-        String query = "SELECT birth FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+        String query = "SELECT birth FROM " + EstructuraBBDD.TABLE_USERS +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? " +
                 " LIMIT 1";
 
         Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
@@ -336,8 +332,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         String genero = ""; // Valor predeterminado si no se encuentra ningún genero
 
         // Consulta SQL para obtener la altura limitada a un solo registro
-        String query = "SELECT gender FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+        String query = "SELECT gender FROM " + EstructuraBBDD.TABLE_USERS +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? " +
                 " LIMIT 1";
 
         Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
@@ -356,8 +352,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         String password = "";
 
         // Consulta SQL para obtener la altura limitada a un solo registro
-        String query = "SELECT password FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+        String query = "SELECT password FROM " + EstructuraBBDD.TABLE_USERS +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? " +
                 " LIMIT 1";
 
         Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
@@ -376,8 +372,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         String userName = "";
 
         // Consulta SQL para obtener la altura limitada a un solo registro
-        String query = "SELECT user_name FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+        String query = "SELECT user_name FROM " + EstructuraBBDD.TABLE_USERS +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? " +
                 " LIMIT 1";
 
         Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
@@ -396,8 +392,8 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         String birth = "";
 
         // Consulta SQL para obtener la altura limitada a un solo registro
-        String query = "SELECT birth FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + "=? " +
+        String query = "SELECT birth FROM " + EstructuraBBDD.TABLE_USERS +
+                " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER + "=? " +
                 " LIMIT 1";
 
         Cursor cursor = this.getReadableDatabase().rawQuery(query, new String[]{email});
@@ -416,26 +412,21 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
         // Creamos mapa de valores con los nombres de las tablas
         ContentValues values = new ContentValues();
-        values.put(EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT, email);
-        values.put(EstructuraBBDD.COLUMN_PASSWORD_USERSANDWEIGHT, getPassword(email));
-        values.put(EstructuraBBDD.COLUMN_USERNAME_USERSANDWEIGHT, getUserName(email));
-        values.put(EstructuraBBDD.COLUMN_GENDER_USERSANDWEIGHT, getGenero(email));
-        values.put(EstructuraBBDD.COLUMN_BIRTH_USERSANDWEIGHT, getBirth(email));
-        values.put(EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT, getAltura(email));
-        values.put(EstructuraBBDD.COLUMN_DATE_USERSANDWEIGHT, date);
-        values.put(EstructuraBBDD.COLUMN_DESCRIPTION_USERSANDWEIGHT, description);
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USER_WEIGHT, email);
+        values.put(EstructuraBBDD.COLUMN_DATE_WEIGHT, date);
+        values.put(EstructuraBBDD.COLUMN_DESCRIPTION_WEIGHT, description);
         if (!Objects.isNull(img)) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
             img.compress(Bitmap.CompressFormat.PNG, 0, baos);
             byte[] blob = baos.toByteArray();
-            values.put(EstructuraBBDD.COLUMN_IMG_USERSANDWEIGHT, blob);
+            values.put(EstructuraBBDD.COLUMN_IMG_WEIGHT, blob);
         }
-        values.put(EstructuraBBDD.COLUMN_WEIGHT_USERSANDWEIGHT, weight);
+        values.put(EstructuraBBDD.COLUMN_WEIGHT_WEIGHT, weight);
 
         try {
             // Insertar nueva fila indicando nombre de la tabla
             long newRowId = this.getWritableDatabase().insert(
-                    EstructuraBBDD.TABLE_USERSANDWEIGHT, null, values);
+                    EstructuraBBDD.TABLE_WEIGHTS, null, values);
             //this.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -472,13 +463,14 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         db.beginTransaction();
         int deletedRows = 0;
         try {
-            String selection = EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " = ? AND " +
-                    EstructuraBBDD.COLUMN_ID_USERSANDWEIGHT + " NOT IN (SELECT " + EstructuraBBDD.COLUMN_ID_USERSANDWEIGHT +
-                    " FROM " + EstructuraBBDD.TABLE_USERSANDWEIGHT +
-                    " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " = ? " +
-                    " ORDER BY " + EstructuraBBDD.COLUMN_ID_USERSANDWEIGHT + " DESC LIMIT 1)";
+            String selection = EstructuraBBDD.COLUMN_EMAIL_USER_WEIGHT + " = ? AND " +
+                    EstructuraBBDD.COLUMN_ID_WEIGHT + " NOT IN (" +
+                    "SELECT " + EstructuraBBDD.COLUMN_ID_WEIGHT +
+                    " FROM " + EstructuraBBDD.TABLE_WEIGHTS +
+                    " WHERE " + EstructuraBBDD.COLUMN_EMAIL_USER_WEIGHT + " = ? " +
+                    "ORDER BY " + EstructuraBBDD.COLUMN_ID_WEIGHT + " DESC LIMIT 1)";
             String[] selectionArgs = {email, email};
-            deletedRows = db.delete(EstructuraBBDD.TABLE_USERSANDWEIGHT, selection, selectionArgs);
+            deletedRows = db.delete(EstructuraBBDD.TABLE_WEIGHTS, selection, selectionArgs);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -492,11 +484,13 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
         db.beginTransaction();
         int deletedRows = 0;
         try {
-            String selection = EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " = ?";
+            String selection = EstructuraBBDD.COLUMN_EMAIL_USER + " = ?";
             String selection2 = EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + " = ?";
+            String selection3 = EstructuraBBDD.COLUMN_EMAIL_USER_WEIGHT + " = ?";
             String[] selectionArgs = {email};
-            deletedRows = db.delete(EstructuraBBDD.TABLE_USERSANDWEIGHT, selection, selectionArgs) +
-                    db.delete(EstructuraBBDD.TABLE_CHALLENGES, selection2, selectionArgs);
+            deletedRows = db.delete(EstructuraBBDD.TABLE_USERS, selection, selectionArgs) +
+                    db.delete(EstructuraBBDD.TABLE_CHALLENGES, selection2, selectionArgs) +
+                    db.delete(EstructuraBBDD.TABLE_WEIGHTS, selection3, selectionArgs);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -507,26 +501,65 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
     public boolean upgradeEditarUser(String user_name, String email, String password, String birth, String gender, int height) {
 
+        upgradeChallengesByEmail(email);
+        upgradeWeightsByEmail(email);
+
         // Nuevo valor para la columna
         ContentValues values = new ContentValues();
-        values.put(EstructuraBBDD.COLUMN_USERNAME_USERSANDWEIGHT, user_name);
-        values.put(EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT, email);
-        values.put(EstructuraBBDD.COLUMN_PASSWORD_USERSANDWEIGHT, password);
-        values.put(EstructuraBBDD.COLUMN_BIRTH_USERSANDWEIGHT, birth);
-        values.put(EstructuraBBDD.COLUMN_GENDER_USERSANDWEIGHT, gender);
-        values.put(EstructuraBBDD.COLUMN_HEIGHT_USERSANDWEIGHT, height);
+        values.put(EstructuraBBDD.COLUMN_USERNAME_USER, user_name);
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USER, email);
+        values.put(EstructuraBBDD.COLUMN_PASSWORD_USER, password);
+        values.put(EstructuraBBDD.COLUMN_BIRTH_USER, birth);
+        values.put(EstructuraBBDD.COLUMN_GENDER_USER, gender);
+        values.put(EstructuraBBDD.COLUMN_HEIGHT_USER, height);
 
         // NOmbre columna a actualizar
-        String selection = EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " LIKE ?";
+        String selection = EstructuraBBDD.COLUMN_EMAIL_USER + " LIKE ?";
 
         int count = this.getWritableDatabase().update(
-                EstructuraBBDD.TABLE_USERSANDWEIGHT,
+                EstructuraBBDD.TABLE_USERS,
+                values,
+                selection,
+                new String[]{MainActivity.email});
+
+        MainActivity.email = email;
+        return count > 0;
+    }
+
+    public boolean upgradeChallengesByEmail(String email) {
+
+        // Nuevo valor para la columna
+        ContentValues values = new ContentValues();
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE, email);
+
+        // Nombre columna a actualizar
+        String selection = EstructuraBBDD.COLUMN_EMAIL_USER_CHALLENGE + " LIKE ?";
+
+        int count = this.getWritableDatabase().update(
+                EstructuraBBDD.TABLE_CHALLENGES,
                 values,
                 selection,
                 new String[]{MainActivity.email});
 
         return count > 0;
+    }
 
+    public boolean upgradeWeightsByEmail(String email) {
+
+        // Nuevo valor para la columna
+        ContentValues values = new ContentValues();
+        values.put(EstructuraBBDD.COLUMN_EMAIL_USER_WEIGHT, email);
+
+        // Nombre columna a actualizar
+        String selection = EstructuraBBDD.COLUMN_EMAIL_USER_WEIGHT + " LIKE ?";
+
+        int count = this.getWritableDatabase().update(
+                EstructuraBBDD.TABLE_WEIGHTS,
+                values,
+                selection,
+                new String[]{MainActivity.email});
+
+        return count > 0;
     }
 
     public boolean upgradeCambiarDesafiosIs_Checked(int id_desafio, int is_checked) {
@@ -552,13 +585,13 @@ public class BaseDatosHelper extends SQLiteOpenHelper {
 
         // Nuevo valor para la columna
         ContentValues values = new ContentValues();
-        values.put(EstructuraBBDD.COLUMN_GOAL_USERSANDWEIGHT, objetivoPeso);
+        values.put(EstructuraBBDD.COLUMN_GOAL_USER, objetivoPeso);
 
         // NOmbre columna a actualizar
-        String selection = EstructuraBBDD.COLUMN_EMAIL_USERSANDWEIGHT + " LIKE ?";
+        String selection = EstructuraBBDD.COLUMN_EMAIL_USER + " LIKE ?";
 
         int count = this.getWritableDatabase().update(
-                EstructuraBBDD.TABLE_USERSANDWEIGHT,
+                EstructuraBBDD.TABLE_USERS,
                 values,
                 selection,
                 new String[]{String.valueOf(email)});

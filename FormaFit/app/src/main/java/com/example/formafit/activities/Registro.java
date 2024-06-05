@@ -160,7 +160,8 @@ public class Registro extends AppCompatActivity {
                                 if (crearAltura != 0) {
                                     if (fechaIntroducida) {
                                         dbHelper.insertNewUserRegistro(emailRegistro.getText().toString(), passwordRegistro.getText().toString(), nombreRegistro.getText().toString(),
-                                                getGeneroLogin(), nacimientoButtonRegistro.getText().toString(), crearAltura, MainActivity.getFechaActual(), crearPeso);
+                                                getGeneroLogin(), nacimientoButtonRegistro.getText().toString(), crearAltura);
+                                        dbHelper.insertNewWeightRegistro(emailRegistro.getText().toString(), crearPeso);
                                         openLogin(emailRegistro.getText().toString(), passwordRegistro.getText().toString());
                                     } else {
                                         nacimientoButtonRegistro.setText(getResources().getString(R.string.introduceFecha));
